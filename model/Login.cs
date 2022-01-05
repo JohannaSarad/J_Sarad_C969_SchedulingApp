@@ -46,8 +46,16 @@ namespace J_Sarad_C969_SchedulingApp
             }
             else
             {
-                MessageBox.Show( "This application supports English or Spanish \nEsta applicacion es compatible con ingles o espanol", 
-                    "Unknown Language -- Idioma desconocido");
+                //FiXME make the format of this dialog box look nicer. 
+                DialogResult dialog = MessageBox.Show("This application supports English or Spanish" +
+                    "\n Please change language settings and restart application" + 
+                    "\r\nEsta applicacion es compatible con ingles o espanol" +
+                    "\nCambie la configuracion de idioma y reinicie la aplicacion" ,
+                    "Unknown Language -- Idioma desconocido", MessageBoxButtons.OK);
+                if (dialog == DialogResult.OK)
+                {
+                    Application.Exit();
+                }
             }
         }
     }
