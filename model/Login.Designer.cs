@@ -66,14 +66,14 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             // txtUsername
             // 
-            this.txtUsername.Location = new System.Drawing.Point(100, 52);
+            this.txtUsername.Location = new System.Drawing.Point(160, 49);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(100, 20);
             this.txtUsername.TabIndex = 3;
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(100, 86);
+            this.txtPassword.Location = new System.Drawing.Point(160, 83);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(100, 20);
             this.txtPassword.TabIndex = 4;

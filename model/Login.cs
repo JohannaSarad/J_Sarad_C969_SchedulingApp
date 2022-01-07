@@ -42,7 +42,7 @@ namespace J_Sarad_C969_SchedulingApp
                 lblLogin.Text = "Porfavor introduzca su nombre de usuario y contrasena";
                 lblPassword.Text = "contrasena";
                 lblUsername.Text = "Nombre de usuario";
-                lblLogin.Text = "Accesso";
+                btnLogin.Text = "Accesso";
             }
             else
             {
