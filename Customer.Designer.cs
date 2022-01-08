@@ -1,5 +1,5 @@
 ﻿
-namespace J_Sarad_C969_SchedulingApp.model
+namespace J_Sarad_C969_SchedulingApp
 {
     partial class Customer
     {
@@ -255,6 +255,7 @@ namespace J_Sarad_C969_SchedulingApp.model
             this.Controls.Add(this.lblCustID);
             this.Name = "Customer";
             this.Text = "Customer";
+            this.Load += new System.EventHandler(this.Customer_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -9,11 +9,20 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Globalization;
 using System.Threading;
+using MySql.Data;
+using MySql.Data.MySqlClient;
+using System.Configuration;
+using J_Sarad_C969_SchedulingApp.model;
 
 namespace J_Sarad_C969_SchedulingApp
+
 {
+
     public partial class LogIn : Form
     {
+        static string connectionString = ConfigurationManager.ConnectionStrings["MySqlkey"].ConnectionString;
+        static MySqlConnection con = new MySqlConnection(connectionString);
+        public static int currentUserID { get; set; }
         public LogIn()
         {
             InitializeComponent();
@@ -57,6 +66,34 @@ namespace J_Sarad_C969_SchedulingApp
                     Application.Exit();
                 }
             }
+        }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            con.Open();
+            string query = "SELECT * FROM User";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            DataTable dt = new DataTable();
+            MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
+            adp.Fill(dt);
+            con.Close();
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                if (dt.Rows[i]["userName"].ToString() == txtUsername.Text
+                    && dt.Rows[i]["password"].ToString() == txtPassword.Text)
+                {
+                    currentUserID = (int)dt.Rows[i]["userID"];
+                    this.Hide();
+                    Customer form = new Customer();
+                    form.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("Please check your username and password", "Invalid username or password");
+                }
+            }
+            
         }
     }
 }

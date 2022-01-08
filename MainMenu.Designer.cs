@@ -1,5 +1,5 @@
 ﻿
-namespace J_Sarad_C969_SchedulingApp.model
+namespace J_Sarad_C969_SchedulingApp
 {
     partial class MainMenu
     {
@@ -60,6 +60,7 @@ namespace J_Sarad_C969_SchedulingApp.model
             this.Controls.Add(this.dgvCustomer);
             this.Name = "MainMenu";
             this.Text = "MainMenu";
+            this.Load += new System.EventHandler(this.MainMenu_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAppointment)).EndInit();
             this.ResumeLayout(false);

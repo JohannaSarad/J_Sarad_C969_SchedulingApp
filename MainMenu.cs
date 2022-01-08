@@ -7,14 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using J_Sarad_C969_SchedulingApp.model;
 
-namespace J_Sarad_C969_SchedulingApp.model
+namespace J_Sarad_C969_SchedulingApp
 {
     public partial class MainMenu : Form
     {
         public MainMenu()
         {
             InitializeComponent();
+        }
+
+        private void MainMenu_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
