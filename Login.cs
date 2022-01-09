@@ -20,19 +20,20 @@ namespace J_Sarad_C969_SchedulingApp
 
     public partial class LogIn : Form
     {
+        //FIX ME!!! add to class DB and create methods for inserting, deleting, and swapping (at least)
         static string connectionString = ConfigurationManager.ConnectionStrings["MySqlkey"].ConnectionString;
         static MySqlConnection con = new MySqlConnection(connectionString);
+        
+        //FIX ME! Move me to a class user with method to update user and possibly add user for testing
         public static int currentUserID { get; set; }
         public LogIn()
         {
             InitializeComponent();
-           
         }
 
         private void LogIn_Load(object sender, EventArgs e)
         {
             DetectLanguage();
-            
         }
 
         private void DetectLanguage()
@@ -85,7 +86,7 @@ namespace J_Sarad_C969_SchedulingApp
                 {
                     currentUserID = (int)dt.Rows[i]["userID"];
                     this.Hide();
-                    Customer form = new Customer();
+                    MainMenu form = new MainMenu();
                     form.ShowDialog();
                 }
                 else

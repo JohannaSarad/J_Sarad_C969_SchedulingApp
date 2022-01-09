@@ -41,7 +41,7 @@ namespace J_Sarad_C969_SchedulingApp
             this.txtCustPhone = new System.Windows.Forms.TextBox();
             this.txtCustAddress = new System.Windows.Forms.TextBox();
             this.txtCustName = new System.Windows.Forms.TextBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvCustomers = new System.Windows.Forms.DataGridView();
             this.lblAdd = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
@@ -50,7 +50,7 @@ namespace J_Sarad_C969_SchedulingApp
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnMain = new System.Windows.Forms.Button();
             this.txtSearch = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCustomers)).BeginInit();
             this.SuspendLayout();
             // 
             // lblCustID
@@ -111,6 +111,7 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             this.txtCustID.Location = new System.Drawing.Point(120, 63);
             this.txtCustID.Name = "txtCustID";
+            this.txtCustID.ReadOnly = true;
             this.txtCustID.Size = new System.Drawing.Size(100, 20);
             this.txtCustID.TabIndex = 6;
             // 
@@ -149,13 +150,14 @@ namespace J_Sarad_C969_SchedulingApp
             this.txtCustName.Size = new System.Drawing.Size(100, 20);
             this.txtCustName.TabIndex = 11;
             // 
-            // dataGridView1
+            // dgvCustomers
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(280, 63);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(457, 228);
-            this.dataGridView1.TabIndex = 12;
+            this.dgvCustomers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvCustomers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCustomers.Location = new System.Drawing.Point(280, 63);
+            this.dgvCustomers.Name = "dgvCustomers";
+            this.dgvCustomers.Size = new System.Drawing.Size(560, 228);
+            this.dgvCustomers.TabIndex = 12;
             // 
             // lblAdd
             // 
@@ -177,7 +179,7 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(662, 12);
+            this.btnSearch.Location = new System.Drawing.Point(765, 12);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);
             this.btnSearch.TabIndex = 15;
@@ -195,7 +197,7 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(603, 320);
+            this.btnDelete.Location = new System.Drawing.Point(548, 320);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(134, 23);
             this.btnDelete.TabIndex = 17;
@@ -204,7 +206,7 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(446, 320);
+            this.btnUpdate.Location = new System.Drawing.Point(421, 320);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(121, 23);
             this.btnUpdate.TabIndex = 18;
@@ -213,7 +215,7 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             // btnMain
             // 
-            this.btnMain.Location = new System.Drawing.Point(609, 374);
+            this.btnMain.Location = new System.Drawing.Point(688, 320);
             this.btnMain.Name = "btnMain";
             this.btnMain.Size = new System.Drawing.Size(128, 23);
             this.btnMain.TabIndex = 19;
@@ -222,7 +224,7 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             // txtSearch
             // 
-            this.txtSearch.Location = new System.Drawing.Point(556, 15);
+            this.txtSearch.Location = new System.Drawing.Point(659, 14);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(100, 20);
             this.txtSearch.TabIndex = 20;
@@ -231,7 +233,7 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(882, 450);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.btnMain);
             this.Controls.Add(this.btnUpdate);
@@ -240,7 +242,7 @@ namespace J_Sarad_C969_SchedulingApp
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.lblAdd);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgvCustomers);
             this.Controls.Add(this.txtCustName);
             this.Controls.Add(this.txtCustAddress);
             this.Controls.Add(this.txtCustPhone);
@@ -254,9 +256,9 @@ namespace J_Sarad_C969_SchedulingApp
             this.Controls.Add(this.lblCustName);
             this.Controls.Add(this.lblCustID);
             this.Name = "Customer";
-            this.Text = "Customer";
+            this.Text = "Customers";
             this.Load += new System.EventHandler(this.Customer_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCustomers)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -276,7 +278,7 @@ namespace J_Sarad_C969_SchedulingApp
         private System.Windows.Forms.TextBox txtCustPhone;
         private System.Windows.Forms.TextBox txtCustAddress;
         private System.Windows.Forms.TextBox txtCustName;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvCustomers;
         private System.Windows.Forms.Button lblAdd;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button btnSearch;

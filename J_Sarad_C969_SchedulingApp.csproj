@@ -54,6 +54,7 @@
     <Compile Include="Customer.Designer.cs">
       <DependentUpon>Customer.cs</DependentUpon>
     </Compile>
+    <Compile Include="model\Customer.cs" />
     <Compile Include="model\DB.cs" />
     <Compile Include="model\Localization.cs" />
     <Compile Include="Login.cs">

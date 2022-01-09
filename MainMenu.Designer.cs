@@ -29,47 +29,71 @@ namespace J_Sarad_C969_SchedulingApp
         /// </summary>
         private void InitializeComponent()
         {
-            this.dgvCustomer = new System.Windows.Forms.DataGridView();
-            this.dgvAppointment = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCustomer)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvAppointment)).BeginInit();
+            this.lblGreeting = new System.Windows.Forms.Label();
+            this.btnCustomers = new System.Windows.Forms.Button();
+            this.btnAppointments = new System.Windows.Forms.Button();
+            this.btnReports = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // dgvCustomer
+            // lblGreeting
             // 
-            this.dgvCustomer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCustomer.Location = new System.Drawing.Point(22, 67);
-            this.dgvCustomer.Name = "dgvCustomer";
-            this.dgvCustomer.Size = new System.Drawing.Size(356, 206);
-            this.dgvCustomer.TabIndex = 0;
+            this.lblGreeting.AutoSize = true;
+            this.lblGreeting.Location = new System.Drawing.Point(0, 0);
+            this.lblGreeting.Name = "lblGreeting";
+            this.lblGreeting.Size = new System.Drawing.Size(216, 13);
+            this.lblGreeting.TabIndex = 0;
+            this.lblGreeting.Text = "Welcome User. What can I help with today?";
             // 
-            // dgvAppointment
+            // btnCustomers
             // 
-            this.dgvAppointment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvAppointment.Location = new System.Drawing.Point(425, 67);
-            this.dgvAppointment.Name = "dgvAppointment";
-            this.dgvAppointment.Size = new System.Drawing.Size(351, 206);
-            this.dgvAppointment.TabIndex = 1;
+            this.btnCustomers.Location = new System.Drawing.Point(78, 50);
+            this.btnCustomers.Name = "btnCustomers";
+            this.btnCustomers.Size = new System.Drawing.Size(178, 23);
+            this.btnCustomers.TabIndex = 1;
+            this.btnCustomers.Text = "Customers";
+            this.btnCustomers.UseVisualStyleBackColor = true;
+            this.btnCustomers.Click += new System.EventHandler(this.btnCustomers_Click);
+            // 
+            // btnAppointments
+            // 
+            this.btnAppointments.Location = new System.Drawing.Point(78, 79);
+            this.btnAppointments.Name = "btnAppointments";
+            this.btnAppointments.Size = new System.Drawing.Size(178, 23);
+            this.btnAppointments.TabIndex = 2;
+            this.btnAppointments.Text = "Appointments";
+            this.btnAppointments.UseVisualStyleBackColor = true;
+            // 
+            // btnReports
+            // 
+            this.btnReports.Location = new System.Drawing.Point(78, 108);
+            this.btnReports.Name = "btnReports";
+            this.btnReports.Size = new System.Drawing.Size(178, 23);
+            this.btnReports.TabIndex = 3;
+            this.btnReports.Text = "Generate Reports";
+            this.btnReports.UseVisualStyleBackColor = true;
             // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.dgvAppointment);
-            this.Controls.Add(this.dgvCustomer);
+            this.ClientSize = new System.Drawing.Size(324, 211);
+            this.Controls.Add(this.btnReports);
+            this.Controls.Add(this.btnAppointments);
+            this.Controls.Add(this.btnCustomers);
+            this.Controls.Add(this.lblGreeting);
             this.Name = "MainMenu";
             this.Text = "MainMenu";
             this.Load += new System.EventHandler(this.MainMenu_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCustomer)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvAppointment)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dgvCustomer;
-        private System.Windows.Forms.DataGridView dgvAppointment;
+        private System.Windows.Forms.Label lblGreeting;
+        private System.Windows.Forms.Button btnCustomers;
+        private System.Windows.Forms.Button btnAppointments;
+        private System.Windows.Forms.Button btnReports;
     }
 }
