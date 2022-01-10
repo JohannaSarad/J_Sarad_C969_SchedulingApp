@@ -21,8 +21,8 @@ namespace J_Sarad_C969_SchedulingApp
     public partial class LogIn : Form
     {
         //FIX ME!!! add to class DB and create methods for inserting, deleting, and swapping (at least)
-        static string connectionString = ConfigurationManager.ConnectionStrings["MySqlkey"].ConnectionString;
-        static MySqlConnection con = new MySqlConnection(connectionString);
+        //static string connectionString = ConfigurationManager.ConnectionStrings["MySqlkey"].ConnectionString;
+        //static MySqlConnection con = new MySqlConnection(connectionString);
         
         //FIX ME! Move me to a class user with method to update user and possibly add user for testing
         public static int currentUserID { get; set; }
@@ -71,26 +71,29 @@ namespace J_Sarad_C969_SchedulingApp
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            con.Open();
+            DB.OpenConnection();
             string query = "SELECT * FROM User";
-            MySqlCommand cmd = new MySqlCommand(query, con);
-            DataTable dt = new DataTable();
-            MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
-            adp.Fill(dt);
-            con.Close();
+            DB.FillTable(query);
+            //MySqlCommand cmd = new MySqlCommand(query, con);
+            //DataTable dt = new DataTable();
+            //MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
+            //adp.Fill(dt);
+            DB.CloseConnection();
+            //MessageBox.Show(DB.dataTable.Rows[0]["userName"].ToString());
 
-            for (int i = 0; i < dt.Rows.Count; i++)
+            for (int i = 0; i < DB.dataTable.Rows.Count; i++)
             {
-                if (dt.Rows[i]["userName"].ToString() == txtUsername.Text
-                    && dt.Rows[i]["password"].ToString() == txtPassword.Text)
+                if (DB.dataTable.Rows[i]["userName"].ToString() == txtUsername.Text
+                    && DB.dataTable.Rows[i]["password"].ToString() == txtPassword.Text)
                 {
-                    currentUserID = (int)dt.Rows[i]["userID"];
+                    currentUserID = (int)DB.dataTable.Rows[i]["userID"];
                     this.Hide();
                     MainMenu form = new MainMenu();
                     form.ShowDialog();
                 }
                 else
                 {
+                    //FIXME!!! check for Spanish and make an error message in Spanish
                     MessageBox.Show("Please check your username and password", "Invalid username or password");
                 }
             }

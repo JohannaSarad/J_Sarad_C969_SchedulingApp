@@ -26,7 +26,7 @@ namespace J_Sarad_C969_SchedulingApp
         private void btnCustomers_Click(object sender, EventArgs e)
         {
             this.Hide();
-            Customer form = new Customer();
+            Customers form = new Customers();
             form.ShowDialog();
         }
     }

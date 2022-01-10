@@ -13,33 +13,26 @@ using System.Configuration;
 
 namespace J_Sarad_C969_SchedulingApp
 {
-    public partial class Customer : Form
+    public partial class Customers : Form
     {
-        static string connectionString = ConfigurationManager.ConnectionStrings["MySqlkey"].ConnectionString;
-        static MySqlConnection con = new MySqlConnection(connectionString);
-        public Customer()
+        int currentIndex;
+        public Customers()
         {
             InitializeComponent();
         }
 
         private void Customer_Load(object sender, EventArgs e)
         {
-            
-            con.Open();
+            DB.OpenConnection();
             string query = "select customerId as 'ID', customerName as 'Name', phone as 'Phone', address as 'Address', city as 'City', country as 'Country' from customer t1 inner join address t2 on t1.addressId=t2.addressId inner join city t3 on t2.cityId=t3.cityId inner join country t4 on t3.countryId=t4.countryId";
-            MySqlCommand cmd = new MySqlCommand(query, con);
-            DataTable dt = new DataTable();
-            MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
-            adp.Fill(dt);
-            con.Close();
-            dgvCustomers.DataSource = dt;
+            DB.FillTable(query);
+            DB.CloseConnection();
             display();
-
-           
         }
 
         private void display()
         {
+            dgvCustomers.DataSource = DB.dataTable;
             dgvCustomers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvCustomers.ReadOnly = true;
             dgvCustomers.MultiSelect = false;
@@ -47,6 +40,21 @@ namespace J_Sarad_C969_SchedulingApp
             dgvCustomers.DefaultCellStyle.SelectionBackColor = Color.Yellow;
             dgvCustomers.DefaultCellStyle.SelectionForeColor = Color.Black;
             dgvCustomers.RowHeadersVisible = false;
+        }
+
+        private void dgvCustomers_CellClick(object sender, DataGridViewCellEventArgs e)
+        { 
+            currentIndex = e.RowIndex;
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            txtCustID.Text = dgvCustomers.Rows[currentIndex].Cells["ID"].Value.ToString().Trim();
+            txtCustName.Text = (string)dgvCustomers.Rows[currentIndex].Cells["Name"].Value.ToString();
+            txtCustAddress.Text = (string)dgvCustomers.Rows[currentIndex].Cells["Address"].Value.ToString().Trim();
+            txtCustPhone.Text = (string)dgvCustomers.Rows[currentIndex].Cells["Phone"].Value.ToString();
+            txtCustCity.Text = (string)dgvCustomers.Rows[currentIndex].Cells["City"].Value.ToString();
+            txtCustCountry.Text = (string)dgvCustomers.Rows[currentIndex].Cells["Country"].Value.ToString();
         }
     }
 }

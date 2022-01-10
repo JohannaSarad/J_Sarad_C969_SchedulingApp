@@ -1,7 +1,7 @@
 ﻿
 namespace J_Sarad_C969_SchedulingApp
 {
-    partial class Customer
+    partial class Customers
     {
         /// <summary>
         /// Required designer variable.
@@ -158,6 +158,8 @@ namespace J_Sarad_C969_SchedulingApp
             this.dgvCustomers.Name = "dgvCustomers";
             this.dgvCustomers.Size = new System.Drawing.Size(560, 228);
             this.dgvCustomers.TabIndex = 12;
+            this.dgvCustomers.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCustomers_CellClick);
+            //this.dgvCustomers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCustomers_CellContentClick);
             // 
             // lblAdd
             // 
@@ -212,6 +214,7 @@ namespace J_Sarad_C969_SchedulingApp
             this.btnUpdate.TabIndex = 18;
             this.btnUpdate.Text = "Update Customer";
             this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // btnMain
             // 
@@ -229,7 +232,7 @@ namespace J_Sarad_C969_SchedulingApp
             this.txtSearch.Size = new System.Drawing.Size(100, 20);
             this.txtSearch.TabIndex = 20;
             // 
-            // Customer
+            // Customers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -255,7 +258,7 @@ namespace J_Sarad_C969_SchedulingApp
             this.Controls.Add(this.CustAddress);
             this.Controls.Add(this.lblCustName);
             this.Controls.Add(this.lblCustID);
-            this.Name = "Customer";
+            this.Name = "Customers";
             this.Text = "Customers";
             this.Load += new System.EventHandler(this.Customer_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomers)).EndInit();

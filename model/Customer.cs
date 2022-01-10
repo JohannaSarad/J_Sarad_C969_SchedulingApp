@@ -16,6 +16,8 @@ namespace J_Sarad_C969_SchedulingApp.model
         public string City { get; set; }
         public string Country { get; set; }
 
+        public Customer() { }
+
         public Customer(int id, string name, string phone, string address, string city, string country)
         {
             ID = id;
@@ -24,6 +26,11 @@ namespace J_Sarad_C969_SchedulingApp.model
             Address = address;
             City = city;
             Country = country;
+        }
+
+        public void UpdateCustomer(int id)
+        {
+
         }
     }
 }
