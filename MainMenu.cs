@@ -13,6 +13,7 @@ namespace J_Sarad_C969_SchedulingApp
 {
     public partial class MainMenu : Form
     {
+        DataTable calendar = new DataTable();
         public MainMenu()
         {
             InitializeComponent();
@@ -23,7 +24,7 @@ namespace J_Sarad_C969_SchedulingApp
 
         }
 
-        private void btnCustomers_Click(object sender, EventArgs e)
+        private void btnEditCust_Click(object sender, EventArgs e)
         {
             this.Hide();
             Customers form = new Customers();

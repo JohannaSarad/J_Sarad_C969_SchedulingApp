@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using J_Sarad_C969_SchedulingApp.model;
 
 namespace J_Sarad_C969_SchedulingApp
 {
@@ -18,7 +19,8 @@ namespace J_Sarad_C969_SchedulingApp
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new LogIn());
 
-            int currentUserID = -1;
+            //int currentUserID = -1;
+             DB.currentUser = "";
         }
     }
 }

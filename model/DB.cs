@@ -12,11 +12,16 @@ namespace J_Sarad_C969_SchedulingApp.model
 {
     public static class DB
     {
-        
+
         static MySqlConnection con { get; set; }
         public static MySqlCommand cmd { get; set; }
         public static MySqlDataAdapter adp { get; set; }
-        public static DataTable dataTable { get; set; }
+        
+        //this probably won't work when I get to making appointments
+       
+
+        public static MySqlDataReader reader;
+        public static string currentUser;
 
         public static void OpenConnection()
         {
@@ -36,14 +41,16 @@ namespace J_Sarad_C969_SchedulingApp.model
             adp = new MySqlDataAdapter(cmd);
         }
 
-        public static void FillTable(string query)
+        public static void NonQuery(string query)
         {
-            Query(query);
-            dataTable = new DataTable();
-            adp.Fill(dataTable);
-
+            cmd = new MySqlCommand(query, con);
+            cmd.ExecuteNonQuery();
         }
 
-        
+
+        public static void UpdateDatabase(string query)
+        {
+            NonQuery(query);
+        }
     }
 }

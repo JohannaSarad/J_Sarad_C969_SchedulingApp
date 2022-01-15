@@ -20,12 +20,9 @@ namespace J_Sarad_C969_SchedulingApp
 
     public partial class LogIn : Form
     {
-        //FIX ME!!! add to class DB and create methods for inserting, deleting, and swapping (at least)
-        //static string connectionString = ConfigurationManager.ConnectionStrings["MySqlkey"].ConnectionString;
-        //static MySqlConnection con = new MySqlConnection(connectionString);
-        
         //FIX ME! Move me to a class user with method to update user and possibly add user for testing
         public static int currentUserID { get; set; }
+        
         public LogIn()
         {
             InitializeComponent();
@@ -73,22 +70,23 @@ namespace J_Sarad_C969_SchedulingApp
         {
             DB.OpenConnection();
             string query = "SELECT * FROM User";
-            DB.FillTable(query);
-            //MySqlCommand cmd = new MySqlCommand(query, con);
-            //DataTable dt = new DataTable();
-            //MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
-            //adp.Fill(dt);
+            DB.Query(query);
+            DataTable dataTable = new DataTable();
+            DB.adp.Fill(dataTable);
+            //DB.FillTable(query);
             DB.CloseConnection();
             //MessageBox.Show(DB.dataTable.Rows[0]["userName"].ToString());
 
-            for (int i = 0; i < DB.dataTable.Rows.Count; i++)
+            for (int i = 0; i < dataTable.Rows.Count; i++)
             {
-                if (DB.dataTable.Rows[i]["userName"].ToString() == txtUsername.Text
-                    && DB.dataTable.Rows[i]["password"].ToString() == txtPassword.Text)
+                if (dataTable.Rows[i]["userName"].ToString() == txtUsername.Text
+                    && dataTable.Rows[i]["password"].ToString() == txtPassword.Text)
                 {
-                    currentUserID = (int)DB.dataTable.Rows[i]["userID"];
+                    DB.currentUser = dataTable.Rows[i]["userName"].ToString();
                     this.Hide();
                     MainMenu form = new MainMenu();
+
+                    //MainMenu form = new MainMenu();
                     form.ShowDialog();
                 }
                 else
@@ -97,7 +95,6 @@ namespace J_Sarad_C969_SchedulingApp
                     MessageBox.Show("Please check your username and password", "Invalid username or password");
                 }
             }
-            
         }
     }
 }

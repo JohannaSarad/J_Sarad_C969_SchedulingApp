@@ -13,9 +13,12 @@ using System.Configuration;
 
 namespace J_Sarad_C969_SchedulingApp
 {
+    
     public partial class Customers : Form
     {
-        int currentIndex;
+        DataTable custTable;
+        public int currentIndex;
+        
         public Customers()
         {
             InitializeComponent();
@@ -23,16 +26,20 @@ namespace J_Sarad_C969_SchedulingApp
 
         private void Customer_Load(object sender, EventArgs e)
         {
+            currentIndex = -1;
             DB.OpenConnection();
             string query = "select customerId as 'ID', customerName as 'Name', phone as 'Phone', address as 'Address', city as 'City', country as 'Country' from customer t1 inner join address t2 on t1.addressId=t2.addressId inner join city t3 on t2.cityId=t3.cityId inner join country t4 on t3.countryId=t4.countryId";
-            DB.FillTable(query);
+            DB.Query(query);
+            custTable = new DataTable();
+            DB.adp.Fill(custTable);
+            //DB.FillTable(query);
             DB.CloseConnection();
-            display();
+            displayDGV();
         }
 
-        private void display()
+        private void displayDGV()
         {
-            dgvCustomers.DataSource = DB.dataTable;
+            dgvCustomers.DataSource = custTable;
             dgvCustomers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvCustomers.ReadOnly = true;
             dgvCustomers.MultiSelect = false;
@@ -49,12 +56,32 @@ namespace J_Sarad_C969_SchedulingApp
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            txtCustID.Text = dgvCustomers.Rows[currentIndex].Cells["ID"].Value.ToString().Trim();
-            txtCustName.Text = (string)dgvCustomers.Rows[currentIndex].Cells["Name"].Value.ToString();
-            txtCustAddress.Text = (string)dgvCustomers.Rows[currentIndex].Cells["Address"].Value.ToString().Trim();
-            txtCustPhone.Text = (string)dgvCustomers.Rows[currentIndex].Cells["Phone"].Value.ToString();
-            txtCustCity.Text = (string)dgvCustomers.Rows[currentIndex].Cells["City"].Value.ToString();
-            txtCustCountry.Text = (string)dgvCustomers.Rows[currentIndex].Cells["Country"].Value.ToString();
+            if (currentIndex >= 0)
+            {
+                this.Hide();
+                UpdateCustomer form = new UpdateCustomer();
+                form.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Please Select a Customer to Update");
+            }
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            AddCustomer form = new AddCustomer();
+            form.ShowDialog();
+            /*foreach (Control txt in this.Controls)
+            {
+                if (txt is TextBox && (txt != txtCustID) && (!string.IsNullOrEmpty(txt.Text)))
+                {
+                    DB.OpenConnection();
+                    string query = "INSERT INTO country (country, createDate, createdBy, lastUpdate, lastUpdateBy) VALUES ('" + txtCustCountry.Text + "','" + DateTime.UtcNow + "','" + DB.currentUser + "','" + DateTime.UtcNow + "','" + DB.currentUser + ")";
+                    DB.NonQuery(query);
+                }
+            }*/
         }
     }
 }
