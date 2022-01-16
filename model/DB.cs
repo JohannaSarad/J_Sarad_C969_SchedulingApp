@@ -44,7 +44,8 @@ namespace J_Sarad_C969_SchedulingApp.model
         public static void NonQuery(string query)
         {
             cmd = new MySqlCommand(query, con);
-            cmd.ExecuteNonQuery();
+            
+            //cmd.ExecuteNonQuery();
         }
 
 
