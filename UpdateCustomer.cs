@@ -45,8 +45,8 @@ namespace J_Sarad_C969_SchedulingApp
             DB.cmd.Parameters.AddWithValue("@country", txtCountry.Text);
             DB.cmd.ExecuteNonQuery();
             DB.CloseConnection();
-            this.Hide();
             
+            this.Hide();
             Customers form = new Customers();
             form.ShowDialog();
         }

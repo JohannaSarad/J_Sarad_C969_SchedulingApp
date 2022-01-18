@@ -32,7 +32,6 @@ namespace J_Sarad_C969_SchedulingApp
             DB.Query(query);
             custTable = new DataTable();
             DB.adp.Fill(custTable);
-            //DB.FillTable(query);
             DB.CloseConnection();
             displayDGV();
         }

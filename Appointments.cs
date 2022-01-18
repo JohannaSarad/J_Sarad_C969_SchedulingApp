@@ -57,17 +57,20 @@ namespace J_Sarad_C969_SchedulingApp
         private void Appointments_Load(object sender, EventArgs e)
         {
             currentIndex = -1;
+            
+            
+            
             DB.OpenConnection();
             string query = "select type as 'Appointment Type', userId as 'User ID', customerId as 'Customer ID', customerName as 'Name',  start as 'Appointment Time' from customer join appointment using (customerId)";
             DB.Query(query);
             apptTable = new DataTable();
             DB.adp.Fill(apptTable);
-            //DB.FillTable(query);
+            
             DB.CloseConnection();
-            displayDGV();
+            display();
         }
 
-        private void displayDGV()
+        private void display()
         {
             dgvAppointments.DataSource = apptTable;
             dgvAppointments.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -77,11 +80,20 @@ namespace J_Sarad_C969_SchedulingApp
             dgvAppointments.DefaultCellStyle.SelectionBackColor = Color.Yellow;
             dgvAppointments.DefaultCellStyle.SelectionForeColor = Color.Black;
             dgvAppointments.RowHeadersVisible = false;
+
+            cbApptType.Items.Add("Presentation");
+            cbApptType.Items.Add("SCRUM");
+            cbApptType.Items.Add("Consultation");
         }
 
         private void dgvAppointments_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             currentIndex = e.RowIndex;
+        }
+
+        private void cbApptType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
