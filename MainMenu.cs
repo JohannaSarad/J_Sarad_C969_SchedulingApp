@@ -30,5 +30,12 @@ namespace J_Sarad_C969_SchedulingApp
             Customers form = new Customers();
             form.ShowDialog();
         }
+
+        private void btnUpdateAppt_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Appointments form = new Appointments();
+            form.ShowDialog();
+        }
     }
 }

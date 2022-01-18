@@ -87,6 +87,7 @@ namespace J_Sarad_C969_SchedulingApp
             this.btnUpdateAppt.TabIndex = 11;
             this.btnUpdateAppt.Text = "Veiw/Edit Appointments";
             this.btnUpdateAppt.UseVisualStyleBackColor = true;
+            this.btnUpdateAppt.Click += new System.EventHandler(this.btnUpdateAppt_Click);
             // 
             // btnExit
             // 

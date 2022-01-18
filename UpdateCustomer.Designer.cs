@@ -41,6 +41,8 @@ namespace J_Sarad_C969_SchedulingApp
             this.txtPhone = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.lblId = new System.Windows.Forms.Label();
+            this.txtCustID = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // lblName
@@ -131,6 +133,7 @@ namespace J_Sarad_C969_SchedulingApp
             this.btnSave.TabIndex = 10;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnCancel
             // 
@@ -141,11 +144,30 @@ namespace J_Sarad_C969_SchedulingApp
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
+            // lblId
+            // 
+            this.lblId.AutoSize = true;
+            this.lblId.Location = new System.Drawing.Point(29, 9);
+            this.lblId.Name = "lblId";
+            this.lblId.Size = new System.Drawing.Size(85, 17);
+            this.lblId.TabIndex = 12;
+            this.lblId.Text = "Customer ID";
+            // 
+            // txtCustID
+            // 
+            this.txtCustID.Location = new System.Drawing.Point(125, 12);
+            this.txtCustID.Name = "txtCustID";
+            this.txtCustID.ReadOnly = true;
+            this.txtCustID.Size = new System.Drawing.Size(169, 23);
+            this.txtCustID.TabIndex = 13;
+            // 
             // UpdateCustomer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(344, 361);
+            this.Controls.Add(this.txtCustID);
+            this.Controls.Add(this.lblId);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.txtPhone);
@@ -182,5 +204,7 @@ namespace J_Sarad_C969_SchedulingApp
         private System.Windows.Forms.TextBox txtPhone;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Label lblId;
+        private System.Windows.Forms.TextBox txtCustID;
     }
 }

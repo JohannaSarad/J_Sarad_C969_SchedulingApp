@@ -73,15 +73,18 @@ namespace J_Sarad_C969_SchedulingApp
             this.Hide();
             AddCustomer form = new AddCustomer();
             form.ShowDialog();
-            /*foreach (Control txt in this.Controls)
-            {
-                if (txt is TextBox && (txt != txtCustID) && (!string.IsNullOrEmpty(txt.Text)))
-                {
-                    DB.OpenConnection();
-                    string query = "INSERT INTO country (country, createDate, createdBy, lastUpdate, lastUpdateBy) VALUES ('" + txtCustCountry.Text + "','" + DateTime.UtcNow + "','" + DB.currentUser + "','" + DateTime.UtcNow + "','" + DB.currentUser + ")";
-                    DB.NonQuery(query);
-                }
-            }*/
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void btnMain_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            MainMenu form = new MainMenu();
+            form.ShowDialog();
         }
     }
 }

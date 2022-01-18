@@ -42,17 +42,19 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             this.dgvCustomers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvCustomers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCustomers.Location = new System.Drawing.Point(36, 57);
+            this.dgvCustomers.Location = new System.Drawing.Point(48, 70);
+            this.dgvCustomers.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvCustomers.Name = "dgvCustomers";
-            this.dgvCustomers.Size = new System.Drawing.Size(560, 228);
+            this.dgvCustomers.Size = new System.Drawing.Size(747, 283);
             this.dgvCustomers.TabIndex = 12;
             this.dgvCustomers.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCustomers_CellClick);
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(36, 302);
+            this.btnAdd.Location = new System.Drawing.Point(48, 372);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(135, 23);
+            this.btnAdd.Size = new System.Drawing.Size(180, 28);
             this.btnAdd.TabIndex = 13;
             this.btnAdd.Text = "Add Customer";
             this.btnAdd.UseVisualStyleBackColor = true;
@@ -60,18 +62,20 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(344, 302);
+            this.btnDelete.Location = new System.Drawing.Point(459, 372);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(134, 23);
+            this.btnDelete.Size = new System.Drawing.Size(179, 28);
             this.btnDelete.TabIndex = 17;
             this.btnDelete.Text = "Delete Customer";
             this.btnDelete.UseVisualStyleBackColor = true;
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(202, 302);
+            this.btnUpdate.Location = new System.Drawing.Point(269, 372);
+            this.btnUpdate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(121, 23);
+            this.btnUpdate.Size = new System.Drawing.Size(161, 28);
             this.btnUpdate.TabIndex = 18;
             this.btnUpdate.Text = "Update Customer";
             this.btnUpdate.UseVisualStyleBackColor = true;
@@ -79,33 +83,40 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             // btnMain
             // 
-            this.btnMain.Location = new System.Drawing.Point(468, 12);
+            this.btnMain.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.btnMain.Location = new System.Drawing.Point(624, 15);
+            this.btnMain.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnMain.Name = "btnMain";
-            this.btnMain.Size = new System.Drawing.Size(128, 23);
+            this.btnMain.Size = new System.Drawing.Size(171, 28);
             this.btnMain.TabIndex = 19;
             this.btnMain.Text = "Return to Main Menu";
             this.btnMain.UseVisualStyleBackColor = true;
+            this.btnMain.Click += new System.EventHandler(this.btnMain_Click);
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(500, 302);
+            this.btnExit.Location = new System.Drawing.Point(667, 372);
+            this.btnExit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(96, 23);
+            this.btnExit.Size = new System.Drawing.Size(128, 28);
             this.btnExit.TabIndex = 20;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // Customers
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(634, 361);
+            this.ClientSize = new System.Drawing.Size(845, 444);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnMain);
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.dgvCustomers);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Customers";
             this.Text = "Customers";
             this.Load += new System.EventHandler(this.Customer_Load);
