@@ -31,8 +31,6 @@ namespace J_Sarad_C969_SchedulingApp
         {
             this.cbType = new System.Windows.Forms.ComboBox();
             this.lblType = new System.Windows.Forms.Label();
-            this.cbUserId = new System.Windows.Forms.ComboBox();
-            this.lblCustId = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.lblName = new System.Windows.Forms.Label();
             this.lblUserId = new System.Windows.Forms.Label();
@@ -41,12 +39,15 @@ namespace J_Sarad_C969_SchedulingApp
             this.lblTime = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.lblCustID = new System.Windows.Forms.Label();
+            this.dgvCustSearch = new System.Windows.Forms.DataGridView();
+            this.txtCustID = new System.Windows.Forms.TextBox();
             this.lblSearch = new System.Windows.Forms.Label();
-            this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
             this.btnSearch = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.btnSelectCust = new System.Windows.Forms.Button();
+            this.txtUserID = new System.Windows.Forms.TextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCustSearch)).BeginInit();
             this.SuspendLayout();
             // 
             // cbType
@@ -65,23 +66,6 @@ namespace J_Sarad_C969_SchedulingApp
             this.lblType.Size = new System.Drawing.Size(93, 13);
             this.lblType.TabIndex = 2;
             this.lblType.Text = "Appointment Type";
-            // 
-            // cbUserId
-            // 
-            this.cbUserId.FormattingEnabled = true;
-            this.cbUserId.Location = new System.Drawing.Point(160, 76);
-            this.cbUserId.Name = "cbUserId";
-            this.cbUserId.Size = new System.Drawing.Size(200, 21);
-            this.cbUserId.TabIndex = 3;
-            // 
-            // lblCustId
-            // 
-            this.lblCustId.AutoSize = true;
-            this.lblCustId.Location = new System.Drawing.Point(44, 124);
-            this.lblCustId.Name = "lblCustId";
-            this.lblCustId.Size = new System.Drawing.Size(63, 13);
-            this.lblCustId.TabIndex = 4;
-            this.lblCustId.Text = "Customer Id";
             // 
             // label2
             // 
@@ -151,57 +135,89 @@ namespace J_Sarad_C969_SchedulingApp
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
-            // dataGridView1
+            // lblCustID
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(469, 96);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(325, 150);
-            this.dataGridView1.TabIndex = 15;
+            this.lblCustID.AutoSize = true;
+            this.lblCustID.Location = new System.Drawing.Point(44, 119);
+            this.lblCustID.Name = "lblCustID";
+            this.lblCustID.Size = new System.Drawing.Size(62, 13);
+            this.lblCustID.TabIndex = 15;
+            this.lblCustID.Text = "Cusomer ID";
             // 
-            // txtSearch
+            // dgvCustSearch
             // 
-            this.txtSearch.Location = new System.Drawing.Point(694, 54);
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(100, 20);
-            this.txtSearch.TabIndex = 16;
+            this.dgvCustSearch.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvCustSearch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCustSearch.Location = new System.Drawing.Point(403, 79);
+            this.dgvCustSearch.Name = "dgvCustSearch";
+            this.dgvCustSearch.Size = new System.Drawing.Size(333, 150);
+            this.dgvCustSearch.TabIndex = 16;
+            this.dgvCustSearch.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCustSearch_CellClick);
+            // 
+            // txtCustID
+            // 
+            this.txtCustID.Location = new System.Drawing.Point(160, 119);
+            this.txtCustID.Name = "txtCustID";
+            this.txtCustID.ReadOnly = true;
+            this.txtCustID.Size = new System.Drawing.Size(200, 20);
+            this.txtCustID.TabIndex = 17;
             // 
             // lblSearch
             // 
             this.lblSearch.AutoSize = true;
-            this.lblSearch.Location = new System.Drawing.Point(466, 20);
+            this.lblSearch.Location = new System.Drawing.Point(400, 9);
             this.lblSearch.Name = "lblSearch";
-            this.lblSearch.Size = new System.Drawing.Size(165, 13);
-            this.lblSearch.TabIndex = 17;
-            this.lblSearch.Text = "Search Customers By Name or ID";
-            // 
-            // maskedTextBox1
-            // 
-            this.maskedTextBox1.Location = new System.Drawing.Point(160, 121);
-            this.maskedTextBox1.Name = "maskedTextBox1";
-            this.maskedTextBox1.ReadOnly = true;
-            this.maskedTextBox1.Size = new System.Drawing.Size(200, 20);
-            this.maskedTextBox1.TabIndex = 18;
+            this.lblSearch.Size = new System.Drawing.Size(159, 13);
+            this.lblSearch.TabIndex = 18;
+            this.lblSearch.Text = "Search Customer by Name or ID";
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(604, 52);
+            this.btnSearch.Location = new System.Drawing.Point(661, 50);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);
             this.btnSearch.TabIndex = 19;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = true;
             // 
+            // txtSearch
+            // 
+            this.txtSearch.Location = new System.Drawing.Point(516, 50);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(139, 20);
+            this.txtSearch.TabIndex = 20;
+            // 
+            // btnSelectCust
+            // 
+            this.btnSelectCust.Location = new System.Drawing.Point(565, 253);
+            this.btnSelectCust.Name = "btnSelectCust";
+            this.btnSelectCust.Size = new System.Drawing.Size(171, 23);
+            this.btnSelectCust.TabIndex = 21;
+            this.btnSelectCust.Text = "Select Customer";
+            this.btnSelectCust.UseVisualStyleBackColor = true;
+            this.btnSelectCust.Click += new System.EventHandler(this.btnSelectCust_Click);
+            // 
+            // txtUserID
+            // 
+            this.txtUserID.Location = new System.Drawing.Point(160, 72);
+            this.txtUserID.Name = "txtUserID";
+            this.txtUserID.ReadOnly = true;
+            this.txtUserID.Size = new System.Drawing.Size(200, 20);
+            this.txtUserID.TabIndex = 22;
+            // 
             // AddAppt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(832, 347);
-            this.Controls.Add(this.btnSearch);
-            this.Controls.Add(this.maskedTextBox1);
-            this.Controls.Add(this.lblSearch);
+            this.Controls.Add(this.txtUserID);
+            this.Controls.Add(this.btnSelectCust);
             this.Controls.Add(this.txtSearch);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.btnSearch);
+            this.Controls.Add(this.lblSearch);
+            this.Controls.Add(this.txtCustID);
+            this.Controls.Add(this.dgvCustSearch);
+            this.Controls.Add(this.lblCustID);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.lblTime);
@@ -210,14 +226,12 @@ namespace J_Sarad_C969_SchedulingApp
             this.Controls.Add(this.lblUserId);
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.lblCustId);
-            this.Controls.Add(this.cbUserId);
             this.Controls.Add(this.lblType);
             this.Controls.Add(this.cbType);
             this.Name = "AddAppt";
             this.Text = "Add Appointment";
             this.Load += new System.EventHandler(this.AddAppt_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCustSearch)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -227,8 +241,6 @@ namespace J_Sarad_C969_SchedulingApp
 
         private System.Windows.Forms.ComboBox cbType;
         private System.Windows.Forms.Label lblType;
-        private System.Windows.Forms.ComboBox cbUserId;
-        private System.Windows.Forms.Label lblCustId;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.Label lblUserId;
@@ -237,10 +249,13 @@ namespace J_Sarad_C969_SchedulingApp
         private System.Windows.Forms.Label lblTime;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.Label lblCustID;
+        private System.Windows.Forms.DataGridView dgvCustSearch;
+        private System.Windows.Forms.TextBox txtCustID;
         private System.Windows.Forms.Label lblSearch;
-        private System.Windows.Forms.MaskedTextBox maskedTextBox1;
         private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.Button btnSelectCust;
+        private System.Windows.Forms.TextBox txtUserID;
     }
 }

@@ -17,7 +17,7 @@ namespace J_Sarad_C969_SchedulingApp
     public partial class Customers : Form
     {
         DataTable custTable;
-        public int currentIndex;
+        //public int currentIndex;
         
         public Customers()
         {
@@ -26,7 +26,7 @@ namespace J_Sarad_C969_SchedulingApp
 
         private void Customer_Load(object sender, EventArgs e)
         {
-            currentIndex = -1;
+            DB.currentIndex = -1;
             DB.OpenConnection();
             string query = "select customerId as 'ID', customerName as 'Name', phone as 'Phone', address as 'Address', city as 'City', country as 'Country' from customer t1 inner join address t2 on t1.addressId=t2.addressId inner join city t3 on t2.cityId=t3.cityId inner join country t4 on t3.countryId=t4.countryId";
             DB.Query(query);
@@ -50,12 +50,12 @@ namespace J_Sarad_C969_SchedulingApp
 
         private void dgvCustomers_CellClick(object sender, DataGridViewCellEventArgs e)
         { 
-            currentIndex = e.RowIndex;
+            DB.currentIndex = e.RowIndex;
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (currentIndex >= 0)
+            if (DB.currentIndex >= 0)
             {
                 this.Hide();
                 UpdateCustomer form = new UpdateCustomer();
@@ -84,6 +84,11 @@ namespace J_Sarad_C969_SchedulingApp
             this.Hide();
             MainMenu form = new MainMenu();
             form.ShowDialog();
+        }
+
+        private void dgvCustomers_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

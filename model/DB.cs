@@ -12,6 +12,9 @@ namespace J_Sarad_C969_SchedulingApp.model
 {
     public static class DB
     {
+        public static int currentIndex { get; set; }
+        public static int currentUserID { get; set; }
+        public static string currentUser { get; set; }
 
         static MySqlConnection con { get; set; }
         public static MySqlCommand cmd { get; set; }
@@ -21,7 +24,8 @@ namespace J_Sarad_C969_SchedulingApp.model
        
 
         public static MySqlDataReader reader;
-        public static string currentUser;
+       
+        
 
         public static void OpenConnection()
         {

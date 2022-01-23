@@ -50,6 +50,7 @@ namespace J_Sarad_C969_SchedulingApp
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(169, 23);
             this.txtName.TabIndex = 0;
+            //this.txtName.TextChanged += new System.EventHandler(this.txtName_TextChanged);
             // 
             // btnCancel
             // 
@@ -113,6 +114,7 @@ namespace J_Sarad_C969_SchedulingApp
             this.lblName.Size = new System.Drawing.Size(45, 17);
             this.lblName.TabIndex = 8;
             this.lblName.Text = "Name";
+            //this.lblName.Click += new System.EventHandler(this.lblName_Click);
             // 
             // lblAddress
             // 

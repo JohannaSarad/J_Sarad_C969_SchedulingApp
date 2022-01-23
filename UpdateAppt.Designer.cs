@@ -163,6 +163,7 @@ namespace J_Sarad_C969_SchedulingApp
             this.Controls.Add(this.lblName);
             this.Name = "UpdateAppt";
             this.Text = "UpdateAppt";
+            this.Load += new System.EventHandler(this.UpdateAppt_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

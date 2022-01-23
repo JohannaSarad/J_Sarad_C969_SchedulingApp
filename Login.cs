@@ -20,8 +20,8 @@ namespace J_Sarad_C969_SchedulingApp
 
     public partial class LogIn : Form
     {
-        //FIX ME! Move me to a class user with method to update user and possibly add user for testing
-        public static int currentUserID { get; set; }
+        
+        
         
         public LogIn()
         {
@@ -83,6 +83,7 @@ namespace J_Sarad_C969_SchedulingApp
                     && dataTable.Rows[i]["password"].ToString() == txtPassword.Text)
                 {
                     DB.currentUser = dataTable.Rows[i]["userName"].ToString();
+                    DB.currentUserID = (int)dataTable.Rows[i]["userId"];
                     this.Hide();
                     MainMenu form = new MainMenu();
 

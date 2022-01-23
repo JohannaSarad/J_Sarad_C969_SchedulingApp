@@ -18,9 +18,10 @@ namespace J_Sarad_C969_SchedulingApp
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new LogIn());
+            //Application.Run(new MainMenu());
 
             //int currentUserID = -1;
-             DB.currentUser = "";
+            //DB.currentUser = "";
         }
     }
 }

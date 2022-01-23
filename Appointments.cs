@@ -14,7 +14,7 @@ namespace J_Sarad_C969_SchedulingApp
     public partial class Appointments : Form
     {
         DataTable apptTable;
-        public int currentIndex;
+        //public int currentIndex;
         public Appointments()
         {
             InitializeComponent();
@@ -36,7 +36,7 @@ namespace J_Sarad_C969_SchedulingApp
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (currentIndex >= 0)
+            if (DB.currentIndex >= 0)
             {
                 this.Hide();
                 UpdateAppt form = new UpdateAppt();
@@ -56,17 +56,23 @@ namespace J_Sarad_C969_SchedulingApp
 
         private void Appointments_Load(object sender, EventArgs e)
         {
-            currentIndex = -1;
+            DB.currentIndex = -1;
             
             
             
             DB.OpenConnection();
-            string query = "select type as 'Appointment Type', userId as 'User ID', customerId as 'Customer ID', customerName as 'Name',  start as 'Appointment Time' from customer join appointment using (customerId)";
+            string query = "select type as 'Appointment Type', userId as 'User ID', customerId as 'Customer ID', customerName as 'Name', start as 'Appointment Time' from customer join appointment using (customerId)";
             DB.Query(query);
             apptTable = new DataTable();
             DB.adp.Fill(apptTable);
             
             DB.CloseConnection();
+            for(int i = 0; i < apptTable.Rows.Count; i++ )
+            {
+                apptTable.Rows[i]["Appointment Time"] =
+                    TimeZoneInfo.ConvertTimeFromUtc((DateTime)apptTable.Rows[i]["Appointment Time"], 
+                    TimeZoneInfo.Local);
+            }
             display();
         }
 
@@ -80,6 +86,7 @@ namespace J_Sarad_C969_SchedulingApp
             dgvAppointments.DefaultCellStyle.SelectionBackColor = Color.Yellow;
             dgvAppointments.DefaultCellStyle.SelectionForeColor = Color.Black;
             dgvAppointments.RowHeadersVisible = false;
+            dgvAppointments.Columns["Appointment Time"].DefaultCellStyle.Format = "MM/dd/yyyy HH:mm:ss";
 
             cbApptType.Items.Add("Presentation");
             cbApptType.Items.Add("SCRUM");
@@ -88,12 +95,7 @@ namespace J_Sarad_C969_SchedulingApp
 
         private void dgvAppointments_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            currentIndex = e.RowIndex;
-        }
-
-        private void cbApptType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
+            DB.currentIndex = e.RowIndex;
         }
     }
 }

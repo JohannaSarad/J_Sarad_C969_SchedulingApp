@@ -16,5 +16,10 @@ namespace J_Sarad_C969_SchedulingApp
         {
             InitializeComponent();
         }
+
+        private void UpdateAppt_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

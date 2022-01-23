@@ -31,15 +31,18 @@ namespace J_Sarad_C969_SchedulingApp
         {
             this.btnEditCust = new System.Windows.Forms.Button();
             this.btnReports = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvCalendar = new System.Windows.Forms.DataGridView();
             this.lblAppointments = new System.Windows.Forms.Label();
             this.btnUpdateAppt = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
-            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
+            this.monthCal = new System.Windows.Forms.MonthCalendar();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.lblGreeting = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.btnToday = new System.Windows.Forms.Button();
+            this.btnLocal = new System.Windows.Forms.Button();
+            this.btnUTC = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCalendar)).BeginInit();
             this.SuspendLayout();
             // 
             // btnEditCust
@@ -61,13 +64,16 @@ namespace J_Sarad_C969_SchedulingApp
             this.btnReports.Text = "Generate Reports";
             this.btnReports.UseVisualStyleBackColor = true;
             // 
-            // dataGridView1
+            // dgvCalendar
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(277, 86);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(588, 306);
-            this.dataGridView1.TabIndex = 4;
+            this.dgvCalendar.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvCalendar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCalendar.Location = new System.Drawing.Point(277, 86);
+            this.dgvCalendar.Name = "dgvCalendar";
+            this.dgvCalendar.ReadOnly = true;
+            this.dgvCalendar.Size = new System.Drawing.Size(675, 306);
+            this.dgvCalendar.TabIndex = 4;
+            this.dgvCalendar.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCalendar_CellContentClick);
             // 
             // lblAppointments
             // 
@@ -97,12 +103,14 @@ namespace J_Sarad_C969_SchedulingApp
             this.btnExit.TabIndex = 13;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
-            // monthCalendar1
+            // monthCal
             // 
-            this.monthCalendar1.Location = new System.Drawing.Point(17, 119);
-            this.monthCalendar1.Name = "monthCalendar1";
-            this.monthCalendar1.TabIndex = 14;
+            this.monthCal.Location = new System.Drawing.Point(17, 119);
+            this.monthCal.Name = "monthCal";
+            this.monthCal.TabIndex = 14;
+            this.monthCal.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
             // 
             // comboBox1
             // 
@@ -133,25 +141,58 @@ namespace J_Sarad_C969_SchedulingApp
             this.lblGreeting.Text = "Welcome User. What Can I Help You with Today?";
             this.lblGreeting.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
+            // btnToday
+            // 
+            this.btnToday.Location = new System.Drawing.Point(19, 19);
+            this.btnToday.Name = "btnToday";
+            this.btnToday.Size = new System.Drawing.Size(75, 23);
+            this.btnToday.TabIndex = 18;
+            this.btnToday.Text = "Today";
+            this.btnToday.UseVisualStyleBackColor = true;
+            this.btnToday.Click += new System.EventHandler(this.btnToday_Click);
+            // 
+            // btnLocal
+            // 
+            this.btnLocal.Location = new System.Drawing.Point(100, 19);
+            this.btnLocal.Name = "btnLocal";
+            this.btnLocal.Size = new System.Drawing.Size(75, 23);
+            this.btnLocal.TabIndex = 19;
+            this.btnLocal.Text = "Local";
+            this.btnLocal.UseVisualStyleBackColor = true;
+            this.btnLocal.Click += new System.EventHandler(this.btnLocal_Click);
+            // 
+            // btnUTC
+            // 
+            this.btnUTC.Location = new System.Drawing.Point(191, 19);
+            this.btnUTC.Name = "btnUTC";
+            this.btnUTC.Size = new System.Drawing.Size(75, 23);
+            this.btnUTC.TabIndex = 20;
+            this.btnUTC.Text = "UTC";
+            this.btnUTC.UseVisualStyleBackColor = true;
+            this.btnUTC.Click += new System.EventHandler(this.btnUTC_Click);
+            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(884, 461);
+            this.ClientSize = new System.Drawing.Size(1062, 461);
+            this.Controls.Add(this.btnUTC);
+            this.Controls.Add(this.btnLocal);
+            this.Controls.Add(this.btnToday);
             this.Controls.Add(this.lblGreeting);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.monthCalendar1);
+            this.Controls.Add(this.monthCal);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnUpdateAppt);
             this.Controls.Add(this.lblAppointments);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgvCalendar);
             this.Controls.Add(this.btnReports);
             this.Controls.Add(this.btnEditCust);
             this.Name = "MainMenu";
             this.Text = "MainMenu";
             this.Load += new System.EventHandler(this.MainMenu_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCalendar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -160,13 +201,16 @@ namespace J_Sarad_C969_SchedulingApp
         #endregion
         private System.Windows.Forms.Button btnEditCust;
         private System.Windows.Forms.Button btnReports;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvCalendar;
         private System.Windows.Forms.Label lblAppointments;
         private System.Windows.Forms.Button btnUpdateAppt;
         private System.Windows.Forms.Button btnExit;
-        private System.Windows.Forms.MonthCalendar monthCalendar1;
+        private System.Windows.Forms.MonthCalendar monthCal;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblGreeting;
+        private System.Windows.Forms.Button btnToday;
+        private System.Windows.Forms.Button btnLocal;
+        private System.Windows.Forms.Button btnUTC;
     }
 }

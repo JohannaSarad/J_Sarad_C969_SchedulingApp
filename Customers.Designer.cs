@@ -48,6 +48,7 @@ namespace J_Sarad_C969_SchedulingApp
             this.dgvCustomers.Size = new System.Drawing.Size(747, 283);
             this.dgvCustomers.TabIndex = 12;
             this.dgvCustomers.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCustomers_CellClick);
+            this.dgvCustomers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCustomers_CellContentClick);
             // 
             // btnAdd
             // 

@@ -143,6 +143,7 @@ namespace J_Sarad_C969_SchedulingApp
             this.btnCancel.TabIndex = 11;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // lblId
             // 
@@ -181,7 +182,7 @@ namespace J_Sarad_C969_SchedulingApp
             this.Controls.Add(this.lblCountry);
             this.Controls.Add(this.lblName);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "UpdateCustomer";
             this.Text = "Update Customer";
             this.Load += new System.EventHandler(this.UpdateCustomer_Load);
