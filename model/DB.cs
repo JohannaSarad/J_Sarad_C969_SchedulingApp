@@ -16,6 +16,8 @@ namespace J_Sarad_C969_SchedulingApp.model
         public static int currentUserID { get; set; }
         public static string currentUser { get; set; }
 
+        public static TimeZone CurrentTimeZone { get; }
+
         static MySqlConnection con { get; set; }
         public static MySqlCommand cmd { get; set; }
         public static MySqlDataAdapter adp { get; set; }

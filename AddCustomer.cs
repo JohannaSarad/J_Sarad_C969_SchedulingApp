@@ -86,7 +86,11 @@ namespace J_Sarad_C969_SchedulingApp
             }
         }
 
-       
-       
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Customers form = new Customers();
+            form.ShowDialog();
+        }
     }
 }

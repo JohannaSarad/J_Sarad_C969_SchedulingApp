@@ -33,14 +33,18 @@ namespace J_Sarad_C969_SchedulingApp
             this.lblUserId = new System.Windows.Forms.Label();
             this.lblType = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.lblTime = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.txtCustId = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.lblDate = new System.Windows.Forms.Label();
+            this.cbType = new System.Windows.Forms.ComboBox();
+            this.txtCustID = new System.Windows.Forms.TextBox();
+            this.txtName = new System.Windows.Forms.TextBox();
+            this.dtpDate = new System.Windows.Forms.DateTimePicker();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.dtpStart = new System.Windows.Forms.DateTimePicker();
+            this.dtpEnd = new System.Windows.Forms.DateTimePicker();
+            this.lblStart = new System.Windows.Forms.Label();
+            this.lblEnd = new System.Windows.Forms.Label();
+            this.txtUserID = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // lblName
@@ -79,56 +83,51 @@ namespace J_Sarad_C969_SchedulingApp
             this.label4.TabIndex = 3;
             this.label4.Text = "Customer ID";
             // 
-            // lblTime
+            // lblDate
             // 
-            this.lblTime.AutoSize = true;
-            this.lblTime.Location = new System.Drawing.Point(32, 215);
-            this.lblTime.Name = "lblTime";
-            this.lblTime.Size = new System.Drawing.Size(92, 13);
-            this.lblTime.TabIndex = 4;
-            this.lblTime.Text = "Appointment Time";
+            this.lblDate.AutoSize = true;
+            this.lblDate.Location = new System.Drawing.Point(32, 215);
+            this.lblDate.Name = "lblDate";
+            this.lblDate.Size = new System.Drawing.Size(92, 13);
+            this.lblDate.TabIndex = 4;
+            this.lblDate.Text = "Appointment Date";
             // 
-            // comboBox1
+            // cbType
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(158, 79);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(200, 21);
-            this.comboBox1.TabIndex = 5;
+            this.cbType.FormattingEnabled = true;
+            this.cbType.Location = new System.Drawing.Point(158, 42);
+            this.cbType.Name = "cbType";
+            this.cbType.Size = new System.Drawing.Size(200, 21);
+            this.cbType.TabIndex = 6;
             // 
-            // comboBox2
+            // txtCustID
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(158, 42);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(200, 21);
-            this.comboBox2.TabIndex = 6;
+            this.txtCustID.Location = new System.Drawing.Point(158, 119);
+            this.txtCustID.Name = "txtCustID";
+            this.txtCustID.ReadOnly = true;
+            this.txtCustID.Size = new System.Drawing.Size(200, 20);
+            this.txtCustID.TabIndex = 8;
             // 
-            // txtCustId
+            // txtName
             // 
-            this.txtCustId.Location = new System.Drawing.Point(158, 119);
-            this.txtCustId.Name = "txtCustId";
-            this.txtCustId.ReadOnly = true;
-            this.txtCustId.Size = new System.Drawing.Size(200, 20);
-            this.txtCustId.TabIndex = 8;
+            this.txtName.Location = new System.Drawing.Point(158, 165);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(200, 20);
+            this.txtName.TabIndex = 9;
             // 
-            // textBox2
+            // dtpDate
             // 
-            this.textBox2.Location = new System.Drawing.Point(158, 165);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(200, 20);
-            this.textBox2.TabIndex = 9;
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(158, 208);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker1.TabIndex = 10;
+            this.dtpDate.CustomFormat = "yyyy-MM-dd";
+            this.dtpDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpDate.Location = new System.Drawing.Point(158, 208);
+            this.dtpDate.Name = "dtpDate";
+            this.dtpDate.ShowUpDown = true;
+            this.dtpDate.Size = new System.Drawing.Size(200, 20);
+            this.dtpDate.TabIndex = 10;
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(158, 254);
+            this.btnSave.Location = new System.Drawing.Point(158, 321);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 11;
@@ -137,26 +136,73 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(272, 254);
+            this.btnCancel.Location = new System.Drawing.Point(259, 321);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 12;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
+            // dtpStart
+            // 
+            this.dtpStart.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dtpStart.Location = new System.Drawing.Point(158, 242);
+            this.dtpStart.Name = "dtpStart";
+            this.dtpStart.ShowUpDown = true;
+            this.dtpStart.Size = new System.Drawing.Size(200, 20);
+            this.dtpStart.TabIndex = 13;
+            // 
+            // dtpEnd
+            // 
+            this.dtpEnd.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dtpEnd.Location = new System.Drawing.Point(158, 276);
+            this.dtpEnd.Name = "dtpEnd";
+            this.dtpEnd.ShowUpDown = true;
+            this.dtpEnd.Size = new System.Drawing.Size(200, 20);
+            this.dtpEnd.TabIndex = 14;
+            // 
+            // lblStart
+            // 
+            this.lblStart.AutoSize = true;
+            this.lblStart.Location = new System.Drawing.Point(32, 248);
+            this.lblStart.Name = "lblStart";
+            this.lblStart.Size = new System.Drawing.Size(55, 13);
+            this.lblStart.TabIndex = 15;
+            this.lblStart.Text = "Start Time";
+            // 
+            // lblEnd
+            // 
+            this.lblEnd.AutoSize = true;
+            this.lblEnd.Location = new System.Drawing.Point(34, 283);
+            this.lblEnd.Name = "lblEnd";
+            this.lblEnd.Size = new System.Drawing.Size(53, 13);
+            this.lblEnd.TabIndex = 16;
+            this.lblEnd.Text = "End TIme";
+            // 
+            // txtUserID
+            // 
+            this.txtUserID.Location = new System.Drawing.Point(158, 79);
+            this.txtUserID.Name = "txtUserID";
+            this.txtUserID.Size = new System.Drawing.Size(200, 20);
+            this.txtUserID.TabIndex = 17;
+            // 
             // UpdateAppt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(415, 311);
+            this.ClientSize = new System.Drawing.Size(443, 369);
+            this.Controls.Add(this.txtUserID);
+            this.Controls.Add(this.lblEnd);
+            this.Controls.Add(this.lblStart);
+            this.Controls.Add(this.dtpEnd);
+            this.Controls.Add(this.dtpStart);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.txtCustId);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.lblTime);
+            this.Controls.Add(this.dtpDate);
+            this.Controls.Add(this.txtName);
+            this.Controls.Add(this.txtCustID);
+            this.Controls.Add(this.cbType);
+            this.Controls.Add(this.lblDate);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.lblType);
             this.Controls.Add(this.lblUserId);
@@ -175,13 +221,17 @@ namespace J_Sarad_C969_SchedulingApp
         private System.Windows.Forms.Label lblUserId;
         private System.Windows.Forms.Label lblType;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label lblTime;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.TextBox txtCustId;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Label lblDate;
+        private System.Windows.Forms.ComboBox cbType;
+        private System.Windows.Forms.TextBox txtCustID;
+        private System.Windows.Forms.TextBox txtName;
+        private System.Windows.Forms.DateTimePicker dtpDate;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.DateTimePicker dtpStart;
+        private System.Windows.Forms.DateTimePicker dtpEnd;
+        private System.Windows.Forms.Label lblStart;
+        private System.Windows.Forms.Label lblEnd;
+        private System.Windows.Forms.TextBox txtUserID;
     }
 }

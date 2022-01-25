@@ -35,8 +35,8 @@ namespace J_Sarad_C969_SchedulingApp
             this.lblName = new System.Windows.Forms.Label();
             this.lblUserId = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.lblTime = new System.Windows.Forms.Label();
+            this.dtpDate = new System.Windows.Forms.DateTimePicker();
+            this.lblDate = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.lblCustID = new System.Windows.Forms.Label();
@@ -47,6 +47,12 @@ namespace J_Sarad_C969_SchedulingApp
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.btnSelectCust = new System.Windows.Forms.Button();
             this.txtUserID = new System.Windows.Forms.TextBox();
+            this.lblstartTime = new System.Windows.Forms.Label();
+            this.lblEndTime = new System.Windows.Forms.Label();
+            this.btnExit = new System.Windows.Forms.Button();
+            this.lblHM = new System.Windows.Forms.Label();
+            this.dtpStart = new System.Windows.Forms.DateTimePicker();
+            this.dtpEnd = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustSearch)).BeginInit();
             this.SuspendLayout();
             // 
@@ -101,34 +107,39 @@ namespace J_Sarad_C969_SchedulingApp
             this.txtName.Size = new System.Drawing.Size(200, 20);
             this.txtName.TabIndex = 10;
             // 
-            // dateTimePicker1
+            // dtpDate
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(160, 226);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker1.TabIndex = 11;
+            this.dtpDate.CustomFormat = "yyyy-MM-dd";
+            this.dtpDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpDate.Location = new System.Drawing.Point(160, 202);
+            this.dtpDate.Name = "dtpDate";
+            this.dtpDate.ShowUpDown = true;
+            this.dtpDate.Size = new System.Drawing.Size(125, 20);
+            this.dtpDate.TabIndex = 11;
+            this.dtpDate.Value = new System.DateTime(2022, 3, 4, 0, 0, 0, 0);
             // 
-            // lblTime
+            // lblDate
             // 
-            this.lblTime.AutoSize = true;
-            this.lblTime.Location = new System.Drawing.Point(44, 233);
-            this.lblTime.Name = "lblTime";
-            this.lblTime.Size = new System.Drawing.Size(92, 13);
-            this.lblTime.TabIndex = 12;
-            this.lblTime.Text = "Appointment Time";
+            this.lblDate.AutoSize = true;
+            this.lblDate.Location = new System.Drawing.Point(44, 206);
+            this.lblDate.Name = "lblDate";
+            this.lblDate.Size = new System.Drawing.Size(92, 13);
+            this.lblDate.TabIndex = 12;
+            this.lblDate.Text = "Appointment Date";
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(160, 299);
+            this.btnSave.Location = new System.Drawing.Point(160, 344);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 13;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(264, 299);
+            this.btnCancel.Location = new System.Drawing.Point(265, 344);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 14;
@@ -140,9 +151,9 @@ namespace J_Sarad_C969_SchedulingApp
             this.lblCustID.AutoSize = true;
             this.lblCustID.Location = new System.Drawing.Point(44, 119);
             this.lblCustID.Name = "lblCustID";
-            this.lblCustID.Size = new System.Drawing.Size(62, 13);
+            this.lblCustID.Size = new System.Drawing.Size(65, 13);
             this.lblCustID.TabIndex = 15;
-            this.lblCustID.Text = "Cusomer ID";
+            this.lblCustID.Text = "Customer ID";
             // 
             // dgvCustSearch
             // 
@@ -150,7 +161,7 @@ namespace J_Sarad_C969_SchedulingApp
             this.dgvCustSearch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCustSearch.Location = new System.Drawing.Point(403, 79);
             this.dgvCustSearch.Name = "dgvCustSearch";
-            this.dgvCustSearch.Size = new System.Drawing.Size(333, 150);
+            this.dgvCustSearch.Size = new System.Drawing.Size(386, 194);
             this.dgvCustSearch.TabIndex = 16;
             this.dgvCustSearch.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCustSearch_CellClick);
             // 
@@ -173,7 +184,7 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(661, 50);
+            this.btnSearch.Location = new System.Drawing.Point(714, 47);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);
             this.btnSearch.TabIndex = 19;
@@ -182,14 +193,14 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             // txtSearch
             // 
-            this.txtSearch.Location = new System.Drawing.Point(516, 50);
+            this.txtSearch.Location = new System.Drawing.Point(569, 49);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(139, 20);
             this.txtSearch.TabIndex = 20;
             // 
             // btnSelectCust
             // 
-            this.btnSelectCust.Location = new System.Drawing.Point(565, 253);
+            this.btnSelectCust.Location = new System.Drawing.Point(618, 289);
             this.btnSelectCust.Name = "btnSelectCust";
             this.btnSelectCust.Size = new System.Drawing.Size(171, 23);
             this.btnSelectCust.TabIndex = 21;
@@ -205,11 +216,72 @@ namespace J_Sarad_C969_SchedulingApp
             this.txtUserID.Size = new System.Drawing.Size(200, 20);
             this.txtUserID.TabIndex = 22;
             // 
+            // lblstartTime
+            // 
+            this.lblstartTime.AutoSize = true;
+            this.lblstartTime.Location = new System.Drawing.Point(44, 243);
+            this.lblstartTime.Name = "lblstartTime";
+            this.lblstartTime.Size = new System.Drawing.Size(55, 13);
+            this.lblstartTime.TabIndex = 23;
+            this.lblstartTime.Text = "Start Time";
+            // 
+            // lblEndTime
+            // 
+            this.lblEndTime.AutoSize = true;
+            this.lblEndTime.Location = new System.Drawing.Point(44, 280);
+            this.lblEndTime.Name = "lblEndTime";
+            this.lblEndTime.Size = new System.Drawing.Size(52, 13);
+            this.lblEndTime.TabIndex = 24;
+            this.lblEndTime.Text = "End Time";
+            // 
+            // btnExit
+            // 
+            this.btnExit.Location = new System.Drawing.Point(714, 344);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(75, 23);
+            this.btnExit.TabIndex = 27;
+            this.btnExit.Text = "Exit";
+            this.btnExit.UseVisualStyleBackColor = true;
+            // 
+            // lblHM
+            // 
+            this.lblHM.AutoSize = true;
+            this.lblHM.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblHM.Location = new System.Drawing.Point(410, 354);
+            this.lblHM.Name = "lblHM";
+            this.lblHM.Size = new System.Drawing.Size(84, 13);
+            this.lblHM.TabIndex = 40;
+            this.lblHM.Text = "HH:MM AM/PM";
+            // 
+            // dtpStart
+            // 
+            this.dtpStart.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dtpStart.Location = new System.Drawing.Point(160, 243);
+            this.dtpStart.Name = "dtpStart";
+            this.dtpStart.ShowUpDown = true;
+            this.dtpStart.Size = new System.Drawing.Size(200, 20);
+            this.dtpStart.TabIndex = 49;
+            // 
+            // dtpEnd
+            // 
+            this.dtpEnd.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dtpEnd.Location = new System.Drawing.Point(160, 280);
+            this.dtpEnd.Name = "dtpEnd";
+            this.dtpEnd.ShowUpDown = true;
+            this.dtpEnd.Size = new System.Drawing.Size(200, 20);
+            this.dtpEnd.TabIndex = 50;
+            // 
             // AddAppt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(832, 347);
+            this.ClientSize = new System.Drawing.Size(832, 389);
+            this.Controls.Add(this.dtpEnd);
+            this.Controls.Add(this.dtpStart);
+            this.Controls.Add(this.lblHM);
+            this.Controls.Add(this.btnExit);
+            this.Controls.Add(this.lblEndTime);
+            this.Controls.Add(this.lblstartTime);
             this.Controls.Add(this.txtUserID);
             this.Controls.Add(this.btnSelectCust);
             this.Controls.Add(this.txtSearch);
@@ -220,8 +292,8 @@ namespace J_Sarad_C969_SchedulingApp
             this.Controls.Add(this.lblCustID);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.lblTime);
-            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.lblDate);
+            this.Controls.Add(this.dtpDate);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.lblUserId);
             this.Controls.Add(this.lblName);
@@ -245,8 +317,8 @@ namespace J_Sarad_C969_SchedulingApp
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.Label lblUserId;
         private System.Windows.Forms.TextBox txtName;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.Label lblTime;
+        private System.Windows.Forms.DateTimePicker dtpDate;
+        private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Label lblCustID;
@@ -257,5 +329,11 @@ namespace J_Sarad_C969_SchedulingApp
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Button btnSelectCust;
         private System.Windows.Forms.TextBox txtUserID;
+        private System.Windows.Forms.Label lblstartTime;
+        private System.Windows.Forms.Label lblEndTime;
+        private System.Windows.Forms.Button btnExit;
+        private System.Windows.Forms.Label lblHM;
+        private System.Windows.Forms.DateTimePicker dtpStart;
+        private System.Windows.Forms.DateTimePicker dtpEnd;
     }
 }

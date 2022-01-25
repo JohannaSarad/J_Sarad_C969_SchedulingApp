@@ -172,8 +172,6 @@ namespace J_Sarad_C969_SchedulingApp
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridView dgvAppointments;
         private System.Windows.Forms.ComboBox cbApptType;
         private System.Windows.Forms.Label lblType;
         private System.Windows.Forms.Button btnAdd;
@@ -183,5 +181,6 @@ namespace J_Sarad_C969_SchedulingApp
         private System.Windows.Forms.ComboBox cbCustId;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnMenu;
+        public System.Windows.Forms.DataGridView dgvAppointments;
     }
 }
