@@ -45,6 +45,8 @@ namespace J_Sarad_C969_SchedulingApp
             this.lblStart = new System.Windows.Forms.Label();
             this.lblEnd = new System.Windows.Forms.Label();
             this.txtUserID = new System.Windows.Forms.TextBox();
+            this.lblApptID = new System.Windows.Forms.Label();
+            this.txtApptId = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // lblName
@@ -59,7 +61,7 @@ namespace J_Sarad_C969_SchedulingApp
             // lblUserId
             // 
             this.lblUserId.AutoSize = true;
-            this.lblUserId.Location = new System.Drawing.Point(31, 82);
+            this.lblUserId.Location = new System.Drawing.Point(32, 86);
             this.lblUserId.Name = "lblUserId";
             this.lblUserId.Size = new System.Drawing.Size(43, 13);
             this.lblUserId.TabIndex = 1;
@@ -68,7 +70,7 @@ namespace J_Sarad_C969_SchedulingApp
             // lblType
             // 
             this.lblType.AutoSize = true;
-            this.lblType.Location = new System.Drawing.Point(31, 45);
+            this.lblType.Location = new System.Drawing.Point(31, 221);
             this.lblType.Name = "lblType";
             this.lblType.Size = new System.Drawing.Size(93, 13);
             this.lblType.TabIndex = 2;
@@ -86,7 +88,7 @@ namespace J_Sarad_C969_SchedulingApp
             // lblDate
             // 
             this.lblDate.AutoSize = true;
-            this.lblDate.Location = new System.Drawing.Point(32, 215);
+            this.lblDate.Location = new System.Drawing.Point(31, 263);
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(92, 13);
             this.lblDate.TabIndex = 4;
@@ -95,7 +97,7 @@ namespace J_Sarad_C969_SchedulingApp
             // cbType
             // 
             this.cbType.FormattingEnabled = true;
-            this.cbType.Location = new System.Drawing.Point(158, 42);
+            this.cbType.Location = new System.Drawing.Point(158, 213);
             this.cbType.Name = "cbType";
             this.cbType.Size = new System.Drawing.Size(200, 21);
             this.cbType.TabIndex = 6;
@@ -112,6 +114,7 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             this.txtName.Location = new System.Drawing.Point(158, 165);
             this.txtName.Name = "txtName";
+            this.txtName.ReadOnly = true;
             this.txtName.Size = new System.Drawing.Size(200, 20);
             this.txtName.TabIndex = 9;
             // 
@@ -119,7 +122,7 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             this.dtpDate.CustomFormat = "MM/dd/yyyy";
             this.dtpDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpDate.Location = new System.Drawing.Point(158, 208);
+            this.dtpDate.Location = new System.Drawing.Point(158, 256);
             this.dtpDate.Name = "dtpDate";
             this.dtpDate.ShowUpDown = true;
             this.dtpDate.Size = new System.Drawing.Size(200, 20);
@@ -127,7 +130,7 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(158, 321);
+            this.btnSave.Location = new System.Drawing.Point(158, 358);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 11;
@@ -137,18 +140,19 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(259, 321);
+            this.btnCancel.Location = new System.Drawing.Point(261, 358);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 12;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // dtpStart
             // 
             this.dtpStart.CustomFormat = "HH:mm tt";
             this.dtpStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpStart.Location = new System.Drawing.Point(158, 242);
+            this.dtpStart.Location = new System.Drawing.Point(158, 289);
             this.dtpStart.Name = "dtpStart";
             this.dtpStart.ShowUpDown = true;
             this.dtpStart.Size = new System.Drawing.Size(200, 20);
@@ -158,7 +162,7 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             this.dtpEnd.CustomFormat = "HH:mm tt";
             this.dtpEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpEnd.Location = new System.Drawing.Point(158, 276);
+            this.dtpEnd.Location = new System.Drawing.Point(158, 321);
             this.dtpEnd.Name = "dtpEnd";
             this.dtpEnd.ShowUpDown = true;
             this.dtpEnd.Size = new System.Drawing.Size(200, 20);
@@ -167,7 +171,7 @@ namespace J_Sarad_C969_SchedulingApp
             // lblStart
             // 
             this.lblStart.AutoSize = true;
-            this.lblStart.Location = new System.Drawing.Point(32, 248);
+            this.lblStart.Location = new System.Drawing.Point(34, 296);
             this.lblStart.Name = "lblStart";
             this.lblStart.Size = new System.Drawing.Size(55, 13);
             this.lblStart.TabIndex = 15;
@@ -176,7 +180,7 @@ namespace J_Sarad_C969_SchedulingApp
             // lblEnd
             // 
             this.lblEnd.AutoSize = true;
-            this.lblEnd.Location = new System.Drawing.Point(34, 283);
+            this.lblEnd.Location = new System.Drawing.Point(34, 328);
             this.lblEnd.Name = "lblEnd";
             this.lblEnd.Size = new System.Drawing.Size(53, 13);
             this.lblEnd.TabIndex = 16;
@@ -186,14 +190,34 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             this.txtUserID.Location = new System.Drawing.Point(158, 79);
             this.txtUserID.Name = "txtUserID";
+            this.txtUserID.ReadOnly = true;
             this.txtUserID.Size = new System.Drawing.Size(200, 20);
             this.txtUserID.TabIndex = 17;
+            // 
+            // lblApptID
+            // 
+            this.lblApptID.AutoSize = true;
+            this.lblApptID.Location = new System.Drawing.Point(34, 48);
+            this.lblApptID.Name = "lblApptID";
+            this.lblApptID.Size = new System.Drawing.Size(80, 13);
+            this.lblApptID.TabIndex = 18;
+            this.lblApptID.Text = "Appointment ID";
+            // 
+            // txtApptId
+            // 
+            this.txtApptId.Location = new System.Drawing.Point(158, 45);
+            this.txtApptId.Name = "txtApptId";
+            this.txtApptId.ReadOnly = true;
+            this.txtApptId.Size = new System.Drawing.Size(200, 20);
+            this.txtApptId.TabIndex = 19;
             // 
             // UpdateAppt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(443, 369);
+            this.ClientSize = new System.Drawing.Size(443, 393);
+            this.Controls.Add(this.txtApptId);
+            this.Controls.Add(this.lblApptID);
             this.Controls.Add(this.txtUserID);
             this.Controls.Add(this.lblEnd);
             this.Controls.Add(this.lblStart);
@@ -236,5 +260,7 @@ namespace J_Sarad_C969_SchedulingApp
         private System.Windows.Forms.Label lblStart;
         private System.Windows.Forms.Label lblEnd;
         private System.Windows.Forms.TextBox txtUserID;
+        private System.Windows.Forms.Label lblApptID;
+        private System.Windows.Forms.TextBox txtApptId;
     }
 }

@@ -61,7 +61,7 @@ namespace J_Sarad_C969_SchedulingApp
             
             
             DB.OpenConnection();
-            string query = "select type as 'Appointment Type', userId as 'User ID', customerId as 'Customer ID', customerName as 'Name', start as 'Date', start as 'Start Time', end as ' End Time' from customer join appointment using (customerId)";
+            string query = "select appointmentID as 'Appointment ID', type as 'Appointment Type', userId as 'User ID', customerId as 'Customer ID', customerName as 'Name', start as 'Date', start as 'Start Time', end as ' End Time' from customer join appointment using (customerId)";
             DB.Query(query);
             apptTable = new DataTable();
             DB.adp.Fill(apptTable);
@@ -105,5 +105,7 @@ namespace J_Sarad_C969_SchedulingApp
         {
             DB.currentIndex = e.RowIndex;
         }
+
+       
     }
 }
