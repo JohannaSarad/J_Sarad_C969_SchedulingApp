@@ -49,7 +49,7 @@ namespace J_Sarad_C969_SchedulingApp
             this.dgvAppointments.Location = new System.Drawing.Point(37, 110);
             this.dgvAppointments.Margin = new System.Windows.Forms.Padding(4);
             this.dgvAppointments.Name = "dgvAppointments";
-            this.dgvAppointments.Size = new System.Drawing.Size(747, 283);
+            this.dgvAppointments.Size = new System.Drawing.Size(870, 283);
             this.dgvAppointments.TabIndex = 0;
             this.dgvAppointments.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAppointments_CellClick);
             // 
@@ -125,7 +125,7 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(684, 414);
+            this.btnExit.Location = new System.Drawing.Point(807, 414);
             this.btnExit.Margin = new System.Windows.Forms.Padding(4);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(100, 28);
@@ -136,7 +136,7 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             // btnMenu
             // 
-            this.btnMenu.Location = new System.Drawing.Point(600, 52);
+            this.btnMenu.Location = new System.Drawing.Point(723, 50);
             this.btnMenu.Margin = new System.Windows.Forms.Padding(4);
             this.btnMenu.Name = "btnMenu";
             this.btnMenu.Size = new System.Drawing.Size(184, 28);
@@ -149,7 +149,7 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(835, 462);
+            this.ClientSize = new System.Drawing.Size(952, 462);
             this.Controls.Add(this.btnMenu);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.cbCustId);

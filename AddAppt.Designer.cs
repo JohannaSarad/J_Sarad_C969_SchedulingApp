@@ -53,6 +53,8 @@ namespace J_Sarad_C969_SchedulingApp
             this.lblHM = new System.Windows.Forms.Label();
             this.dtpStart = new System.Windows.Forms.DateTimePicker();
             this.dtpEnd = new System.Windows.Forms.DateTimePicker();
+            this.lblMDY = new System.Windows.Forms.Label();
+            this.lblHM2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustSearch)).BeginInit();
             this.SuspendLayout();
             // 
@@ -109,14 +111,14 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             // dtpDate
             // 
-            this.dtpDate.CustomFormat = "yyyy-MM-dd";
+            this.dtpDate.CustomFormat = "MM/dd/yyyy";
             this.dtpDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpDate.Location = new System.Drawing.Point(160, 202);
             this.dtpDate.Name = "dtpDate";
             this.dtpDate.ShowUpDown = true;
-            this.dtpDate.Size = new System.Drawing.Size(125, 20);
+            this.dtpDate.Size = new System.Drawing.Size(90, 20);
             this.dtpDate.TabIndex = 11;
-            this.dtpDate.Value = new System.DateTime(2022, 3, 4, 0, 0, 0, 0);
+            this.dtpDate.Value = new System.DateTime(2022, 3, 18, 0, 0, 0, 0);
             // 
             // lblDate
             // 
@@ -247,35 +249,60 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             this.lblHM.AutoSize = true;
             this.lblHM.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblHM.Location = new System.Drawing.Point(410, 354);
+            this.lblHM.Location = new System.Drawing.Point(276, 249);
             this.lblHM.Name = "lblHM";
-            this.lblHM.Size = new System.Drawing.Size(84, 13);
+            this.lblHM.Size = new System.Drawing.Size(90, 13);
             this.lblHM.TabIndex = 40;
-            this.lblHM.Text = "HH:MM AM/PM";
+            this.lblHM.Text = "Hour:Min AM/PM";
             // 
             // dtpStart
             // 
-            this.dtpStart.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dtpStart.CustomFormat = "HH:mm tt";
+            this.dtpStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpStart.Location = new System.Drawing.Point(160, 243);
             this.dtpStart.Name = "dtpStart";
             this.dtpStart.ShowUpDown = true;
-            this.dtpStart.Size = new System.Drawing.Size(200, 20);
+            this.dtpStart.Size = new System.Drawing.Size(90, 20);
             this.dtpStart.TabIndex = 49;
             // 
             // dtpEnd
             // 
-            this.dtpEnd.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dtpEnd.Checked = false;
+            this.dtpEnd.CustomFormat = "HH:mm tt";
+            this.dtpEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpEnd.Location = new System.Drawing.Point(160, 280);
             this.dtpEnd.Name = "dtpEnd";
             this.dtpEnd.ShowUpDown = true;
-            this.dtpEnd.Size = new System.Drawing.Size(200, 20);
+            this.dtpEnd.Size = new System.Drawing.Size(90, 20);
             this.dtpEnd.TabIndex = 50;
+            // 
+            // lblMDY
+            // 
+            this.lblMDY.AutoSize = true;
+            this.lblMDY.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblMDY.Location = new System.Drawing.Point(276, 208);
+            this.lblMDY.Name = "lblMDY";
+            this.lblMDY.Size = new System.Drawing.Size(88, 13);
+            this.lblMDY.TabIndex = 51;
+            this.lblMDY.Text = "Month/Day/Year";
+            // 
+            // lblHM2
+            // 
+            this.lblHM2.AutoSize = true;
+            this.lblHM2.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblHM2.Location = new System.Drawing.Point(276, 286);
+            this.lblHM2.Name = "lblHM2";
+            this.lblHM2.Size = new System.Drawing.Size(90, 13);
+            this.lblHM2.TabIndex = 52;
+            this.lblHM2.Text = "Hour:Min AM/PM";
             // 
             // AddAppt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(832, 389);
+            this.Controls.Add(this.lblHM2);
+            this.Controls.Add(this.lblMDY);
             this.Controls.Add(this.dtpEnd);
             this.Controls.Add(this.dtpStart);
             this.Controls.Add(this.lblHM);
@@ -335,5 +362,7 @@ namespace J_Sarad_C969_SchedulingApp
         private System.Windows.Forms.Label lblHM;
         private System.Windows.Forms.DateTimePicker dtpStart;
         private System.Windows.Forms.DateTimePicker dtpEnd;
+        private System.Windows.Forms.Label lblMDY;
+        private System.Windows.Forms.Label lblHM2;
     }
 }

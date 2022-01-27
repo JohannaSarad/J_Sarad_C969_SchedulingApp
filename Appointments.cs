@@ -61,7 +61,7 @@ namespace J_Sarad_C969_SchedulingApp
             
             
             DB.OpenConnection();
-            string query = "select type as 'Appointment Type', userId as 'User ID', customerId as 'Customer ID', customerName as 'Name', start as 'Appointment Time' from customer join appointment using (customerId)";
+            string query = "select type as 'Appointment Type', userId as 'User ID', customerId as 'Customer ID', customerName as 'Name', start as 'Date', start as 'Start Time', end as ' End Time' from customer join appointment using (customerId)";
             DB.Query(query);
             apptTable = new DataTable();
             DB.adp.Fill(apptTable);
@@ -69,8 +69,14 @@ namespace J_Sarad_C969_SchedulingApp
             DB.CloseConnection();
             for(int i = 0; i < apptTable.Rows.Count; i++ )
             {
-                apptTable.Rows[i]["Appointment Time"] =
-                    TimeZoneInfo.ConvertTimeFromUtc((DateTime)apptTable.Rows[i]["Appointment Time"], 
+                apptTable.Rows[i]["Date"] =
+                    TimeZoneInfo.ConvertTimeFromUtc((DateTime)apptTable.Rows[i]["Date"],
+                    TimeZoneInfo.Local);
+                apptTable.Rows[i]["Start Time"] =
+                    TimeZoneInfo.ConvertTimeFromUtc((DateTime)apptTable.Rows[i]["Start Time"], 
+                    TimeZoneInfo.Local);
+                apptTable.Rows[i]["End Time"] =
+                    TimeZoneInfo.ConvertTimeFromUtc((DateTime)apptTable.Rows[i]["End Time"],
                     TimeZoneInfo.Local);
             }
             display();
@@ -86,7 +92,9 @@ namespace J_Sarad_C969_SchedulingApp
             dgvAppointments.DefaultCellStyle.SelectionBackColor = Color.Yellow;
             dgvAppointments.DefaultCellStyle.SelectionForeColor = Color.Black;
             dgvAppointments.RowHeadersVisible = false;
-            dgvAppointments.Columns["Appointment Time"].DefaultCellStyle.Format = "MM/dd/yyyy HH:mm:ss";
+            dgvAppointments.Columns["Date"].DefaultCellStyle.Format = "MM/dd/yyyy";
+            dgvAppointments.Columns["Start Time"].DefaultCellStyle.Format = "HH:mm tt";
+            dgvAppointments.Columns["End Time"].DefaultCellStyle.Format = "HH:mm tt";
 
             cbApptType.Items.Add("Presentation");
             cbApptType.Items.Add("SCRUM");

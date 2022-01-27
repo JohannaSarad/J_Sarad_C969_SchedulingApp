@@ -13,11 +13,8 @@ namespace J_Sarad_C969_SchedulingApp
 {
     public partial class AddAppt : Form
     {
-        TimeZone localZone = TimeZone.CurrentTimeZone;
-        DateTime currentDate = DateTime.Now;
-        DateTime local, uinversal;
         DataTable customerSearch;
-        //DataTable userSearch;
+      
         public AddAppt()
         {
             InitializeComponent();
@@ -33,11 +30,6 @@ namespace J_Sarad_C969_SchedulingApp
             DB.Query(query);
             customerSearch = new DataTable();
             DB.adp.Fill(customerSearch);
-            
-            /*string query2 = "Select userID from user";
-            DB.Query(query2);
-            userSearch = new DataTable();
-            DB.adp.Fill(userSearch);*/
             
             DB.CloseConnection();
             display();
@@ -64,13 +56,6 @@ namespace J_Sarad_C969_SchedulingApp
             cbType.Items.Add("Presentation");
             cbType.Items.Add("SCRUM");
             cbType.Items.Add("Consultation");
-
-            /*for (int i = 0; i < userSearch.Rows.Count; i++)
-            {
-                cbUserId.Items.Add(userSearch.Rows[i].ToString());
-            }*/
-
-
         }
 
         private void btnSelectCust_Click(object sender, EventArgs e)
@@ -81,18 +66,10 @@ namespace J_Sarad_C969_SchedulingApp
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            //FIX ME!!! THis should be moved to method in a dateTime class for appointments and calendar information
-            var timeStart = dtpStart.Text.ToString().TrimStart();
-            var date = dtpDate.Text.ToString() + " ";
-            char[] AMPM = { 'A', 'M', 'P' };
+            string date = dtpDate.Text.ToString();
+            string startTime = dtpStart.Text.ToString();
+            string endTime = dtpEnd.Text.ToString();
             
-            var time = timeStart.TrimEnd(AMPM);
-            string insertDate = date + time;
-
-            local = DateTime.Parse(insertDate);
-
-            
-            //MessageBox.Show(time);
             DB.OpenConnection();
 
             string query = "INSERT INTO appointment (customerId, userId, title, description, location, contact, type, url, start, end, createDate, createdBy, lastUpdate, lastUpdateBy) VALUES (@custID, @userID, @title, @description, @location, @contact, @type, @url, @start, @end, CURDATE(), @user, CURDATE(), @user)";
@@ -105,10 +82,8 @@ namespace J_Sarad_C969_SchedulingApp
             DB.cmd.Parameters.AddWithValue("@contact", "none");
             DB.cmd.Parameters.AddWithValue("@type", cbType.Text.ToString());
             DB.cmd.Parameters.AddWithValue("@url", "none");
-            //DB.cmd.Parameters.AddWithValue("@start", date + time);
-            DB.cmd.Parameters.AddWithValue("@start", localZone.ToUniversalTime(local));
-            //FIX ME!!! DateTime picker is an incorrect DateTime value
-            DB.cmd.Parameters.AddWithValue("@end", "2019-01-01 00:00:00");
+            DB.cmd.Parameters.AddWithValue("@start", DT.UniversalTime(startTime, date));
+            DB.cmd.Parameters.AddWithValue("@end", DT.UniversalTime(endTime, date));
             DB.cmd.Parameters.AddWithValue("@user", DB.currentUser.ToString());
             DB.cmd.ExecuteNonQuery();
 
@@ -117,7 +92,5 @@ namespace J_Sarad_C969_SchedulingApp
             Appointments form = new Appointments();
             form.ShowDialog();
         }
-
-      
     }  
 }

@@ -117,7 +117,7 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             // dtpDate
             // 
-            this.dtpDate.CustomFormat = "yyyy-MM-dd";
+            this.dtpDate.CustomFormat = "MM/dd/yyyy";
             this.dtpDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpDate.Location = new System.Drawing.Point(158, 208);
             this.dtpDate.Name = "dtpDate";
@@ -133,6 +133,7 @@ namespace J_Sarad_C969_SchedulingApp
             this.btnSave.TabIndex = 11;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnCancel
             // 
@@ -145,7 +146,8 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             // dtpStart
             // 
-            this.dtpStart.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dtpStart.CustomFormat = "HH:mm tt";
+            this.dtpStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpStart.Location = new System.Drawing.Point(158, 242);
             this.dtpStart.Name = "dtpStart";
             this.dtpStart.ShowUpDown = true;
@@ -154,7 +156,8 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             // dtpEnd
             // 
-            this.dtpEnd.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dtpEnd.CustomFormat = "HH:mm tt";
+            this.dtpEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpEnd.Location = new System.Drawing.Point(158, 276);
             this.dtpEnd.Name = "dtpEnd";
             this.dtpEnd.ShowUpDown = true;
