@@ -57,55 +57,75 @@ namespace J_Sarad_C969_SchedulingApp
         private void Appointments_Load(object sender, EventArgs e)
         {
             DB.currentIndex = -1;
+            DB.currentApptId = null;
             
-            
-            
-            DB.OpenConnection();
-            string query = "select appointmentID as 'Appointment ID', type as 'Appointment Type', userId as 'User ID', customerId as 'Customer ID', customerName as 'Name', start as 'Date', start as 'Start Time', end as ' End Time' from customer join appointment using (customerId)";
-            DB.Query(query);
-            apptTable = new DataTable();
-            DB.adp.Fill(apptTable);
-            
-            DB.CloseConnection();
-            for(int i = 0; i < apptTable.Rows.Count; i++ )
-            {
-                apptTable.Rows[i]["Date"] =
-                    TimeZoneInfo.ConvertTimeFromUtc((DateTime)apptTable.Rows[i]["Date"],
-                    TimeZoneInfo.Local);
-                apptTable.Rows[i]["Start Time"] =
-                    TimeZoneInfo.ConvertTimeFromUtc((DateTime)apptTable.Rows[i]["Start Time"], 
-                    TimeZoneInfo.Local);
-                apptTable.Rows[i]["End Time"] =
-                    TimeZoneInfo.ConvertTimeFromUtc((DateTime)apptTable.Rows[i]["End Time"],
-                    TimeZoneInfo.Local);
-            }
             display();
         }
 
         private void display()
         {
-            dgvAppointments.DataSource = apptTable;
-            dgvAppointments.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvAppointments.ReadOnly = true;
-            dgvAppointments.MultiSelect = false;
-            dgvAppointments.AllowUserToAddRows = false;
-            dgvAppointments.DefaultCellStyle.SelectionBackColor = Color.Yellow;
-            dgvAppointments.DefaultCellStyle.SelectionForeColor = Color.Black;
-            dgvAppointments.RowHeadersVisible = false;
-            dgvAppointments.Columns["Date"].DefaultCellStyle.Format = "MM/dd/yyyy";
-            dgvAppointments.Columns["Start Time"].DefaultCellStyle.Format = "HH:mm tt";
-            dgvAppointments.Columns["End Time"].DefaultCellStyle.Format = "HH:mm tt";
+            DB.OpenConnection();
+            string query = 
+                "select appointmentID as 'Appointment ID', type as 'Appointment Type', userId as 'User ID', " +
+                "customerId as 'Customer ID', customerName as 'Name', start as 'Date', start as 'Start Time', " +
+                "end as ' End Time' from customer join appointment using (customerId)";
+            DB.Query(query);
+            apptTable = new DataTable();
+            DB.adp.Fill(apptTable);
 
-            cbApptType.Items.Add("Presentation");
-            cbApptType.Items.Add("SCRUM");
-            cbApptType.Items.Add("Consultation");
+            DB.CloseConnection();
+            for (int i = 0; i < apptTable.Rows.Count; i++)
+            {
+                apptTable.Rows[i]["Date"] =
+                    TimeZoneInfo.ConvertTimeFromUtc((DateTime)apptTable.Rows[i]["Date"],
+                    TimeZoneInfo.Local);
+                apptTable.Rows[i]["Start Time"] =
+                    TimeZoneInfo.ConvertTimeFromUtc((DateTime)apptTable.Rows[i]["Start Time"],
+                    TimeZoneInfo.Local);
+                apptTable.Rows[i]["End Time"] =
+                    TimeZoneInfo.ConvertTimeFromUtc((DateTime)apptTable.Rows[i]["End Time"],
+                    TimeZoneInfo.Local);
+                dgvAppointments.DataSource = apptTable;
+                dgvAppointments.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                dgvAppointments.ReadOnly = true;
+                dgvAppointments.MultiSelect = false;
+                dgvAppointments.AllowUserToAddRows = false;
+                dgvAppointments.DefaultCellStyle.SelectionBackColor = Color.Yellow;
+                dgvAppointments.DefaultCellStyle.SelectionForeColor = Color.Black;
+                dgvAppointments.RowHeadersVisible = false;
+                dgvAppointments.Columns["Date"].DefaultCellStyle.Format = "MM/dd/yyyy";
+                dgvAppointments.Columns["Start Time"].DefaultCellStyle.Format = "HH:mm tt";
+                dgvAppointments.Columns["End Time"].DefaultCellStyle.Format = "HH:mm tt";
+
+                cbApptType.Items.Add("Presentation");
+                cbApptType.Items.Add("SCRUM");
+                cbApptType.Items.Add("Consultation");
+            }
         }
 
         private void dgvAppointments_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             DB.currentIndex = e.RowIndex;
+            DB.currentApptId = dgvAppointments.Rows[DB.currentIndex].Cells["Appointment ID"].Value.ToString();
         }
 
-       
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (DB.currentIndex >= 0)
+            {
+                DB.OpenConnection();
+                string query = "DELETE FROM appointment WHERE appointmentId = @appointmentID";
+                DB.NonQuery(query);
+                DB.cmd.Parameters.AddWithValue("@appointmentID", DB.currentApptId);
+                DB.cmd.ExecuteNonQuery();
+                DB.CloseConnection();
+                display();
+                DB.currentIndex = -1;
+            }
+            else
+            {
+                MessageBox.Show("Please Select an Appointment to Delete");
+            }
+        }
     }
 }

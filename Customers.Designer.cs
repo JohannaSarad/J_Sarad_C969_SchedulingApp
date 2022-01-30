@@ -43,17 +43,17 @@ namespace J_Sarad_C969_SchedulingApp
             this.dgvCustomers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvCustomers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCustomers.Location = new System.Drawing.Point(48, 70);
-            this.dgvCustomers.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvCustomers.Margin = new System.Windows.Forms.Padding(4);
             this.dgvCustomers.Name = "dgvCustomers";
             this.dgvCustomers.Size = new System.Drawing.Size(747, 283);
             this.dgvCustomers.TabIndex = 12;
             this.dgvCustomers.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCustomers_CellClick);
-            this.dgvCustomers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCustomers_CellContentClick);
+            //this.dgvCustomers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCustomers_CellContentClick);
             // 
             // btnAdd
             // 
             this.btnAdd.Location = new System.Drawing.Point(48, 372);
-            this.btnAdd.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(4);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(180, 28);
             this.btnAdd.TabIndex = 13;
@@ -64,17 +64,18 @@ namespace J_Sarad_C969_SchedulingApp
             // btnDelete
             // 
             this.btnDelete.Location = new System.Drawing.Point(459, 372);
-            this.btnDelete.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(4);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(179, 28);
             this.btnDelete.TabIndex = 17;
             this.btnDelete.Text = "Delete Customer";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnUpdate
             // 
             this.btnUpdate.Location = new System.Drawing.Point(269, 372);
-            this.btnUpdate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnUpdate.Margin = new System.Windows.Forms.Padding(4);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(161, 28);
             this.btnUpdate.TabIndex = 18;
@@ -86,7 +87,7 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             this.btnMain.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.btnMain.Location = new System.Drawing.Point(624, 15);
-            this.btnMain.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnMain.Margin = new System.Windows.Forms.Padding(4);
             this.btnMain.Name = "btnMain";
             this.btnMain.Size = new System.Drawing.Size(171, 28);
             this.btnMain.TabIndex = 19;
@@ -97,7 +98,7 @@ namespace J_Sarad_C969_SchedulingApp
             // btnExit
             // 
             this.btnExit.Location = new System.Drawing.Point(667, 372);
-            this.btnExit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnExit.Margin = new System.Windows.Forms.Padding(4);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(128, 28);
             this.btnExit.TabIndex = 20;
@@ -117,7 +118,7 @@ namespace J_Sarad_C969_SchedulingApp
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.dgvCustomers);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Customers";
             this.Text = "Customers";
             this.Load += new System.EventHandler(this.Customer_Load);

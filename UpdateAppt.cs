@@ -32,6 +32,7 @@ namespace J_Sarad_C969_SchedulingApp
             using (Appointments apptForm = (Appointments)Application.OpenForms["Appointments"])
             {
                 cbType.Text = apptForm.dgvAppointments.Rows[DB.currentIndex].Cells["Appointment Type"].Value.ToString();
+                
                 txtApptId.Text = apptForm.dgvAppointments.Rows[DB.currentIndex].Cells["Appointment ID"].Value.ToString();
                 txtUserID.Text = apptForm.dgvAppointments.Rows[DB.currentIndex].Cells["User ID"].Value.ToString().Trim();
                 txtCustID.Text = apptForm.dgvAppointments.Rows[DB.currentIndex].Cells["Customer ID"].Value.ToString().Trim();

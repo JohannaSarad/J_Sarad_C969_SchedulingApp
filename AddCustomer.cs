@@ -43,6 +43,7 @@ namespace J_Sarad_C969_SchedulingApp
         }
         private void btnSave_Click(object sender, EventArgs e)
         {
+            AllowSave();
 
             if (AllowedSave)
             {
@@ -78,7 +79,12 @@ namespace J_Sarad_C969_SchedulingApp
                 DB.cmd.Parameters.AddWithValue("@bit", 0);
                 DB.cmd.ExecuteNonQuery();
 
+               
+
                 DB.CloseConnection();
+                this.Hide();
+                Customers form = new Customers();
+                form.ShowDialog();
             }
             else
             {

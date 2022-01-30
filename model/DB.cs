@@ -15,6 +15,7 @@ namespace J_Sarad_C969_SchedulingApp.model
         public static int currentIndex { get; set; }
         public static int currentUserID { get; set; }
         public static string currentUser { get; set; }
+        public static string currentApptId { get; set; }
 
         public static TimeZone CurrentTimeZone { get; }
 
