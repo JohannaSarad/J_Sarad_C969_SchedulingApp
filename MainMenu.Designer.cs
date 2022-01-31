@@ -36,7 +36,7 @@ namespace J_Sarad_C969_SchedulingApp
             this.btnUpdateAppt = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
             this.monthCal = new System.Windows.Forms.MonthCalendar();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cbMonthWeek = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.lblGreeting = new System.Windows.Forms.Label();
             this.btnToday = new System.Windows.Forms.Button();
@@ -108,17 +108,21 @@ namespace J_Sarad_C969_SchedulingApp
             // monthCal
             // 
             this.monthCal.Location = new System.Drawing.Point(17, 119);
+            this.monthCal.MaxDate = new System.DateTime(2040, 12, 31, 0, 0, 0, 0);
+            this.monthCal.MinDate = new System.DateTime(1990, 1, 1, 0, 0, 0, 0);
             this.monthCal.Name = "monthCal";
+            this.monthCal.ShowTodayCircle = false;
             this.monthCal.TabIndex = 14;
             this.monthCal.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
             // 
-            // comboBox1
+            // cbMonthWeek
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(19, 86);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 15;
+            this.cbMonthWeek.FormattingEnabled = true;
+            this.cbMonthWeek.Location = new System.Drawing.Point(19, 86);
+            this.cbMonthWeek.Name = "cbMonthWeek";
+            this.cbMonthWeek.Size = new System.Drawing.Size(121, 21);
+            this.cbMonthWeek.TabIndex = 15;
+            this.cbMonthWeek.SelectedIndexChanged += new System.EventHandler(this.cbMonthWeek_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -149,7 +153,7 @@ namespace J_Sarad_C969_SchedulingApp
             this.btnToday.TabIndex = 18;
             this.btnToday.Text = "Today";
             this.btnToday.UseVisualStyleBackColor = true;
-            this.btnToday.Click += new System.EventHandler(this.btnToday_Click);
+            //this.btnToday.Click += new System.EventHandler(this.btnToday_Click);
             // 
             // btnLocal
             // 
@@ -159,7 +163,7 @@ namespace J_Sarad_C969_SchedulingApp
             this.btnLocal.TabIndex = 19;
             this.btnLocal.Text = "Local";
             this.btnLocal.UseVisualStyleBackColor = true;
-            this.btnLocal.Click += new System.EventHandler(this.btnLocal_Click);
+            //this.btnLocal.Click += new System.EventHandler(this.btnLocal_Click);
             // 
             // btnUTC
             // 
@@ -169,7 +173,7 @@ namespace J_Sarad_C969_SchedulingApp
             this.btnUTC.TabIndex = 20;
             this.btnUTC.Text = "UTC";
             this.btnUTC.UseVisualStyleBackColor = true;
-            this.btnUTC.Click += new System.EventHandler(this.btnUTC_Click);
+            //this.btnUTC.Click += new System.EventHandler(this.btnUTC_Click);
             // 
             // MainMenu
             // 
@@ -181,7 +185,7 @@ namespace J_Sarad_C969_SchedulingApp
             this.Controls.Add(this.btnToday);
             this.Controls.Add(this.lblGreeting);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cbMonthWeek);
             this.Controls.Add(this.monthCal);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnUpdateAppt);
@@ -205,12 +209,12 @@ namespace J_Sarad_C969_SchedulingApp
         private System.Windows.Forms.Label lblAppointments;
         private System.Windows.Forms.Button btnUpdateAppt;
         private System.Windows.Forms.Button btnExit;
-        private System.Windows.Forms.MonthCalendar monthCal;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cbMonthWeek;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblGreeting;
         private System.Windows.Forms.Button btnToday;
         private System.Windows.Forms.Button btnLocal;
         private System.Windows.Forms.Button btnUTC;
+        public System.Windows.Forms.MonthCalendar monthCal;
     }
 }

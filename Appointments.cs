@@ -64,6 +64,7 @@ namespace J_Sarad_C969_SchedulingApp
 
         private void display()
         {
+            //FIX ME!!! put this somewhere other than display. It doesn't work here if you want to change the table. 
             DB.OpenConnection();
             string query = 
                 "select appointmentID as 'Appointment ID', type as 'Appointment Type', userId as 'User ID', " +
@@ -85,22 +86,24 @@ namespace J_Sarad_C969_SchedulingApp
                 apptTable.Rows[i]["End Time"] =
                     TimeZoneInfo.ConvertTimeFromUtc((DateTime)apptTable.Rows[i]["End Time"],
                     TimeZoneInfo.Local);
-                dgvAppointments.DataSource = apptTable;
-                dgvAppointments.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-                dgvAppointments.ReadOnly = true;
-                dgvAppointments.MultiSelect = false;
-                dgvAppointments.AllowUserToAddRows = false;
-                dgvAppointments.DefaultCellStyle.SelectionBackColor = Color.Yellow;
-                dgvAppointments.DefaultCellStyle.SelectionForeColor = Color.Black;
-                dgvAppointments.RowHeadersVisible = false;
-                dgvAppointments.Columns["Date"].DefaultCellStyle.Format = "MM/dd/yyyy";
-                dgvAppointments.Columns["Start Time"].DefaultCellStyle.Format = "HH:mm tt";
-                dgvAppointments.Columns["End Time"].DefaultCellStyle.Format = "HH:mm tt";
-
-                cbApptType.Items.Add("Presentation");
-                cbApptType.Items.Add("SCRUM");
-                cbApptType.Items.Add("Consultation");
             }
+
+            dgvAppointments.DataSource = apptTable;
+            dgvAppointments.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvAppointments.ReadOnly = true;
+            dgvAppointments.MultiSelect = false;
+            dgvAppointments.AllowUserToAddRows = false;
+            dgvAppointments.DefaultCellStyle.SelectionBackColor = Color.Yellow;
+            dgvAppointments.DefaultCellStyle.SelectionForeColor = Color.Black;
+            dgvAppointments.RowHeadersVisible = false;
+            dgvAppointments.Columns["Date"].DefaultCellStyle.Format = "MM/dd/yyyy";
+            dgvAppointments.Columns["Start Time"].DefaultCellStyle.Format = "hh:mm tt";
+            dgvAppointments.Columns["End Time"].DefaultCellStyle.Format = "hh:mm tt";
+
+            cbApptType.Items.Add("Presentation");
+            cbApptType.Items.Add("SCRUM");
+            cbApptType.Items.Add("Consultation");
+            
         }
 
         private void dgvAppointments_CellClick(object sender, DataGridViewCellEventArgs e)
