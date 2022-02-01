@@ -69,6 +69,7 @@ namespace J_Sarad_C969_SchedulingApp
             this.dgvCalendar.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvCalendar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCalendar.Location = new System.Drawing.Point(277, 86);
+            this.dgvCalendar.MultiSelect = false;
             this.dgvCalendar.Name = "dgvCalendar";
             this.dgvCalendar.ReadOnly = true;
             this.dgvCalendar.Size = new System.Drawing.Size(675, 306);
@@ -153,7 +154,6 @@ namespace J_Sarad_C969_SchedulingApp
             this.btnToday.TabIndex = 18;
             this.btnToday.Text = "Today";
             this.btnToday.UseVisualStyleBackColor = true;
-            //this.btnToday.Click += new System.EventHandler(this.btnToday_Click);
             // 
             // btnLocal
             // 
@@ -163,7 +163,6 @@ namespace J_Sarad_C969_SchedulingApp
             this.btnLocal.TabIndex = 19;
             this.btnLocal.Text = "Local";
             this.btnLocal.UseVisualStyleBackColor = true;
-            //this.btnLocal.Click += new System.EventHandler(this.btnLocal_Click);
             // 
             // btnUTC
             // 
@@ -173,7 +172,6 @@ namespace J_Sarad_C969_SchedulingApp
             this.btnUTC.TabIndex = 20;
             this.btnUTC.Text = "UTC";
             this.btnUTC.UseVisualStyleBackColor = true;
-            //this.btnUTC.Click += new System.EventHandler(this.btnUTC_Click);
             // 
             // MainMenu
             // 
