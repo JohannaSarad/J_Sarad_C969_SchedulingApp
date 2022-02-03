@@ -147,6 +147,7 @@ namespace J_Sarad_C969_SchedulingApp
             this.btnCancel.TabIndex = 14;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // lblCustID
             // 
@@ -244,6 +245,7 @@ namespace J_Sarad_C969_SchedulingApp
             this.btnExit.TabIndex = 27;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // lblHM
             // 
@@ -257,7 +259,7 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             // dtpStart
             // 
-            this.dtpStart.CustomFormat = "HH:mm tt";
+            this.dtpStart.CustomFormat = "hh:mm tt";
             this.dtpStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpStart.Location = new System.Drawing.Point(160, 243);
             this.dtpStart.Name = "dtpStart";
@@ -268,7 +270,7 @@ namespace J_Sarad_C969_SchedulingApp
             // dtpEnd
             // 
             this.dtpEnd.Checked = false;
-            this.dtpEnd.CustomFormat = "HH:mm tt";
+            this.dtpEnd.CustomFormat = "hh:mm tt";
             this.dtpEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpEnd.Location = new System.Drawing.Point(160, 280);
             this.dtpEnd.Name = "dtpEnd";

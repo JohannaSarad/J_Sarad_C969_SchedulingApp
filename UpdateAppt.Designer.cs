@@ -150,17 +150,18 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             // dtpStart
             // 
-            this.dtpStart.CustomFormat = "HH:mm tt";
+            this.dtpStart.CustomFormat = "hh:mm tt";
             this.dtpStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpStart.Location = new System.Drawing.Point(158, 289);
             this.dtpStart.Name = "dtpStart";
             this.dtpStart.ShowUpDown = true;
             this.dtpStart.Size = new System.Drawing.Size(200, 20);
             this.dtpStart.TabIndex = 13;
+            this.dtpStart.ValueChanged += new System.EventHandler(this.dtpStart_ValueChanged);
             // 
             // dtpEnd
             // 
-            this.dtpEnd.CustomFormat = "HH:mm tt";
+            this.dtpEnd.CustomFormat = "hh:mm tt";
             this.dtpEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpEnd.Location = new System.Drawing.Point(158, 321);
             this.dtpEnd.Name = "dtpEnd";

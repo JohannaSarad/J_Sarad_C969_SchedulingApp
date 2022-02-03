@@ -46,22 +46,32 @@ namespace J_Sarad_C969_SchedulingApp
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            DB.OpenConnection();
+            if (DT.IsBusinessHours(dtpDate.Value, dtpStart.Value, dtpEnd.Value))
+            {
+                DB.OpenConnection();
+                string query = 
+                    "UPDATE appointment SET type = @Type, start = @Start, end = @End " +
+                    "WHERE appointment.appointmentID = @ApptID";
+                DB.NonQuery(query);
+                DB.cmd.Parameters.AddWithValue("@Type", cbType.Text.ToString());
+                DB.cmd.Parameters.AddWithValue("@ApptID", txtApptId.Text.ToString());
+                DB.cmd.Parameters.AddWithValue("@start", DT.UniversalTime(dtpStart.Text.ToString(), dtpDate.Text.ToString()));
+                DB.cmd.Parameters.AddWithValue("@end", DT.UniversalTime(dtpEnd.Text.ToString(), dtpDate.Text.ToString()));
+                DB.cmd.ExecuteNonQuery();
+                DB.CloseConnection();
 
-            //FIX ME!!! How do I update only one 
-
-            string query = "UPDATE appointment SET type = @Type, start = @Start, end = @End WHERE appointment.appointmentID = @ApptID";
-            DB.NonQuery(query);
-            DB.cmd.Parameters.AddWithValue("@Type", cbType.Text.ToString());
-            DB.cmd.Parameters.AddWithValue("@ApptID", txtApptId.Text.ToString());
-            DB.cmd.Parameters.AddWithValue("@start", DT.UniversalTime(dtpStart.Text.ToString(), dtpDate.Text.ToString()));
-            DB.cmd.Parameters.AddWithValue("@end", DT.UniversalTime(dtpEnd.Text.ToString(), dtpDate.Text.ToString()));
-            DB.cmd.ExecuteNonQuery();
-            DB.CloseConnection();
-
-            this.Hide();
-            Appointments form = new Appointments();
-            form.ShowDialog();
+                this.Hide();
+                Appointments form = new Appointments();
+                form.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Appointment on " + dtpDate.Value.ToLongDateString() + " from "  +
+                    dtpStart.Value.ToShortTimeString() + " to " + dtpEnd.Value.ToShortTimeString() +
+                    "\nis outside of business hours and can not be set." +
+                    "\n\nBusiness Hours are 8:00 AM to 5:00 PM Monday through Friday.", 
+                    "Appointment Outside of Business Hours") ;
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -69,6 +79,11 @@ namespace J_Sarad_C969_SchedulingApp
             this.Hide();
             Appointments form = new Appointments();
             form.ShowDialog();
+        }
+
+        private void dtpStart_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

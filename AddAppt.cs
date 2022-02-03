@@ -53,6 +53,7 @@ namespace J_Sarad_C969_SchedulingApp
 
             txtUserID.Text = DB.currentUserID.ToString();
 
+            cbType.Text = "--select Appointment Type--";
             cbType.Items.Add("Presentation");
             cbType.Items.Add("SCRUM");
             cbType.Items.Add("Consultation");
@@ -69,28 +70,51 @@ namespace J_Sarad_C969_SchedulingApp
             string date = dtpDate.Text.ToString();
             string startTime = dtpStart.Text.ToString();
             string endTime = dtpEnd.Text.ToString();
-            
-            DB.OpenConnection();
 
-            string query = "INSERT INTO appointment (customerId, userId, title, description, location, contact, type, url, start, end, createDate, createdBy, lastUpdate, lastUpdateBy) VALUES (@custID, @userID, @title, @description, @location, @contact, @type, @url, @start, @end, CURDATE(), @user, CURDATE(), @user)";
-            DB.NonQuery(query);
-            DB.cmd.Parameters.AddWithValue("@custID", txtCustID.Text);
-            DB.cmd.Parameters.AddWithValue("@userID", txtUserID.Text);
-            DB.cmd.Parameters.AddWithValue("@title", "none");
-            DB.cmd.Parameters.AddWithValue("@description", "none");
-            DB.cmd.Parameters.AddWithValue("@location", "none");
-            DB.cmd.Parameters.AddWithValue("@contact", "none");
-            DB.cmd.Parameters.AddWithValue("@type", cbType.Text.ToString());
-            DB.cmd.Parameters.AddWithValue("@url", "none");
-            DB.cmd.Parameters.AddWithValue("@start", DT.UniversalTime(startTime, date));
-            DB.cmd.Parameters.AddWithValue("@end", DT.UniversalTime(endTime, date));
-            DB.cmd.Parameters.AddWithValue("@user", DB.currentUser.ToString());
-            DB.cmd.ExecuteNonQuery();
+            if (DT.IsBusinessHours(dtpDate.Value, dtpStart.Value, dtpEnd.Value))
+            {
+                DB.OpenConnection();
 
-            DB.CloseConnection();
+                string query = "INSERT INTO appointment (customerId, userId, title, description, location, contact, type, url, start, end, createDate, createdBy, lastUpdate, lastUpdateBy) VALUES (@custID, @userID, @title, @description, @location, @contact, @type, @url, @start, @end, CURDATE(), @user, CURDATE(), @user)";
+                DB.NonQuery(query);
+                DB.cmd.Parameters.AddWithValue("@custID", txtCustID.Text);
+                DB.cmd.Parameters.AddWithValue("@userID", txtUserID.Text);
+                DB.cmd.Parameters.AddWithValue("@title", "none");
+                DB.cmd.Parameters.AddWithValue("@description", "none");
+                DB.cmd.Parameters.AddWithValue("@location", "none");
+                DB.cmd.Parameters.AddWithValue("@contact", "none");
+                DB.cmd.Parameters.AddWithValue("@type", cbType.Text.ToString());
+                DB.cmd.Parameters.AddWithValue("@url", "none");
+                DB.cmd.Parameters.AddWithValue("@start", DT.UniversalTime(startTime, date));
+                DB.cmd.Parameters.AddWithValue("@end", DT.UniversalTime(endTime, date));
+                DB.cmd.Parameters.AddWithValue("@user", DB.currentUser.ToString());
+                DB.cmd.ExecuteNonQuery();
+
+                DB.CloseConnection();
+                this.Hide();
+                Appointments form = new Appointments();
+                form.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Appointment on " + dtpDate.Value.ToLongDateString() + " from " +
+                    dtpStart.Value.ToShortTimeString() + " to " + dtpEnd.Value.ToShortTimeString() +
+                    "\nis outside of business hours and can not be set." +
+                    "\n\nBusiness Hours are 8:00 AM to 5:00 PM Monday through Friday.",
+                    "Appointment Outside of Business Hours");
+            }
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
             this.Hide();
             Appointments form = new Appointments();
             form.ShowDialog();
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }  
 }

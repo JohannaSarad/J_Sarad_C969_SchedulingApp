@@ -20,9 +20,9 @@ namespace J_Sarad_C969_SchedulingApp
 
     public partial class LogIn : Form
     {
-        
-        
-        
+
+        DateTime currentTime = DateTime.Now;
+
         public LogIn()
         {
             InitializeComponent();
@@ -73,9 +73,8 @@ namespace J_Sarad_C969_SchedulingApp
             DB.Query(query);
             DataTable dataTable = new DataTable();
             DB.adp.Fill(dataTable);
-            //DB.FillTable(query);
             DB.CloseConnection();
-            //MessageBox.Show(DB.dataTable.Rows[0]["userName"].ToString());
+            
 
             for (int i = 0; i < dataTable.Rows.Count; i++)
             {
@@ -84,16 +83,43 @@ namespace J_Sarad_C969_SchedulingApp
                 {
                     DB.currentUser = dataTable.Rows[i]["userName"].ToString();
                     DB.currentUserID = (int)dataTable.Rows[i]["userId"];
+
+                    CheckForAppt();
+                    
                     this.Hide();
                     MainMenu form = new MainMenu();
-
-                    //MainMenu form = new MainMenu();
                     form.ShowDialog();
                 }
                 else
                 {
                     //FIXME!!! check for Spanish and make an error message in Spanish
                     MessageBox.Show("Please check your username and password", "Invalid username or password");
+                }
+            }
+        }
+
+        private void CheckForAppt ()
+        {
+            DB.OpenConnection();
+            string query2 = "Select appointmentId as ApptID, start as Start from appointment ";
+            DB.Query(query2);
+            DataTable check = new DataTable();
+            DB.adp.Fill(check);
+            DB.CloseConnection();
+
+            for (int i = 0; i < check.Rows.Count; i++)
+            {
+                
+                check.Rows[i]["Start"] =
+                    TimeZoneInfo.ConvertTimeFromUtc((DateTime)check.Rows[i]["Start"],
+                    TimeZoneInfo.Local);
+                DateTime upcoming = (DateTime)check.Rows[i]["Start"];
+                var id = check.Rows[i]["ApptID"];
+                if (currentTime < upcoming &&
+                    (currentTime.AddMinutes(15) > upcoming))
+                {
+                    MessageBox.Show($"You have an appointment within fifteen minutes with " +
+                        $"{id} at {upcoming}");
                 }
             }
         }

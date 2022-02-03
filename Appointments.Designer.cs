@@ -61,6 +61,7 @@ namespace J_Sarad_C969_SchedulingApp
             this.cbApptType.Name = "cbApptType";
             this.cbApptType.Size = new System.Drawing.Size(160, 24);
             this.cbApptType.TabIndex = 2;
+            this.cbApptType.SelectedIndexChanged += new System.EventHandler(this.cbApptType_SelectedIndexChanged);
             // 
             // lblType
             // 

@@ -100,6 +100,8 @@ namespace J_Sarad_C969_SchedulingApp
             dgvAppointments.Columns["Start Time"].DefaultCellStyle.Format = "hh:mm tt";
             dgvAppointments.Columns["End Time"].DefaultCellStyle.Format = "hh:mm tt";
 
+            cbApptType.Text = "All Types";
+            cbApptType.Items.Add("All Types");
             cbApptType.Items.Add("Presentation");
             cbApptType.Items.Add("SCRUM");
             cbApptType.Items.Add("Consultation");
@@ -124,11 +126,17 @@ namespace J_Sarad_C969_SchedulingApp
                 DB.CloseConnection();
                 display();
                 DB.currentIndex = -1;
+                dgvAppointments.ClearSelection();
             }
             else
             {
                 MessageBox.Show("Please Select an Appointment to Delete");
             }
+        }
+
+        private void cbApptType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //if (cbApptType.)
         }
     }
 }
