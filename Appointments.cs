@@ -13,7 +13,7 @@ namespace J_Sarad_C969_SchedulingApp
 {
     public partial class Appointments : Form
     {
-        DataTable apptTable;
+        internal DataTable apptTable;
         //public int currentIndex;
         public Appointments()
         {
@@ -137,6 +137,11 @@ namespace J_Sarad_C969_SchedulingApp
         private void cbApptType_SelectedIndexChanged(object sender, EventArgs e)
         {
             //if (cbApptType.)
+        }
+
+        private void dgvAppointments_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

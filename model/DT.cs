@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using System.Data;
+
 namespace J_Sarad_C969_SchedulingApp.model
 {
     
@@ -14,39 +16,78 @@ namespace J_Sarad_C969_SchedulingApp.model
         public static DateTime Universal { get; set; }
         
         public static TimeZone LocalZone = TimeZone.CurrentTimeZone;
-        public static void FormatDate(string time, string date)
-        {
-            //char[] AMPM = { 'A', 'M', 'P' };
-            var formatDate = date + " ";
-            var fTime = time.TrimStart();
-            //var formatTime = fTime.TrimEnd(AMPM);
 
-            string insertDate = formatDate + fTime;
-            FormattedDate = DateTime.Parse(insertDate);
+        public static bool isOverlap { get; set; }
+        public static bool isBusinessHours { get; set; }
+        
 
-            //MessageBox.Show("The value of inserted Date is: " + insertDate + "/nThe value of Formatted Date is: " 
-                //+ FormattedDate);
-        }
-        public static DateTime UniversalTime(string time, string date)
+        public static DateTime UniversalTime(DateTime date, TimeSpan time)
         {
-            FormatDate(time, date);
-            DateTime universal = LocalZone.ToUniversalTime(FormattedDate);
-            //MessageBox.Show("The Value of universal is:" + universal);
+            
+            DateTime formatDate = date.Add(time);
+            DateTime formatDT = formatDate.AddSeconds(-formatDate.Second);
+            DateTime universal = LocalZone.ToUniversalTime(formatDT);
             return universal;
         }
 
-        public static bool IsBusinessHours (DateTime date, DateTime start, DateTime end)
+        public static void IsBusinessHours (DateTime date, DateTime start, DateTime end)
         {
             TimeSpan open = new TimeSpan(08, 00, 00);
             TimeSpan close = new TimeSpan(17, 00, 00);
             if (date.DayOfWeek.ToString() == "Saturday" || date.DayOfWeek.ToString() == "Sunday"
                 || start.TimeOfDay < open || end.TimeOfDay > close)
             {
-                return false;
+                MessageBox.Show("Appointment on " + date.ToLongDateString() + " from " +
+                        start.ToShortTimeString() + " to " + end.ToShortTimeString() +
+                        "\nis outside of business hours and can not be set." +
+                        "\n\nBusiness Hours are 8:00 AM to 5:00 PM Monday through Friday.",
+                        "Appointment Outside of Business Hours");
+                isBusinessHours = false;
+
             }
             else
             {
-                return true;
+                isBusinessHours =  true;
+            }
+        }
+
+        public static void IsOverlap (DateTime start, DateTime end)
+        {
+            DB.OpenConnection();
+            string query = "select start as 'Start', end as 'End', userName as 'User', customerName as 'Customer'" +
+                "from user inner join appointment on user.userId = appointment.userID inner join customer using(customerId)";
+            DB.Query(query);
+            DataTable dt = new DataTable();
+            DB.adp.Fill(dt);
+            DB.CloseConnection();
+            
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                dt.Rows[i]["Start"] =
+                    TimeZoneInfo.ConvertTimeFromUtc((DateTime)dt.Rows[i]["Start"],
+                    TimeZoneInfo.Local);
+                dt.Rows[i]["End"] =
+                    TimeZoneInfo.ConvertTimeFromUtc((DateTime)dt.Rows[i]["End"],
+                    TimeZoneInfo.Local);
+            }
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                DateTime checkStart = (DateTime)dt.Rows[i]["Start"];
+                DateTime checkEnd = (DateTime)dt.Rows[i]["End"];
+                if ((start <= checkStart && end >= checkStart) || (start <= checkEnd && end >= checkEnd)
+                    || (start == checkEnd) || (end == checkStart))
+                {
+                    string user = dt.Rows[i]["User"].ToString();
+                    string customer = dt.Rows[i]["Customer"].ToString();
+                    isOverlap = true;
+                    
+                    MessageBox.Show($"There is an overlapping appointment for {user} with {customer} from \n " +
+                        $"{checkStart} to {checkEnd}", "Overlapping Appointment");
+                }
+                else
+                {
+                    isOverlap = false;
+                }
             }
         }
     }

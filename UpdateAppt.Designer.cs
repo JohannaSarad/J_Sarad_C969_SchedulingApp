@@ -146,7 +146,7 @@ namespace J_Sarad_C969_SchedulingApp
             this.btnCancel.TabIndex = 12;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            //this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // dtpStart
             // 
@@ -157,7 +157,7 @@ namespace J_Sarad_C969_SchedulingApp
             this.dtpStart.ShowUpDown = true;
             this.dtpStart.Size = new System.Drawing.Size(200, 20);
             this.dtpStart.TabIndex = 13;
-            this.dtpStart.ValueChanged += new System.EventHandler(this.dtpStart_ValueChanged);
+            //this.dtpStart.ValueChanged += new System.EventHandler(this.dtpStart_ValueChanged);
             // 
             // dtpEnd
             // 
