@@ -13,6 +13,7 @@ namespace J_Sarad_C969_SchedulingApp
 {
     public partial class AddAppt : Form
     {
+        //Appointment appointment = new Appointment();
         DataTable customerSearch;
         //Appointments appointment = new Appointments();
         //bool allowSave;
@@ -40,11 +41,7 @@ namespace J_Sarad_C969_SchedulingApp
         {
             DB.currentIndex = e.RowIndex;
         }
-
-       
-
-
-
+        
         private void displayControls() 
         {
             dgvCustSearch.DataSource = customerSearch;
@@ -77,8 +74,9 @@ namespace J_Sarad_C969_SchedulingApp
             TimeSpan endTime = dtpEnd.Value.TimeOfDay;
             DateTime startAppt = date.Add(startTime).AddSeconds(-date.Add(startTime).Second);
             DateTime endAppt = date.Add(endTime).AddSeconds(-date.Add(endTime).Second);
+            string userId = txtUserID.Text;
 
-            Appointment.IsOverlap(startAppt, endAppt);
+            Appointment.IsOverlap(startAppt, endAppt, userId);
             Appointment.IsBusinessHours(dtpDate.Value, dtpStart.Value, dtpEnd.Value);
 
             if (!Appointment.isBusinessHours)
@@ -97,7 +95,11 @@ namespace J_Sarad_C969_SchedulingApp
             }
             else if (startAppt > endAppt)
             {
-                MessageBox.Show("The appointment start time cannot be later than the appointment end time.");
+                MessageBox.Show("The appointment start time cannot be later than the appointment end time");
+            }
+            else if (startAppt == endAppt)
+            {
+                MessageBox.Show("The appointment start time cannot be the same as the appointment end time");
             }
             else if ((string.IsNullOrEmpty(txtCustID.Text)) ||
                 (string.IsNullOrEmpty(txtName.Text)))

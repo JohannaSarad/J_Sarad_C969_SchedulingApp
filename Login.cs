@@ -13,6 +13,7 @@ using MySql.Data;
 using MySql.Data.MySqlClient;
 using System.Configuration;
 using J_Sarad_C969_SchedulingApp.model;
+using System.IO;
 
 namespace J_Sarad_C969_SchedulingApp
 
@@ -74,7 +75,7 @@ namespace J_Sarad_C969_SchedulingApp
             DataTable dataTable = new DataTable();
             DB.adp.Fill(dataTable);
             DB.CloseConnection();
-            
+
 
             for (int i = 0; i < dataTable.Rows.Count; i++)
             {
@@ -83,18 +84,35 @@ namespace J_Sarad_C969_SchedulingApp
                 {
                     DB.currentUser = dataTable.Rows[i]["userName"].ToString();
                     DB.currentUserID = (int)dataTable.Rows[i]["userId"];
+                }
+            }
+            if (DB.currentUserID > -1)
+            {
+                CheckForAppt();
+                string path = @"userLogs.txt";
+                //DirectoryInfo info = new DirectoryInfo(".");
 
-                    CheckForAppt();
-                    
-                    this.Hide();
-                    MainMenu form = new MainMenu();
-                    form.ShowDialog();
-                }
-                else
+                using (StreamWriter sw = File.AppendText(path))
                 {
-                    //FIXME!!! check for Spanish and make an error message in Spanish
-                    MessageBox.Show("Please check your username and password", "Invalid username or password");
+                    sw.WriteLine($"User: {DB.currentUser} . UserId: {DB.currentUserID} . Logged in at: {currentTime}");
                 }
+                using (StreamReader sr = File.OpenText(path))
+                {
+                    string s = " ";
+                    while ((s = sr.ReadLine()) !=null)
+                    {
+                        Console.WriteLine(s);
+                    }
+                }
+
+                this.Hide();
+                MainMenu form = new MainMenu();
+                form.ShowDialog();
+            }
+            else
+            {
+                //FIXME!!! check for Spanish and make an error message in Spanish
+                MessageBox.Show("Please check your username and password", "Invalid username or password");
             }
         }
 

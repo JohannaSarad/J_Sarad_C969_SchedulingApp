@@ -63,6 +63,7 @@ namespace J_Sarad_C969_SchedulingApp
             this.btnReports.TabIndex = 3;
             this.btnReports.Text = "Generate Reports";
             this.btnReports.UseVisualStyleBackColor = true;
+            this.btnReports.Click += new System.EventHandler(this.btnReports_Click);
             // 
             // dgvCalendar
             // 

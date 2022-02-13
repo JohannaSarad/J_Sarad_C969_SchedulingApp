@@ -16,7 +16,7 @@ namespace J_Sarad_C969_SchedulingApp
     {
         //global instances and variables
         DateTime currentDate = DateTime.Now;
-        DataTable calendar = new DataTable();
+        //DataTable calendar = new DataTable();
         bool isMonth;
         bool isWeek;
         
@@ -31,8 +31,9 @@ namespace J_Sarad_C969_SchedulingApp
             DB.currentIndex = -1;
             isWeek = false;
             isMonth = false;
-            
+
             //call to show all appointments in dgvCalendar and display for all form controls
+            Appointment.FillAppointments();
             ShowAll();
             displayControls();
             MessageBox.Show($"{currentDate.DayOfWeek}" + ", " + $"{currentDate.ToShortTimeString()}");
@@ -91,7 +92,10 @@ namespace J_Sarad_C969_SchedulingApp
         //display format for Data Grid View dgvCalendar, monthCalendar cbMonthWeek, and combobox cbMonthWeek
         private void displayControls()
         {
-            dgvCalendar.DataSource = calendar;
+           
+            //dgvCalendar.DataSource = calendar;
+            dgvCalendar.DataSource = Appointment.dtAppointments;
+
             dgvCalendar.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvCalendar.ReadOnly = true;
             dgvCalendar.MultiSelect = false;
@@ -100,30 +104,45 @@ namespace J_Sarad_C969_SchedulingApp
             dgvCalendar.DefaultCellStyle.SelectionForeColor = this.dgvCalendar.DefaultCellStyle.ForeColor; 
             dgvCalendar.RowHeadersVisible = false;
             dgvCalendar.Columns["Date"].DefaultCellStyle.Format = "MM/dd/yyyy";
-            dgvCalendar.Columns["Time"].DefaultCellStyle.Format = "hh:mm tt";
+            dgvCalendar.Columns["Start Time"].DefaultCellStyle.Format = "hh:mm tt";
+            dgvCalendar.Columns["End Time"].DefaultCellStyle.Format = "hh:mm tt";
+            dgvCalendar.Columns["Appointment ID"].Visible = false;
+            dgvCalendar.Columns["User ID"].Visible = false;
+            dgvCalendar.Columns["Customer ID"].Visible = false;
+            dgvCalendar.Columns["Date"].DisplayIndex = 0;
+            dgvCalendar.Columns["Start Time"].DisplayIndex = 1;
+            dgvCalendar.Columns["End Time"].DisplayIndex = 2;
+            dgvCalendar.Columns["Customer Name"].DisplayIndex = 3;
+            dgvCalendar.Columns["User Name"].DisplayIndex = 4;
+            dgvCalendar.Columns["Appointment Type"].DisplayIndex = 5;
 
-            cbMonthWeek.Text = "All Appointments";
-            cbMonthWeek.Items.Add("All Appointments");
-            cbMonthWeek.Items.Add("Month");
-            cbMonthWeek.Items.Add("Week");
+            if (string.IsNullOrEmpty(cbMonthWeek.Text)) 
+            {
+                cbMonthWeek.Text = "All Appointments";
+                cbMonthWeek.Items.Add("All Appointments");
+                cbMonthWeek.Items.Add("Month");
+                cbMonthWeek.Items.Add("Week");
+            }
+            
+
 
             monthCal.AddBoldedDate(currentDate);
             monthCal.UpdateBoldedDates();
         }
 
-        //displays time and date in local timezone. May not be necessary in this case. 
-        private void displayLocalTime()
-        {
-            for (int i = 0; i < calendar.Rows.Count; i++)
-            {
-                calendar.Rows[i]["Date"] =
-                    TimeZoneInfo.ConvertTimeFromUtc((DateTime)calendar.Rows[i]["Date"],
-                    TimeZoneInfo.Local);
-                calendar.Rows[i]["Time"] =
-                    TimeZoneInfo.ConvertTimeFromUtc((DateTime)calendar.Rows[i]["Time"],
-                    TimeZoneInfo.Local);
-            }
-        }
+        //displays time and date in local timezone.May not be necessary in this case. 
+        //private void displayLocalTime()
+        //{
+        //    for (int i = 0; i < calendar.Rows.Count; i++)
+        //    {
+        //        calendar.Rows[i]["Date"] =
+        //            TimeZoneInfo.ConvertTimeFromUtc((DateTime)calendar.Rows[i]["Date"],
+        //            TimeZoneInfo.Local);
+        //        calendar.Rows[i]["Time"] =
+        //            TimeZoneInfo.ConvertTimeFromUtc((DateTime)calendar.Rows[i]["Time"],
+        //            TimeZoneInfo.Local);
+        //    }
+        //}
 
         //dgv and month Calendar event updates
 
@@ -131,7 +150,8 @@ namespace J_Sarad_C969_SchedulingApp
         private void ShowAll()
         {
             //clears dataTable calendar and monthCalendar data
-            calendar.Clear();
+            //calendar.Clear();
+            Appointment.dtAppointments.Clear();
             monthCal.RemoveAllBoldedDates();
             
             //bolds the currently selected date in month calendar
@@ -139,15 +159,18 @@ namespace J_Sarad_C969_SchedulingApp
             monthCal.UpdateBoldedDates();
 
             //Selects values from database and displays them in dgvCalendar in Local Time. 
-            DB.OpenConnection();
-            string query =
-                "select appointmentId as 'Appointment ID', type as 'Type', customerId as 'Customer ID', " +
-                "customerName as 'Customer Name',  start as 'Date', start as 'Time' " +
-                "from customer join appointment using (customerId) order by appointmentId";
-            DB.Query(query);
-            DB.adp.Fill(calendar);
-            displayLocalTime();
-            dgvCalendar.DataSource = calendar;
+            //DB.OpenConnection();
+            //string query =
+            //    "select appointmentId as 'Appointment ID', type as 'Type', customerId as 'Customer ID', " +
+            //    "customerName as 'Customer Name',  start as 'Date', start as 'Time' " +
+            //    "from customer join appointment using (customerId) order by appointmentId";
+            //DB.Query(query);
+            //DB.adp.Fill(calendar);
+            //displayLocalTime();
+            Appointment.FillAppointments();
+            //dgvCalendar.DataSource = calendar;
+            //dgvCalendar.DataSource = Appointment.dtAppointments;
+            displayControls();
         }
 
         /*Selects week from month calendar, bolds all dates of week that selected day is in and displays any
@@ -157,7 +180,8 @@ namespace J_Sarad_C969_SchedulingApp
         {
             //clears dataTable calendar and monthCalendar data
             monthCal.RemoveAllBoldedDates();
-            calendar.Clear();
+            //calendar.Clear();
+            Appointment.dtAppointments.Clear();
 
             /*creates start and end dates of week from monthCalender click currentDate and converts them from
              * string to DateTime */
@@ -173,21 +197,25 @@ namespace J_Sarad_C969_SchedulingApp
                 monthCal.AddBoldedDate(startDate.AddDays(i));
             }
             monthCal.UpdateBoldedDates();
-            
+
             //Selects values from database and displays them in dgvCalendar in Local Time. 
-            DB.OpenConnection();
-            string query =
-                "select appointmentId as 'Appointment ID', type as 'Type', customerId as 'Customer ID', " +
-                "customerName as 'Customer Name', start as 'Date', start as 'Time' " +
-                "from customer join appointment using (customerId) " +
-                "where start BETWEEN @start AND @end order by start";
-            DB.Query(query);
-            DB.cmd.Parameters.AddWithValue("@start", startDate);
-            DB.cmd.Parameters.AddWithValue("@end", endDate);
-            DB.adp.Fill(calendar);
-            DB.CloseConnection();
-            displayLocalTime();
-            dgvCalendar.DataSource = calendar;
+            //DB.OpenConnection();
+            //string query =
+            //   "select appointmentId as 'Appointment ID', type as 'Type', customerId as 'Customer ID', " +
+            //   "customerName as 'Customer Name', start as 'Date', start as 'Start Time', end as 'End Time' " +
+            //   "from customer join appointment using (customerId) " +
+            //   "where start BETWEEN @start AND @end order by start";
+            //DB.Query(query);
+            //DB.cmd.Parameters.AddWithValue("@start", startDate);
+            //DB.cmd.Parameters.AddWithValue("@end", endDate);
+            //DB.adp.Fill(calendar);
+            //DB.adp.Fill(Appointment.dtAppointments);
+            //DB.CloseConnection();
+            Appointment.FillAppointmentsByDate(startDate, endDate);
+            //Appointment.DisplayLocalTime(Appointment.dtAppointments);
+            //dgvCalendar.DataSource = calendar;
+            //Appointment.FillAppointments();
+            dgvCalendar.DataSource = Appointment.dtAppointments;
         }
 
         /*Selects month from month calendar, bolds all dates of month that selected day is in and displays any
@@ -196,7 +224,8 @@ namespace J_Sarad_C969_SchedulingApp
         {
             //clears dataTable calendar and monthCalendar data
             monthCal.RemoveAllBoldedDates();
-            calendar.Clear();
+            //calendar.Clear();
+            Appointment.dtAppointments.Clear();
 
             /*creates start and end dates of month from monthCalender click currentDate and converts them from
              * string to DateTime */
@@ -217,20 +246,25 @@ namespace J_Sarad_C969_SchedulingApp
             monthCal.UpdateBoldedDates();
 
             //Selects values from database and displays them in dgvCalendar in Local Time.
-            DB.OpenConnection();
-            string query = 
-                "select appointmentId as 'Appointment ID', type as 'Appointment Type', userId as 'User ID', " +
-                "customerId as 'Customer ID', customerName as 'Name', start as 'Date', start as 'Time' " +
-                "from customer join appointment using (customerId) " +
-                "where start BETWEEN @start AND @end order by start";
-            DB.Query(query);
-            DB.cmd.Parameters.AddWithValue("@start", start);
-            DB.cmd.Parameters.AddWithValue("@end", endDate);
-            //calendar = new DataTable();
-            DB.adp.Fill(calendar);
-            DB.CloseConnection();
-            displayLocalTime();
-            dgvCalendar.DataSource = calendar;
+            //DB.OpenConnection();
+            //string query =
+            //    "select appointmentId as 'Appointment ID', type as 'Appointment Type', userId as 'User ID', " +
+            //    "customerId as 'Customer ID', customerName as 'Customer Name', start as 'Date', start as 'Start Time', end as 'End Time' " +
+            //    "from customer join appointment using (customerId) " +
+            //    "where start BETWEEN @start AND @end order by start";
+            //DB.Query(query);
+            //DB.cmd.Parameters.AddWithValue("@start", start);
+            //DB.cmd.Parameters.AddWithValue("@end", endDate);
+            ////calendar = new DataTable();
+            ////DB.adp.Fill(calendar);
+            //DB.adp.Fill(Appointment.dtAppointments);
+            //DB.CloseConnection();
+            //Appointment.DisplayLocalTime(Appointment.dtAppointments);
+            Appointment.FillAppointmentsByDate(startDate, endDate);
+            //dgvCalendar.DataSource = calendar;
+            //Appointment.FillAppointments();
+            //dgvCalendar.DataSource = Appointment.dtAppointments;
+            displayControls();
         }
 
         private void cbMonthWeek_SelectedIndexChanged(object sender, EventArgs e)
@@ -243,7 +277,7 @@ namespace J_Sarad_C969_SchedulingApp
             }
             else if (cbMonthWeek.Text == "Month")
             {
-                calendar.Clear();
+                //calendar.Clear();
                 isMonth = true;
                 isWeek = false;
                 ShowMonth();
@@ -256,7 +290,12 @@ namespace J_Sarad_C969_SchedulingApp
             }
         }
 
-       
+        private void btnReports_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Reports form = new Reports();
+            form.ShowDialog();
+        }
     }
 }
 

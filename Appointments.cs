@@ -13,20 +13,23 @@ namespace J_Sarad_C969_SchedulingApp
 {
     public partial class Appointments : Form
     {
-        internal DataTable apptTable;
+        //Appointment appointment = new Appointment();
+        public DataTable dtCurrentUserAppt;
         //public int currentIndex;
         public Appointments()
         {
             InitializeComponent();
         }
 
+        //closes Appointment Form and opens MainMenu Form
         private void btnMenu_Click(object sender, EventArgs e)
         {
             this.Hide();
             MainMenu form = new MainMenu();
             form.ShowDialog();
         }
-
+        
+        //closes Appointment Form and opens AddAppt Form
         private void btnAdd_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -34,6 +37,7 @@ namespace J_Sarad_C969_SchedulingApp
             form.ShowDialog();
         }
 
+        //closes Appointment Form and opens UpdateAppt Form if a row is selected in dgvAppointments
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             if (DB.currentIndex >= 0)
@@ -42,6 +46,7 @@ namespace J_Sarad_C969_SchedulingApp
                 UpdateAppt form = new UpdateAppt();
                 form.ShowDialog();
             }
+            //show exception if there is no row selected in dgvAppointments to update
             else
             {
                 MessageBox.Show("Please Select an Appointment to Update");
@@ -49,11 +54,13 @@ namespace J_Sarad_C969_SchedulingApp
             
         }
 
+        //closes Appointments Form and Exits program
         private void btnExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
+        
         private void Appointments_Load(object sender, EventArgs e)
         {
             DB.currentIndex = -1;
@@ -64,31 +71,28 @@ namespace J_Sarad_C969_SchedulingApp
 
         private void display()
         {
-            //FIX ME!!! put this somewhere other than display. It doesn't work here if you want to change the table. 
-            DB.OpenConnection();
-            string query = 
-                "select appointmentID as 'Appointment ID', type as 'Appointment Type', userId as 'User ID', " +
-                "customerId as 'Customer ID', customerName as 'Name', start as 'Date', start as 'Start Time', " +
-                "end as ' End Time' from customer join appointment using (customerId)";
-            DB.Query(query);
-            apptTable = new DataTable();
-            DB.adp.Fill(apptTable);
-
-            DB.CloseConnection();
-            for (int i = 0; i < apptTable.Rows.Count; i++)
+            Appointment.FillAppointments();
+            //dtCurrentUserAppt = new DataTable();
+            //dtCurrentUserAppt = Appointment.dtAppt.Clone();
+            //foreach (DataRow row in Appointment.dtAppt.Rows)
+            //{
+            //    if (row["User ID"].ToString() == DB.currentUserID.ToString())
+            //    {
+            //        dtCurrentUserAppt.ImportRow(row);
+            //        //dtCurrentUserAppt.Rows.Add(row);
+            //    }
+            //}
+            dtCurrentUserAppt = new DataTable();
+            dtCurrentUserAppt = Appointment.dtAppointments.Clone();
+            foreach (DataRow row in Appointment.dtAppointments.Rows)
             {
-                apptTable.Rows[i]["Date"] =
-                    TimeZoneInfo.ConvertTimeFromUtc((DateTime)apptTable.Rows[i]["Date"],
-                    TimeZoneInfo.Local);
-                apptTable.Rows[i]["Start Time"] =
-                    TimeZoneInfo.ConvertTimeFromUtc((DateTime)apptTable.Rows[i]["Start Time"],
-                    TimeZoneInfo.Local);
-                apptTable.Rows[i]["End Time"] =
-                    TimeZoneInfo.ConvertTimeFromUtc((DateTime)apptTable.Rows[i]["End Time"],
-                    TimeZoneInfo.Local);
+                if (row["User ID"].ToString() == DB.currentUserID.ToString())
+                {
+                    dtCurrentUserAppt.ImportRow(row);
+                }
             }
 
-            dgvAppointments.DataSource = apptTable;
+            dgvAppointments.DataSource = dtCurrentUserAppt;
             dgvAppointments.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvAppointments.ReadOnly = true;
             dgvAppointments.MultiSelect = false;
@@ -100,7 +104,7 @@ namespace J_Sarad_C969_SchedulingApp
             dgvAppointments.Columns["Start Time"].DefaultCellStyle.Format = "hh:mm tt";
             dgvAppointments.Columns["End Time"].DefaultCellStyle.Format = "hh:mm tt";
 
-            cbApptType.Text = "All Types";
+            //cbApptType.DisplayMember = "All Types";
             cbApptType.Items.Add("All Types");
             cbApptType.Items.Add("Presentation");
             cbApptType.Items.Add("SCRUM");
@@ -110,8 +114,12 @@ namespace J_Sarad_C969_SchedulingApp
 
         private void dgvAppointments_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            //FIX ME!!! currentIndex may go better in Appointment class
             DB.currentIndex = e.RowIndex;
-            DB.currentApptId = dgvAppointments.Rows[DB.currentIndex].Cells["Appointment ID"].Value.ToString();
+            //this might need to be an int value
+            Appointment.AppointmentID = dgvAppointments.Rows[DB.currentIndex].Cells["Appointment ID"].Value.ToString();
+            Appointment.UpdateAppointment(Appointment.AppointmentID);
+            
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -121,7 +129,7 @@ namespace J_Sarad_C969_SchedulingApp
                 DB.OpenConnection();
                 string query = "DELETE FROM appointment WHERE appointmentId = @appointmentID";
                 DB.NonQuery(query);
-                DB.cmd.Parameters.AddWithValue("@appointmentID", DB.currentApptId);
+                DB.cmd.Parameters.AddWithValue("@appointmentID", Appointment.AppointmentID);
                 DB.cmd.ExecuteNonQuery();
                 DB.CloseConnection();
                 display();
@@ -139,9 +147,6 @@ namespace J_Sarad_C969_SchedulingApp
             //if (cbApptType.)
         }
 
-        private void dgvAppointments_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
+        
     }
 }
