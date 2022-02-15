@@ -51,6 +51,7 @@ namespace J_Sarad_C969_SchedulingApp
             this.dtpEnd = new System.Windows.Forms.DateTimePicker();
             this.lblMDY = new System.Windows.Forms.Label();
             this.lblHM2 = new System.Windows.Forms.Label();
+            this.btnViewAll = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustSearch)).BeginInit();
             this.SuspendLayout();
             // 
@@ -124,7 +125,7 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(213, 352);
+            this.btnSave.Location = new System.Drawing.Point(213, 344);
             this.btnSave.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(100, 28);
@@ -135,7 +136,7 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(368, 352);
+            this.btnCancel.Location = new System.Drawing.Point(321, 344);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(100, 28);
@@ -174,6 +175,7 @@ namespace J_Sarad_C969_SchedulingApp
             this.btnSearch.TabIndex = 19;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // txtSearch
             // 
@@ -185,10 +187,10 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             // btnSelectCust
             // 
-            this.btnSelectCust.Location = new System.Drawing.Point(732, 352);
+            this.btnSelectCust.Location = new System.Drawing.Point(760, 346);
             this.btnSelectCust.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnSelectCust.Name = "btnSelectCust";
-            this.btnSelectCust.Size = new System.Drawing.Size(228, 28);
+            this.btnSelectCust.Size = new System.Drawing.Size(200, 28);
             this.btnSelectCust.TabIndex = 21;
             this.btnSelectCust.Text = "Select Customer";
             this.btnSelectCust.UseVisualStyleBackColor = true;
@@ -281,11 +283,22 @@ namespace J_Sarad_C969_SchedulingApp
             this.lblHM2.TabIndex = 52;
             this.lblHM2.Text = "Hour:Min AM/PM";
             // 
+            // btnViewAll
+            // 
+            this.btnViewAll.Location = new System.Drawing.Point(537, 346);
+            this.btnViewAll.Name = "btnViewAll";
+            this.btnViewAll.Size = new System.Drawing.Size(200, 28);
+            this.btnViewAll.TabIndex = 53;
+            this.btnViewAll.Text = "View All Customers";
+            this.btnViewAll.UseVisualStyleBackColor = true;
+            this.btnViewAll.Click += new System.EventHandler(this.btnViewAll_Click);
+            // 
             // AddAppt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(987, 479);
+            this.Controls.Add(this.btnViewAll);
             this.Controls.Add(this.lblHM2);
             this.Controls.Add(this.lblMDY);
             this.Controls.Add(this.dtpEnd);
@@ -343,5 +356,6 @@ namespace J_Sarad_C969_SchedulingApp
         private System.Windows.Forms.DateTimePicker dtpEnd;
         private System.Windows.Forms.Label lblMDY;
         private System.Windows.Forms.Label lblHM2;
+        private System.Windows.Forms.Button btnViewAll;
     }
 }

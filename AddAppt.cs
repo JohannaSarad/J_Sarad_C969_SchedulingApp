@@ -18,6 +18,7 @@ namespace J_Sarad_C969_SchedulingApp
         //Appointments appointment = new Appointments();
         //bool allowSave;
         bool validCustomer;
+        bool foundCustomer;
         public AddAppt()
         {
             InitializeComponent();
@@ -180,6 +181,46 @@ namespace J_Sarad_C969_SchedulingApp
         private void btnExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            foundCustomer = false;
+            DataTable dtSearch = new DataTable();
+            foreach (DataRow row in customerSearch.Rows)
+            {
+                if (row["Customer Name"].ToString().ToUpper().Contains(txtSearch.Text.ToUpper()))
+                {
+                    dtSearch =
+                        customerSearch.AsEnumerable().Where(x => x["Customer Name"].ToString().ToUpper().Contains(txtSearch.Text.ToUpper())).CopyToDataTable();
+                    dgvCustSearch.DataSource = dtSearch;
+                    foundCustomer = true;
+                }
+                else if (row["Customer ID"].ToString() == (txtSearch.Text))
+                {
+                    dtSearch =
+                        customerSearch.AsEnumerable().Where(x => x["Customer ID"].ToString() == txtSearch.Text).CopyToDataTable();
+                    dgvCustSearch.DataSource = dtSearch;
+                    foundCustomer = true;
+                }
+            }
+            if (!foundCustomer) 
+            { 
+                
+                DialogResult result = MessageBox.Show("There is no customer matching that Name or ID. \n " +
+                    "Would you like to add a new customer", "Search Found No Results", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    this.Hide();
+                    AddAppt form = new AddAppt();
+                    form.ShowDialog();
+                }
+            }
+        }
+
+        private void btnViewAll_Click(object sender, EventArgs e)
+        {
+            dgvCustSearch.DataSource = customerSearch;
         }
     }  
 }
