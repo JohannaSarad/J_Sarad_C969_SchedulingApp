@@ -15,7 +15,8 @@ namespace J_Sarad_C969_SchedulingApp
 {
     public partial class AddCustomer : Form
     {
-        bool AllowedSave;
+        //bool allowSave;
+        string country;
         public AddCustomer()
         {
             InitializeComponent();
@@ -23,45 +24,48 @@ namespace J_Sarad_C969_SchedulingApp
 
         private void AddCustomer_Load(object sender, EventArgs e)
         {
-
+            displayControls();
         }
 
-        private bool AllowSave()
+        private void displayControls()
         {
-            foreach (Control txt in this.Controls)
-            {
-                if (txt is TextBox && (!string.IsNullOrEmpty(txt.Text)))
-                {
-                    AllowedSave = true;
-                }
-                else
-                {
-                    AllowedSave = false;
-                }
-            }
-            return AllowedSave;
+            cbCity.Items.Add("--select city--");
+            cbCity.Items.Add("Los Angeles");
+            cbCity.Items.Add("Madrid");
+            cbCity.Items.Add("Tokyo");
+            cbCity.SelectedIndex = 0;
         }
+       
         private void btnSave_Click(object sender, EventArgs e)
         {
-            AllowSave();
-
-            if (AllowedSave)
+            int i;
+            string phone = txtPhone.Text.Replace("-", String.Empty);
+            if ((string.IsNullOrEmpty(txtName.Text)) || (string.IsNullOrEmpty(txtAddress.Text)) ||
+                (string.IsNullOrEmpty(txtPhone.Text)))
             {
-                /*FIX ME!!! change all of this to a procedure. Figure out if there is a better place to put params
-                 * so you don't have to keep repeating them. Figure out syntax to concatinate and wrap long mysql 
-                 * statements. Add Try Catch for possible exception either here, or in the DB.OpenConnection Method. */
-                 
+                MessageBox.Show("Please Fill out all required fields");
+            }
+            else if ((!Int32.TryParse(phone, out i)) || (phone.Length != 7))
+            {
+                MessageBox.Show("Phone Number must be 7 digits");
+            }
+            else if (cbCity.SelectedIndex == 0)
+            {
+                MessageBox.Show("Please Select a City");
+            }
+            else { 
+                //possibly make a customer class and make this into an insertCustomer method
                 DB.OpenConnection();
                 
                 string query = "INSERT INTO country (country, createDate, createdBy, lastUpdate, lastUpdateBy) VALUES (@country, CURDATE(), @user, CURDATE(), @user)";
                 DB.NonQuery(query);
-                DB.cmd.Parameters.AddWithValue("@country", txtCountry.Text);
+                DB.cmd.Parameters.AddWithValue("@country", country);
                 DB.cmd.Parameters.AddWithValue("@user", DB.currentUser.ToString());
                 DB.cmd.ExecuteNonQuery();
                 
                 string query2 = "INSERT INTO city (city, countryId, createDate, createdBy, lastUpdate, lastUpdateBy) VALUES (@city, LAST_INSERT_ID(), CURDATE(), @user, CURDATE(), @user)";
                 DB.NonQuery(query2);
-                DB.cmd.Parameters.AddWithValue("@city", txtCity.Text);
+                DB.cmd.Parameters.AddWithValue("@city", cbCity.Text);
                 DB.cmd.Parameters.AddWithValue("@user", DB.currentUser.ToString());
                 DB.cmd.ExecuteNonQuery();
                 
@@ -78,17 +82,11 @@ namespace J_Sarad_C969_SchedulingApp
                 DB.cmd.Parameters.AddWithValue("@user", DB.currentUser.ToString());
                 DB.cmd.Parameters.AddWithValue("@bit", 0);
                 DB.cmd.ExecuteNonQuery();
-
-               
-
+                
                 DB.CloseConnection();
                 this.Hide();
                 Customers form = new Customers();
                 form.ShowDialog();
-            }
-            else
-            {
-                MessageBox.Show("Please Complete all of the Required Customer Information");
             }
         }
 
@@ -97,6 +95,22 @@ namespace J_Sarad_C969_SchedulingApp
             this.Hide();
             Customers form = new Customers();
             form.ShowDialog();
+        }
+
+        private void cbCity_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbCity.SelectedItem == "Los Angeles")
+            {
+                country = "United States";
+            }
+            else if (cbCity.SelectedItem == "Tokyo")
+            {
+                country = "Japan";
+            }
+            else if (cbCity.SelectedItem == "Madrid")
+            {
+                country = "Spain";
+            }
         }
     }
 }

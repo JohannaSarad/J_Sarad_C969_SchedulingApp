@@ -35,20 +35,18 @@ namespace J_Sarad_C969_SchedulingApp
             this.lblAddress = new System.Windows.Forms.Label();
             this.lblPhone = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
-            this.txtCity = new System.Windows.Forms.TextBox();
             this.txtCountry = new System.Windows.Forms.TextBox();
             this.txtAddress = new System.Windows.Forms.TextBox();
             this.txtPhone = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.lblId = new System.Windows.Forms.Label();
-            this.txtCustID = new System.Windows.Forms.TextBox();
+            this.cbCity = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // lblName
             // 
             this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(30, 50);
+            this.lblName.Location = new System.Drawing.Point(30, 36);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(45, 17);
             this.lblName.TabIndex = 0;
@@ -66,7 +64,7 @@ namespace J_Sarad_C969_SchedulingApp
             // lblCity
             // 
             this.lblCity.AutoSize = true;
-            this.lblCity.Location = new System.Drawing.Point(30, 200);
+            this.lblCity.Location = new System.Drawing.Point(30, 197);
             this.lblCity.Name = "lblCity";
             this.lblCity.Size = new System.Drawing.Size(31, 17);
             this.lblCity.TabIndex = 2;
@@ -75,7 +73,7 @@ namespace J_Sarad_C969_SchedulingApp
             // lblAddress
             // 
             this.lblAddress.AutoSize = true;
-            this.lblAddress.Location = new System.Drawing.Point(30, 150);
+            this.lblAddress.Location = new System.Drawing.Point(30, 143);
             this.lblAddress.Name = "lblAddress";
             this.lblAddress.Size = new System.Drawing.Size(60, 17);
             this.lblAddress.TabIndex = 3;
@@ -84,7 +82,7 @@ namespace J_Sarad_C969_SchedulingApp
             // lblPhone
             // 
             this.lblPhone.AutoSize = true;
-            this.lblPhone.Location = new System.Drawing.Point(30, 100);
+            this.lblPhone.Location = new System.Drawing.Point(30, 88);
             this.lblPhone.Name = "lblPhone";
             this.lblPhone.Size = new System.Drawing.Size(49, 17);
             this.lblPhone.TabIndex = 4;
@@ -92,35 +90,29 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(125, 50);
+            this.txtName.Location = new System.Drawing.Point(125, 30);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(169, 23);
             this.txtName.TabIndex = 5;
             // 
-            // txtCity
-            // 
-            this.txtCity.Location = new System.Drawing.Point(125, 200);
-            this.txtCity.Name = "txtCity";
-            this.txtCity.Size = new System.Drawing.Size(169, 23);
-            this.txtCity.TabIndex = 6;
-            // 
             // txtCountry
             // 
-            this.txtCountry.Location = new System.Drawing.Point(125, 250);
+            this.txtCountry.Location = new System.Drawing.Point(124, 244);
             this.txtCountry.Name = "txtCountry";
+            this.txtCountry.ReadOnly = true;
             this.txtCountry.Size = new System.Drawing.Size(169, 23);
             this.txtCountry.TabIndex = 7;
             // 
             // txtAddress
             // 
-            this.txtAddress.Location = new System.Drawing.Point(125, 150);
+            this.txtAddress.Location = new System.Drawing.Point(125, 140);
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(169, 23);
             this.txtAddress.TabIndex = 8;
             // 
             // txtPhone
             // 
-            this.txtPhone.Location = new System.Drawing.Point(125, 100);
+            this.txtPhone.Location = new System.Drawing.Point(125, 85);
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(169, 23);
             this.txtPhone.TabIndex = 9;
@@ -145,36 +137,26 @@ namespace J_Sarad_C969_SchedulingApp
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // lblId
+            // cbCity
             // 
-            this.lblId.AutoSize = true;
-            this.lblId.Location = new System.Drawing.Point(29, 9);
-            this.lblId.Name = "lblId";
-            this.lblId.Size = new System.Drawing.Size(85, 17);
-            this.lblId.TabIndex = 12;
-            this.lblId.Text = "Customer ID";
-            // 
-            // txtCustID
-            // 
-            this.txtCustID.Location = new System.Drawing.Point(125, 12);
-            this.txtCustID.Name = "txtCustID";
-            this.txtCustID.ReadOnly = true;
-            this.txtCustID.Size = new System.Drawing.Size(169, 23);
-            this.txtCustID.TabIndex = 13;
+            this.cbCity.FormattingEnabled = true;
+            this.cbCity.Location = new System.Drawing.Point(124, 194);
+            this.cbCity.Name = "cbCity";
+            this.cbCity.Size = new System.Drawing.Size(170, 24);
+            this.cbCity.TabIndex = 12;
+            this.cbCity.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // UpdateCustomer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(344, 361);
-            this.Controls.Add(this.txtCustID);
-            this.Controls.Add(this.lblId);
+            this.Controls.Add(this.cbCity);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.txtPhone);
             this.Controls.Add(this.txtAddress);
             this.Controls.Add(this.txtCountry);
-            this.Controls.Add(this.txtCity);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.lblPhone);
             this.Controls.Add(this.lblAddress);
@@ -199,13 +181,11 @@ namespace J_Sarad_C969_SchedulingApp
         private System.Windows.Forms.Label lblAddress;
         private System.Windows.Forms.Label lblPhone;
         private System.Windows.Forms.TextBox txtName;
-        private System.Windows.Forms.TextBox txtCity;
         private System.Windows.Forms.TextBox txtCountry;
         private System.Windows.Forms.TextBox txtAddress;
         private System.Windows.Forms.TextBox txtPhone;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Label lblId;
-        private System.Windows.Forms.TextBox txtCustID;
+        private System.Windows.Forms.ComboBox cbCity;
     }
 }

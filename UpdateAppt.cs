@@ -30,25 +30,13 @@ namespace J_Sarad_C969_SchedulingApp
             cbType.Items.Add("Presentation");
             cbType.Items.Add("SCRUM");
             cbType.Items.Add("Consultation");
-            //using (Appointments apptForm = (Appointments)Application.OpenForms["Appointments"])
-            //{
-            //    cbType.Text = apptForm.dgvAppointments.Rows[DB.currentIndex].Cells["Appointment Type"].Value.ToString();
-
-            //    txtApptId.Text = apptForm.dgvAppointments.Rows[DB.currentIndex].Cells["Appointment ID"].Value.ToString();
-            //    txtUserID.Text = apptForm.dgvAppointments.Rows[DB.currentIndex].Cells["User ID"].Value.ToString().Trim();
-            //    txtCustID.Text = apptForm.dgvAppointments.Rows[DB.currentIndex].Cells["Customer ID"].Value.ToString().Trim();
-            //    txtName.Text = apptForm.dgvAppointments.Rows[DB.currentIndex].Cells["Name"].Value.ToString();
-            //    dtpDate.Text = apptForm.dgvAppointments.Rows[DB.currentIndex].Cells["Date"].Value.ToString();
-
-            //    dtpStart.Text = apptForm.dgvAppointments.Rows[DB.currentIndex].Cells["Start Time"].Value.ToString();
-            //    dtpEnd.Text = apptForm.dgvAppointments.Rows[DB.currentIndex].Cells["End Time"].Value.ToString();
-            //}
+            
 
             cbType.Text = Appointment.Type;
 
-            txtApptId.Text = Appointment.AppointmentID;
-            txtUserID.Text = Appointment.UserID;
-            txtCustID.Text = Appointment.CustomerID;
+            //txtApptId.Text = Appointment.AppointmentID;
+            //txtUserID.Text = Appointment.UserID;
+            //txtCustID.Text = Appointment.CustomerID;
             txtName.Text = Appointment.CustomerName;
 
             dtpDate.Value = Appointment.Date;
@@ -63,9 +51,9 @@ namespace J_Sarad_C969_SchedulingApp
             TimeSpan endTime = dtpEnd.Value.TimeOfDay;
             DateTime startAppt = date.Add(startTime).AddSeconds(-date.Add(startTime).Second);
             DateTime endAppt = date.Add(endTime).AddSeconds(-date.Add(endTime).Second);
-            string userId = txtUserID.Text;
+            //string userId = txtUserID.Text;
 
-            Appointment.IsOverlap(startAppt, endAppt, userId);
+            Appointment.IsOverlap(startAppt, endAppt, DB.currentUserID.ToString());
             Appointment.IsBusinessHours(dtpDate.Value, dtpStart.Value, dtpEnd.Value);
 
             if (!Appointment.isBusinessHours)
@@ -99,7 +87,7 @@ namespace J_Sarad_C969_SchedulingApp
                     "WHERE appointment.appointmentID = @ApptID";
                 DB.NonQuery(query);
                 DB.cmd.Parameters.AddWithValue("@Type", cbType.Text.ToString());
-                DB.cmd.Parameters.AddWithValue("@ApptID", txtApptId.Text.ToString());
+                DB.cmd.Parameters.AddWithValue("@ApptID", Appointment.CurrentApptObj["Appointment ID"]);
                 DB.cmd.Parameters.AddWithValue("@start", Appointment.UniversalTime(date, startTime));
                 DB.cmd.Parameters.AddWithValue("@end", Appointment.UniversalTime(date, endTime));
                 DB.cmd.ExecuteNonQuery();

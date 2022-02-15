@@ -39,9 +39,6 @@ namespace J_Sarad_C969_SchedulingApp
             this.cbMonthWeek = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.lblGreeting = new System.Windows.Forms.Label();
-            this.btnToday = new System.Windows.Forms.Button();
-            this.btnLocal = new System.Windows.Forms.Button();
-            this.btnUTC = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCalendar)).BeginInit();
             this.SuspendLayout();
             // 
@@ -99,7 +96,7 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(791, 412);
+            this.btnExit.Location = new System.Drawing.Point(877, 416);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(75, 23);
             this.btnExit.TabIndex = 13;
@@ -146,42 +143,13 @@ namespace J_Sarad_C969_SchedulingApp
             this.lblGreeting.TabIndex = 17;
             this.lblGreeting.Text = "Welcome User. What Can I Help You with Today?";
             this.lblGreeting.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // btnToday
-            // 
-            this.btnToday.Location = new System.Drawing.Point(19, 19);
-            this.btnToday.Name = "btnToday";
-            this.btnToday.Size = new System.Drawing.Size(75, 23);
-            this.btnToday.TabIndex = 18;
-            this.btnToday.Text = "Today";
-            this.btnToday.UseVisualStyleBackColor = true;
-            // 
-            // btnLocal
-            // 
-            this.btnLocal.Location = new System.Drawing.Point(100, 19);
-            this.btnLocal.Name = "btnLocal";
-            this.btnLocal.Size = new System.Drawing.Size(75, 23);
-            this.btnLocal.TabIndex = 19;
-            this.btnLocal.Text = "Local";
-            this.btnLocal.UseVisualStyleBackColor = true;
-            // 
-            // btnUTC
-            // 
-            this.btnUTC.Location = new System.Drawing.Point(191, 19);
-            this.btnUTC.Name = "btnUTC";
-            this.btnUTC.Size = new System.Drawing.Size(75, 23);
-            this.btnUTC.TabIndex = 20;
-            this.btnUTC.Text = "UTC";
-            this.btnUTC.UseVisualStyleBackColor = true;
+            this.lblGreeting.Click += new System.EventHandler(this.lblGreeting_Click);
             // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1062, 461);
-            this.Controls.Add(this.btnUTC);
-            this.Controls.Add(this.btnLocal);
-            this.Controls.Add(this.btnToday);
             this.Controls.Add(this.lblGreeting);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cbMonthWeek);
@@ -211,9 +179,6 @@ namespace J_Sarad_C969_SchedulingApp
         private System.Windows.Forms.ComboBox cbMonthWeek;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblGreeting;
-        private System.Windows.Forms.Button btnToday;
-        private System.Windows.Forms.Button btnLocal;
-        private System.Windows.Forms.Button btnUTC;
         public System.Windows.Forms.MonthCalendar monthCal;
     }
 }

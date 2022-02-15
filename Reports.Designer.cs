@@ -35,14 +35,14 @@ namespace J_Sarad_C969_SchedulingApp
             this.cbApptByMonth = new System.Windows.Forms.ComboBox();
             this.cbSchedules = new System.Windows.Forms.ComboBox();
             this.txtReports = new System.Windows.Forms.TextBox();
-            this.btnTypeByMonth = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnExit = new System.Windows.Forms.Button();
+            this.btnMainMenu = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblTypeByMonth
             // 
             this.lblTypeByMonth.AutoSize = true;
-            this.lblTypeByMonth.Location = new System.Drawing.Point(35, 36);
+            this.lblTypeByMonth.Location = new System.Drawing.Point(35, 52);
             this.lblTypeByMonth.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTypeByMonth.Name = "lblTypeByMonth";
             this.lblTypeByMonth.Size = new System.Drawing.Size(193, 17);
@@ -52,7 +52,7 @@ namespace J_Sarad_C969_SchedulingApp
             // lblApptsByUser
             // 
             this.lblApptsByUser.AutoSize = true;
-            this.lblApptsByUser.Location = new System.Drawing.Point(35, 149);
+            this.lblApptsByUser.Location = new System.Drawing.Point(35, 173);
             this.lblApptsByUser.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblApptsByUser.Name = "lblApptsByUser";
             this.lblApptsByUser.Size = new System.Drawing.Size(138, 17);
@@ -62,7 +62,7 @@ namespace J_Sarad_C969_SchedulingApp
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(35, 377);
+            this.label3.Location = new System.Drawing.Point(35, 300);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(46, 17);
@@ -72,8 +72,10 @@ namespace J_Sarad_C969_SchedulingApp
             // cbApptByMonth
             // 
             this.cbApptByMonth.FormattingEnabled = true;
-            this.cbApptByMonth.Location = new System.Drawing.Point(38, 318);
+            this.cbApptByMonth.IntegralHeight = false;
+            this.cbApptByMonth.Location = new System.Drawing.Point(38, 82);
             this.cbApptByMonth.Margin = new System.Windows.Forms.Padding(4);
+            this.cbApptByMonth.MaxDropDownItems = 4;
             this.cbApptByMonth.Name = "cbApptByMonth";
             this.cbApptByMonth.Size = new System.Drawing.Size(160, 24);
             this.cbApptByMonth.TabIndex = 3;
@@ -82,8 +84,10 @@ namespace J_Sarad_C969_SchedulingApp
             // cbSchedules
             // 
             this.cbSchedules.FormattingEnabled = true;
-            this.cbSchedules.Location = new System.Drawing.Point(38, 182);
+            this.cbSchedules.IntegralHeight = false;
+            this.cbSchedules.Location = new System.Drawing.Point(38, 203);
             this.cbSchedules.Margin = new System.Windows.Forms.Padding(4);
+            this.cbSchedules.MaxDropDownItems = 4;
             this.cbSchedules.Name = "cbSchedules";
             this.cbSchedules.Size = new System.Drawing.Size(160, 24);
             this.cbSchedules.TabIndex = 4;
@@ -91,41 +95,41 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             // txtReports
             // 
-            this.txtReports.Location = new System.Drawing.Point(363, 72);
+            this.txtReports.Location = new System.Drawing.Point(262, 82);
             this.txtReports.Margin = new System.Windows.Forms.Padding(4);
             this.txtReports.Multiline = true;
             this.txtReports.Name = "txtReports";
             this.txtReports.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtReports.Size = new System.Drawing.Size(520, 270);
+            this.txtReports.Size = new System.Drawing.Size(571, 260);
             this.txtReports.TabIndex = 5;
             // 
-            // btnTypeByMonth
+            // btnExit
             // 
-            this.btnTypeByMonth.Location = new System.Drawing.Point(38, 72);
-            this.btnTypeByMonth.Name = "btnTypeByMonth";
-            this.btnTypeByMonth.Size = new System.Drawing.Size(209, 33);
-            this.btnTypeByMonth.TabIndex = 6;
-            this.btnTypeByMonth.Text = "Appointment Types By Month";
-            this.btnTypeByMonth.UseVisualStyleBackColor = true;
-            this.btnTypeByMonth.Click += new System.EventHandler(this.btnTypeByMonth_Click);
+            this.btnExit.Location = new System.Drawing.Point(623, 371);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(75, 23);
+            this.btnExit.TabIndex = 6;
+            this.btnExit.Text = "Exit";
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
-            // button1
+            // btnMainMenu
             // 
-            this.button1.Location = new System.Drawing.Point(38, 213);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnMainMenu.Location = new System.Drawing.Point(659, 31);
+            this.btnMainMenu.Name = "btnMainMenu";
+            this.btnMainMenu.Size = new System.Drawing.Size(174, 23);
+            this.btnMainMenu.TabIndex = 7;
+            this.btnMainMenu.Text = "Return To Main Menu";
+            this.btnMainMenu.UseVisualStyleBackColor = true;
+            this.btnMainMenu.Click += new System.EventHandler(this.btnMainMenu_Click);
             // 
             // Reports
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(938, 355);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.btnTypeByMonth);
+            this.ClientSize = new System.Drawing.Size(938, 480);
+            this.Controls.Add(this.btnMainMenu);
+            this.Controls.Add(this.btnExit);
             this.Controls.Add(this.txtReports);
             this.Controls.Add(this.cbSchedules);
             this.Controls.Add(this.cbApptByMonth);
@@ -150,7 +154,7 @@ namespace J_Sarad_C969_SchedulingApp
         private System.Windows.Forms.ComboBox cbApptByMonth;
         private System.Windows.Forms.ComboBox cbSchedules;
         private System.Windows.Forms.TextBox txtReports;
-        private System.Windows.Forms.Button btnTypeByMonth;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnExit;
+        private System.Windows.Forms.Button btnMainMenu;
     }
 }

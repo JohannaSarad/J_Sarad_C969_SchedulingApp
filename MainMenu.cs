@@ -11,12 +11,12 @@ using J_Sarad_C969_SchedulingApp.model;
 
 namespace J_Sarad_C969_SchedulingApp
 {
-    //FIX ME!!! clean up sql statments and make sure names of dgv columns all match throughout
+   
     public partial class MainMenu : Form
     {
         //global instances and variables
         DateTime currentDate = DateTime.Now;
-        //DataTable calendar = new DataTable();
+        
         bool isMonth;
         bool isWeek;
         
@@ -36,7 +36,7 @@ namespace J_Sarad_C969_SchedulingApp
             Appointment.FillAppointments();
             ShowAll();
             displayControls();
-            MessageBox.Show($"{currentDate.DayOfWeek}" + ", " + $"{currentDate.ToShortTimeString()}");
+            //MessageBox.Show($"{currentDate.DayOfWeek}" + ", " + $"{currentDate.ToShortTimeString()}");
         }
 
         //Button Click Events
@@ -118,39 +118,24 @@ namespace J_Sarad_C969_SchedulingApp
 
             if (string.IsNullOrEmpty(cbMonthWeek.Text)) 
             {
-                cbMonthWeek.Text = "All Appointments";
                 cbMonthWeek.Items.Add("All Appointments");
                 cbMonthWeek.Items.Add("Month");
                 cbMonthWeek.Items.Add("Week");
+                cbMonthWeek.SelectedIndex = 0;
             }
             
-
-
             monthCal.AddBoldedDate(currentDate);
             monthCal.UpdateBoldedDates();
-        }
 
-        //displays time and date in local timezone.May not be necessary in this case. 
-        //private void displayLocalTime()
-        //{
-        //    for (int i = 0; i < calendar.Rows.Count; i++)
-        //    {
-        //        calendar.Rows[i]["Date"] =
-        //            TimeZoneInfo.ConvertTimeFromUtc((DateTime)calendar.Rows[i]["Date"],
-        //            TimeZoneInfo.Local);
-        //        calendar.Rows[i]["Time"] =
-        //            TimeZoneInfo.ConvertTimeFromUtc((DateTime)calendar.Rows[i]["Time"],
-        //            TimeZoneInfo.Local);
-        //    }
-        //}
+            lblGreeting.Text = ($"Welcome {DB.currentUser}. What can I help you with today?");
+        }
 
         //dgv and month Calendar event updates
 
         //Selects and bolds date from month calendar, and shows all appointments in dgvCalender
         private void ShowAll()
         {
-            //clears dataTable calendar and monthCalendar data
-            //calendar.Clear();
+            //clears dataTable and monthCalendar data
             Appointment.dtAppointments.Clear();
             monthCal.RemoveAllBoldedDates();
             
@@ -158,18 +143,10 @@ namespace J_Sarad_C969_SchedulingApp
             monthCal.AddBoldedDate(currentDate);
             monthCal.UpdateBoldedDates();
 
-            //Selects values from database and displays them in dgvCalendar in Local Time. 
-            //DB.OpenConnection();
-            //string query =
-            //    "select appointmentId as 'Appointment ID', type as 'Type', customerId as 'Customer ID', " +
-            //    "customerName as 'Customer Name',  start as 'Date', start as 'Time' " +
-            //    "from customer join appointment using (customerId) order by appointmentId";
-            //DB.Query(query);
-            //DB.adp.Fill(calendar);
-            //displayLocalTime();
+            //Fill Appointment.dtAppointments with all appointments
             Appointment.FillAppointments();
-            //dgvCalendar.DataSource = calendar;
-            //dgvCalendar.DataSource = Appointment.dtAppointments;
+
+            //display updated controls
             displayControls();
         }
 
@@ -198,33 +175,19 @@ namespace J_Sarad_C969_SchedulingApp
             }
             monthCal.UpdateBoldedDates();
 
-            //Selects values from database and displays them in dgvCalendar in Local Time. 
-            //DB.OpenConnection();
-            //string query =
-            //   "select appointmentId as 'Appointment ID', type as 'Type', customerId as 'Customer ID', " +
-            //   "customerName as 'Customer Name', start as 'Date', start as 'Start Time', end as 'End Time' " +
-            //   "from customer join appointment using (customerId) " +
-            //   "where start BETWEEN @start AND @end order by start";
-            //DB.Query(query);
-            //DB.cmd.Parameters.AddWithValue("@start", startDate);
-            //DB.cmd.Parameters.AddWithValue("@end", endDate);
-            //DB.adp.Fill(calendar);
-            //DB.adp.Fill(Appointment.dtAppointments);
-            //DB.CloseConnection();
+            //Fill Appointment.dtAppointments with dates between start and end date
             Appointment.FillAppointmentsByDate(startDate, endDate);
-            //Appointment.DisplayLocalTime(Appointment.dtAppointments);
-            //dgvCalendar.DataSource = calendar;
-            //Appointment.FillAppointments();
-            dgvCalendar.DataSource = Appointment.dtAppointments;
+
+            //display updated controls
+            displayControls();
         }
 
         /*Selects month from month calendar, bolds all dates of month that selected day is in and displays any
          * appointments in that date range in dgvCalendar*/
         private void ShowMonth()
         {
-            //clears dataTable calendar and monthCalendar data
+            //clears dataTable and monthCalendar data
             monthCal.RemoveAllBoldedDates();
-            //calendar.Clear();
             Appointment.dtAppointments.Clear();
 
             /*creates start and end dates of month from monthCalender click currentDate and converts them from
@@ -245,25 +208,10 @@ namespace J_Sarad_C969_SchedulingApp
             }
             monthCal.UpdateBoldedDates();
 
-            //Selects values from database and displays them in dgvCalendar in Local Time.
-            //DB.OpenConnection();
-            //string query =
-            //    "select appointmentId as 'Appointment ID', type as 'Appointment Type', userId as 'User ID', " +
-            //    "customerId as 'Customer ID', customerName as 'Customer Name', start as 'Date', start as 'Start Time', end as 'End Time' " +
-            //    "from customer join appointment using (customerId) " +
-            //    "where start BETWEEN @start AND @end order by start";
-            //DB.Query(query);
-            //DB.cmd.Parameters.AddWithValue("@start", start);
-            //DB.cmd.Parameters.AddWithValue("@end", endDate);
-            ////calendar = new DataTable();
-            ////DB.adp.Fill(calendar);
-            //DB.adp.Fill(Appointment.dtAppointments);
-            //DB.CloseConnection();
-            //Appointment.DisplayLocalTime(Appointment.dtAppointments);
+            //Fill Appointment.dtAppointments with appointments between start and end dates
             Appointment.FillAppointmentsByDate(startDate, endDate);
-            //dgvCalendar.DataSource = calendar;
-            //Appointment.FillAppointments();
-            //dgvCalendar.DataSource = Appointment.dtAppointments;
+            
+            //display updated controls
             displayControls();
         }
 
@@ -295,6 +243,11 @@ namespace J_Sarad_C969_SchedulingApp
             this.Hide();
             Reports form = new Reports();
             form.ShowDialog();
+        }
+
+        private void lblGreeting_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

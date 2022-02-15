@@ -55,10 +55,11 @@ namespace J_Sarad_C969_SchedulingApp
 
             txtUserID.Text = DB.currentUserID.ToString();
 
-            //cbType.Text = "--select Appointment Type--";
+            cbType.Items.Add("--select Appointment Type--");
             cbType.Items.Add("Presentation");
             cbType.Items.Add("SCRUM");
             cbType.Items.Add("Consultation");
+            cbType.SelectedIndex = 0;
         }
 
         private void btnSelectCust_Click(object sender, EventArgs e)
@@ -107,7 +108,8 @@ namespace J_Sarad_C969_SchedulingApp
                 MessageBox.Show("Please select a Customer for this appointment",
                    "Missing Field Information");
             }
-            else if (string.IsNullOrEmpty(cbType.Text))
+            //else if (string.IsNullOrEmpty(cbType.Text))
+            else if (cbType.SelectedIndex <= 0)
             {
                 MessageBox.Show("Please Select an Appointment Type for this Appointment",
                     "Missing Field Infromation");

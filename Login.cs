@@ -18,10 +18,11 @@ using System.IO;
 namespace J_Sarad_C969_SchedulingApp
 
 {
-
+    
     public partial class LogIn : Form
     {
-
+       //bool foundUser;
+        CultureInfo language = CultureInfo.CurrentUICulture;
         DateTime currentTime = DateTime.Now;
 
         public LogIn()
@@ -36,7 +37,7 @@ namespace J_Sarad_C969_SchedulingApp
 
         private void DetectLanguage()
         {
-            CultureInfo language = CultureInfo.CurrentUICulture;
+            //CultureInfo language = CultureInfo.CurrentUICulture;
             if (language.Parent.Name == "en")
             {
                 lblLogin.Text = "Please Enter Your Username and Password";
@@ -76,6 +77,7 @@ namespace J_Sarad_C969_SchedulingApp
             DB.adp.Fill(dataTable);
             DB.CloseConnection();
 
+            //bool foundUser = false;
 
             for (int i = 0; i < dataTable.Rows.Count; i++)
             {
@@ -84,9 +86,11 @@ namespace J_Sarad_C969_SchedulingApp
                 {
                     DB.currentUser = dataTable.Rows[i]["userName"].ToString();
                     DB.currentUserID = (int)dataTable.Rows[i]["userId"];
+                    //foundUser = true;
                 }
             }
-            if (DB.currentUserID > -1)
+
+            if (DB.currentUserID > 0)
             {
                 CheckForAppt();
                 string path = @"userLogs.txt";
@@ -99,23 +103,28 @@ namespace J_Sarad_C969_SchedulingApp
                 using (StreamReader sr = File.OpenText(path))
                 {
                     string s = " ";
-                    while ((s = sr.ReadLine()) !=null)
+                    while ((s = sr.ReadLine()) != null)
                     {
                         Console.WriteLine(s);
                     }
                 }
-
                 this.Hide();
                 MainMenu form = new MainMenu();
                 form.ShowDialog();
             }
             else
             {
-                //FIXME!!! check for Spanish and make an error message in Spanish
-                MessageBox.Show("Please check your username and password", "Invalid username or password");
+                if (language.Parent.Name == "en")
+                {
+                    MessageBox.Show("Please check your username and password", "Invalid username or password");
+                }
+                if (language.Parent.Name == "es")
+                {
+                    MessageBox.Show("Por favor verifique su nombre de usuario y contrasena",
+                        "usuario o contrasena invalido");
+                }
             }
         }
-
         private void CheckForAppt ()
         {
             DB.OpenConnection();

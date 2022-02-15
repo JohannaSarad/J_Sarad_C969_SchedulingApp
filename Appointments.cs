@@ -72,16 +72,6 @@ namespace J_Sarad_C969_SchedulingApp
         private void display()
         {
             Appointment.FillAppointments();
-            //dtCurrentUserAppt = new DataTable();
-            //dtCurrentUserAppt = Appointment.dtAppt.Clone();
-            //foreach (DataRow row in Appointment.dtAppt.Rows)
-            //{
-            //    if (row["User ID"].ToString() == DB.currentUserID.ToString())
-            //    {
-            //        dtCurrentUserAppt.ImportRow(row);
-            //        //dtCurrentUserAppt.Rows.Add(row);
-            //    }
-            //}
             dtCurrentUserAppt = new DataTable();
             dtCurrentUserAppt = Appointment.dtAppointments.Clone();
             foreach (DataRow row in Appointment.dtAppointments.Rows)
@@ -109,7 +99,7 @@ namespace J_Sarad_C969_SchedulingApp
             cbApptType.Items.Add("Presentation");
             cbApptType.Items.Add("SCRUM");
             cbApptType.Items.Add("Consultation");
-            
+            cbApptType.SelectedIndex = 0;
         }
 
         private void dgvAppointments_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -117,8 +107,8 @@ namespace J_Sarad_C969_SchedulingApp
             //FIX ME!!! currentIndex may go better in Appointment class
             DB.currentIndex = e.RowIndex;
             //this might need to be an int value
-            Appointment.AppointmentID = dgvAppointments.Rows[DB.currentIndex].Cells["Appointment ID"].Value.ToString();
-            Appointment.UpdateAppointment(Appointment.AppointmentID);
+            Appointment.CurrentApptID = dgvAppointments.Rows[DB.currentIndex].Cells["Appointment ID"].Value.ToString();
+            Appointment.UpdateAppointment(Appointment.CurrentApptID);
             
         }
 
@@ -129,7 +119,7 @@ namespace J_Sarad_C969_SchedulingApp
                 DB.OpenConnection();
                 string query = "DELETE FROM appointment WHERE appointmentId = @appointmentID";
                 DB.NonQuery(query);
-                DB.cmd.Parameters.AddWithValue("@appointmentID", Appointment.AppointmentID);
+                DB.cmd.Parameters.AddWithValue("@appointmentID", Appointment.CurrentApptObj["Appointment ID"]);
                 DB.cmd.ExecuteNonQuery();
                 DB.CloseConnection();
                 display();

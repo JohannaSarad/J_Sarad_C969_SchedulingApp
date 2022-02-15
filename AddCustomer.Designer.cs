@@ -32,15 +32,13 @@ namespace J_Sarad_C969_SchedulingApp
             this.txtName = new System.Windows.Forms.TextBox();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.txtCountry = new System.Windows.Forms.TextBox();
-            this.txtCity = new System.Windows.Forms.TextBox();
             this.txtAddress = new System.Windows.Forms.TextBox();
             this.txtPhone = new System.Windows.Forms.TextBox();
             this.lblName = new System.Windows.Forms.Label();
             this.lblAddress = new System.Windows.Forms.Label();
             this.lblPhone = new System.Windows.Forms.Label();
             this.lblCity = new System.Windows.Forms.Label();
-            this.lblCountry = new System.Windows.Forms.Label();
+            this.cbCity = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // txtName
@@ -53,7 +51,7 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(218, 300);
+            this.btnCancel.Location = new System.Drawing.Point(219, 256);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 28);
@@ -64,7 +62,7 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(125, 300);
+            this.btnSave.Location = new System.Drawing.Point(125, 256);
             this.btnSave.Margin = new System.Windows.Forms.Padding(4);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 28);
@@ -72,22 +70,6 @@ namespace J_Sarad_C969_SchedulingApp
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // txtCountry
-            // 
-            this.txtCountry.Location = new System.Drawing.Point(125, 250);
-            this.txtCountry.Margin = new System.Windows.Forms.Padding(4);
-            this.txtCountry.Name = "txtCountry";
-            this.txtCountry.Size = new System.Drawing.Size(169, 23);
-            this.txtCountry.TabIndex = 4;
-            // 
-            // txtCity
-            // 
-            this.txtCity.Location = new System.Drawing.Point(125, 200);
-            this.txtCity.Margin = new System.Windows.Forms.Padding(4);
-            this.txtCity.Name = "txtCity";
-            this.txtCity.Size = new System.Drawing.Size(169, 23);
-            this.txtCity.TabIndex = 5;
             // 
             // txtAddress
             // 
@@ -145,30 +127,27 @@ namespace J_Sarad_C969_SchedulingApp
             this.lblCity.TabIndex = 11;
             this.lblCity.Text = "City";
             // 
-            // lblCountry
+            // cbCity
             // 
-            this.lblCountry.AutoSize = true;
-            this.lblCountry.Location = new System.Drawing.Point(30, 250);
-            this.lblCountry.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblCountry.Name = "lblCountry";
-            this.lblCountry.Size = new System.Drawing.Size(57, 17);
-            this.lblCountry.TabIndex = 12;
-            this.lblCountry.Text = "Country";
+            this.cbCity.FormattingEnabled = true;
+            this.cbCity.Location = new System.Drawing.Point(125, 197);
+            this.cbCity.Name = "cbCity";
+            this.cbCity.Size = new System.Drawing.Size(169, 24);
+            this.cbCity.TabIndex = 13;
+            this.cbCity.SelectedIndexChanged += new System.EventHandler(this.cbCity_SelectedIndexChanged);
             // 
             // AddCustomer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(344, 361);
-            this.Controls.Add(this.lblCountry);
+            this.ClientSize = new System.Drawing.Size(344, 317);
+            this.Controls.Add(this.cbCity);
             this.Controls.Add(this.lblCity);
             this.Controls.Add(this.lblPhone);
             this.Controls.Add(this.lblAddress);
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.txtPhone);
             this.Controls.Add(this.txtAddress);
-            this.Controls.Add(this.txtCity);
-            this.Controls.Add(this.txtCountry);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.txtName);
@@ -187,14 +166,12 @@ namespace J_Sarad_C969_SchedulingApp
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.TextBox txtCountry;
-        private System.Windows.Forms.TextBox txtCity;
         private System.Windows.Forms.TextBox txtAddress;
         private System.Windows.Forms.TextBox txtPhone;
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.Label lblAddress;
         private System.Windows.Forms.Label lblPhone;
         private System.Windows.Forms.Label lblCity;
-        private System.Windows.Forms.Label lblCountry;
+        private System.Windows.Forms.ComboBox cbCity;
     }
 }
