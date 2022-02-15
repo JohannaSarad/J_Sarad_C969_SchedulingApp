@@ -33,7 +33,7 @@ namespace J_Sarad_C969_SchedulingApp
         private void displayControls()
         {
 
-            customer.FillCustomer();
+            Customer.FillCustomer();
             dgvCustomers.DataSource = Customer.dtCustomer;
             dgvCustomers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvCustomers.ReadOnly = true;

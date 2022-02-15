@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace J_Sarad_C969_SchedulingApp.model
 
         public Customer() { }
 
-        public void FillCustomer()
+        public static void FillCustomer()
         {
             DB.OpenConnection();
             string query = "select customerId as 'Customer ID', customerName as 'Customer Name', phone as 'Phone', " +
@@ -35,15 +36,20 @@ namespace J_Sarad_C969_SchedulingApp.model
             DB.CloseConnection();
         }
 
-        //public Customer(string id, string name, string phone, string address, string city, string country)
-        //{
-        //    ID = id;
-        //    Name = name;
-        //    Phone = phone;
-        //    Address = address;
-        //    City = city;
-        //    Country = country;
-        //}
+        public static ArrayList FillArray()
+        {
+            ArrayList array = new ArrayList();
+            
+
+            foreach (DataRow row in Customer.dtCustomer.Rows)
+            {
+                string format = $"{row["Customer Name"]} . {row["Phone"]} . {row["Address"]} . {row["City"]}" +
+                     $" . {row["Country"]}";
+                    array.Add(format);
+            }
+            return array;
+            
+        }
 
         public void UpdateCustomer(string id)
         {

@@ -34,6 +34,7 @@ namespace J_Sarad_C969_SchedulingApp
 
             //call to show all appointments in dgvCalendar and display for all form controls
             Appointment.FillAppointments();
+            Customer.FillCustomer();
             ShowAll();
             displayControls();
             //MessageBox.Show($"{currentDate.DayOfWeek}" + ", " + $"{currentDate.ToShortTimeString()}");

@@ -17,6 +17,7 @@ namespace J_Sarad_C969_SchedulingApp
         DataTable customerSearch;
         //Appointments appointment = new Appointments();
         //bool allowSave;
+        bool validCustomer;
         public AddAppt()
         {
             InitializeComponent();
@@ -53,7 +54,7 @@ namespace J_Sarad_C969_SchedulingApp
             dgvCustSearch.DefaultCellStyle.SelectionForeColor = Color.Black;
             dgvCustSearch.RowHeadersVisible = false;
 
-            txtUserID.Text = DB.currentUserID.ToString();
+            //txtUserID.Text = DB.currentUserID.ToString();
 
             cbType.Items.Add("--select Appointment Type--");
             cbType.Items.Add("Presentation");
@@ -64,7 +65,7 @@ namespace J_Sarad_C969_SchedulingApp
 
         private void btnSelectCust_Click(object sender, EventArgs e)
         {
-            txtCustID.Text = dgvCustSearch.Rows[DB.currentIndex].Cells["Customer ID"].Value.ToString();
+            //txtCustID.Text = dgvCustSearch.Rows[DB.currentIndex].Cells["Customer ID"].Value.ToString();
             txtName.Text = dgvCustSearch.Rows[DB.currentIndex].Cells["Customer Name"].Value.ToString();
         }
 
@@ -75,12 +76,36 @@ namespace J_Sarad_C969_SchedulingApp
             TimeSpan endTime = dtpEnd.Value.TimeOfDay;
             DateTime startAppt = date.Add(startTime).AddSeconds(-date.Add(startTime).Second);
             DateTime endAppt = date.Add(endTime).AddSeconds(-date.Add(endTime).Second);
-            string userId = txtUserID.Text;
+            string userId = DB.currentUserID.ToString();
 
             Appointment.IsOverlap(startAppt, endAppt, userId);
             Appointment.IsBusinessHours(dtpDate.Value, dtpStart.Value, dtpEnd.Value);
 
-            if (!Appointment.isBusinessHours)
+            
+            foreach(DataRow row in Customer.dtCustomer.Rows)
+            {
+                if (row["Customer Name"].ToString().ToUpper() == txtName.Text.ToString().ToUpper())
+                {
+                    validCustomer = true;
+                    Customer.currentCustId = row["Customer ID"].ToString();
+                }
+                else
+                {
+                    validCustomer = false;
+                }
+            }
+            if (!validCustomer)
+            {
+                DialogResult result = MessageBox.Show("There is no existing customer by this name,\r\n " +
+                    "Would you like to add this customer?", "Invalid Customer Name", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    this.Hide();
+                    AddCustomer form = new AddCustomer();
+                    form.ShowDialog();
+                }
+            }
+            else if (!Appointment.isBusinessHours)
             {
                 MessageBox.Show("Appointment on " + dtpDate.Value.ToLongDateString() + " from " +
                         dtpStart.Value.ToShortTimeString() + " to " + dtpEnd.Value.ToShortTimeString() +
@@ -90,9 +115,11 @@ namespace J_Sarad_C969_SchedulingApp
             }
             else if (Appointment.isOverlap)
             {
-                MessageBox.Show($"There is an overlapping appointment for {Appointment.UserName} with " +
-                        $"{Appointment.CustomerName} from \n " +
-                        $"{Appointment.StartTime} to {Appointment.EndTime}", "Overlapping Appointment");
+                MessageBox.Show($"There is an overlapping appointment for " +
+                    $"{Appointment.CurrentApptObj["User Name"]} with " +
+                        $"{Appointment.CurrentApptObj["Customer Name"]} from \n " +
+                        $"{Appointment.CurrentApptObj["Start Time"]} to " +
+                        $"{Appointment.CurrentApptObj["End Time"]}", "Overlapping Appointment");
             }
             else if (startAppt > endAppt)
             {
@@ -102,8 +129,7 @@ namespace J_Sarad_C969_SchedulingApp
             {
                 MessageBox.Show("The appointment start time cannot be the same as the appointment end time");
             }
-            else if ((string.IsNullOrEmpty(txtCustID.Text)) ||
-                (string.IsNullOrEmpty(txtName.Text)))
+            else if  (string.IsNullOrEmpty(txtName.Text))
             {
                 MessageBox.Show("Please select a Customer for this appointment",
                    "Missing Field Information");
@@ -124,8 +150,8 @@ namespace J_Sarad_C969_SchedulingApp
                     "VALUES (@custID, @userID, @title, @description, @location, @contact, @type, @url, @start, " +
                     "@end, CURDATE(), @user, CURDATE(), @user)";
                 DB.NonQuery(query);
-                DB.cmd.Parameters.AddWithValue("@custID", txtCustID.Text);
-                DB.cmd.Parameters.AddWithValue("@userID", txtUserID.Text);
+                DB.cmd.Parameters.AddWithValue("@custID", Customer.currentCustId);
+                DB.cmd.Parameters.AddWithValue("@userID", DB.currentUserID);
                 DB.cmd.Parameters.AddWithValue("@title", "none");
                 DB.cmd.Parameters.AddWithValue("@description", "none");
                 DB.cmd.Parameters.AddWithValue("@location", "none");

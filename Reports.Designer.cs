@@ -31,12 +31,13 @@ namespace J_Sarad_C969_SchedulingApp
         {
             this.lblTypeByMonth = new System.Windows.Forms.Label();
             this.lblApptsByUser = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblCustByCity = new System.Windows.Forms.Label();
             this.cbApptByMonth = new System.Windows.Forms.ComboBox();
             this.cbSchedules = new System.Windows.Forms.ComboBox();
             this.txtReports = new System.Windows.Forms.TextBox();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnMainMenu = new System.Windows.Forms.Button();
+            this.cbCustByCity = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // lblTypeByMonth
@@ -59,15 +60,15 @@ namespace J_Sarad_C969_SchedulingApp
             this.lblApptsByUser.TabIndex = 1;
             this.lblApptsByUser.Text = "Consultant Schedule";
             // 
-            // label3
+            // lblCustByCity
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(35, 300);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(46, 17);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "label3";
+            this.lblCustByCity.AutoSize = true;
+            this.lblCustByCity.Location = new System.Drawing.Point(35, 300);
+            this.lblCustByCity.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblCustByCity.Name = "lblCustByCity";
+            this.lblCustByCity.Size = new System.Drawing.Size(122, 17);
+            this.lblCustByCity.TabIndex = 2;
+            this.lblCustByCity.Text = "Customers By City";
             // 
             // cbApptByMonth
             // 
@@ -123,17 +124,27 @@ namespace J_Sarad_C969_SchedulingApp
             this.btnMainMenu.UseVisualStyleBackColor = true;
             this.btnMainMenu.Click += new System.EventHandler(this.btnMainMenu_Click);
             // 
+            // cbCustByCity
+            // 
+            this.cbCustByCity.FormattingEnabled = true;
+            this.cbCustByCity.Location = new System.Drawing.Point(38, 333);
+            this.cbCustByCity.Name = "cbCustByCity";
+            this.cbCustByCity.Size = new System.Drawing.Size(160, 24);
+            this.cbCustByCity.TabIndex = 8;
+            this.cbCustByCity.SelectedIndexChanged += new System.EventHandler(this.cbCustByCity_SelectedIndexChanged);
+            // 
             // Reports
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(938, 480);
+            this.Controls.Add(this.cbCustByCity);
             this.Controls.Add(this.btnMainMenu);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.txtReports);
             this.Controls.Add(this.cbSchedules);
             this.Controls.Add(this.cbApptByMonth);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.lblCustByCity);
             this.Controls.Add(this.lblApptsByUser);
             this.Controls.Add(this.lblTypeByMonth);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
@@ -150,11 +161,12 @@ namespace J_Sarad_C969_SchedulingApp
 
         private System.Windows.Forms.Label lblTypeByMonth;
         private System.Windows.Forms.Label lblApptsByUser;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblCustByCity;
         private System.Windows.Forms.ComboBox cbApptByMonth;
         private System.Windows.Forms.ComboBox cbSchedules;
         private System.Windows.Forms.TextBox txtReports;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnMainMenu;
+        private System.Windows.Forms.ComboBox cbCustByCity;
     }
 }

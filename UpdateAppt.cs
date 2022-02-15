@@ -32,16 +32,16 @@ namespace J_Sarad_C969_SchedulingApp
             cbType.Items.Add("Consultation");
             
 
-            cbType.Text = Appointment.Type;
+            cbType.Text = Appointment.CurrentApptObj["Appointment Type"].ToString();
 
             //txtApptId.Text = Appointment.AppointmentID;
             //txtUserID.Text = Appointment.UserID;
             //txtCustID.Text = Appointment.CustomerID;
-            txtName.Text = Appointment.CustomerName;
+            txtName.Text = Appointment.CurrentApptObj["Customer Name"].ToString();
 
-            dtpDate.Value = Appointment.Date;
-            dtpStart.Value = Appointment.StartTime;
-            dtpEnd.Value = Appointment.EndTime;
+            dtpDate.Value = (DateTime)Appointment.CurrentApptObj["Date"];
+            dtpStart.Value = (DateTime)Appointment.CurrentApptObj["Start Time"];
+            dtpEnd.Value = (DateTime)Appointment.CurrentApptObj["End Time"];
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -66,9 +66,11 @@ namespace J_Sarad_C969_SchedulingApp
             }
             else if (Appointment.isOverlap)
             {
-                MessageBox.Show($"There is an overlapping appointment for {Appointment.UserName} with " +
-                        $"{Appointment.CustomerName} from \n " +
-                        $"{Appointment.StartTime} to {Appointment.EndTime}", "Overlapping Appointment");
+                MessageBox.Show($"There is an overlapping appointment for " +
+                    $"{Appointment.CurrentApptObj["User Name"]} with " +
+                        $"{Appointment.CurrentApptObj["Customer Name"]} from \n " +
+                        $"{Appointment.CurrentApptObj["Start Time"]} to " +
+                        $"{Appointment.CurrentApptObj["End Time"]}", "Overlapping Appointment");
             }
             else if (startAppt > endAppt)
             {

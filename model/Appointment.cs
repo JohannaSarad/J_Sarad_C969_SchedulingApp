@@ -25,11 +25,12 @@ namespace J_Sarad_C969_SchedulingApp.model
        
         public static string CurrentApptID {get; set;}
         //public static string UserID { get; set; }
-        public static string UserName { get; set; }
+       
+        //public static string UserName { get; set; }
         //public static string CustomerID { get; set; }
-        public static string CustomerName { get; set; }
-        public static string Type { get; set; }
-        public static DateTime Date { get; set; }
+        //public static string CustomerName { get; set; }
+        //public static string Type { get; set; }
+        //public static DateTime Date { get; set; }
         public static DateTime StartTime { get; set; }
         public static DateTime EndTime { get; set; }
 
@@ -155,33 +156,41 @@ namespace J_Sarad_C969_SchedulingApp.model
             }
         }
 
-        public static void IsOverlap(DateTime start, DateTime end, string userId)
+        public static bool IsOverlap(DateTime start, DateTime end, string userId)
         {
             //FIX ME !!!start and end being formatted to seconds = 00 before being sent to method, might want to make
             //a seperate method for this
 
-            for (int i = 0; i < dtAppointments.Rows.Count; i++)
+            //for (int i = 0; i < dtAppointments.Rows.Count; i++)
+            //{
+            foreach(DataRow row in dtAppointments.Rows) 
             {
-
                 //Start and End collumns from dtAppointmnet are in seconds = 00 on insert to database
-                StartTime = (DateTime)dtAppointments.Rows[i]["Start Time"];
-                EndTime = (DateTime)dtAppointments.Rows[i]["End Time"];
-
-                if (userId == dtAppointments.Rows[i]["User ID"].ToString())
+                StartTime = (DateTime)row["Start Time"];
+                EndTime = (DateTime)row["End Time"];
+                MessageBox.Show($"{row["Appointment ID"]}, {Appointment.CurrentApptObj["Appointment ID"]}");
+                if (row["Appointment ID"].ToString() == Appointment.CurrentApptObj["Appointment ID"].ToString())
+                {
+                    isOverlap = false;
+                }
+                else if (userId == row["User ID"].ToString())
                 {
                     if ((start <= StartTime && end >= StartTime) || (start <= EndTime && end >= EndTime)
                         || (start == EndTime) || (end == StartTime))
                     {
-                        UserName = dtAppointments.Rows[i]["User Name"].ToString();
-                        CustomerName = dtAppointments.Rows[i]["Customer Name"].ToString();
+                        //UserName = dtAppointments.Rows[i]["User Name"].ToString();
+                        //CustomerName = dtAppointments.Rows[i]["Customer Name"].ToString();
+                        CurrentApptObj = row;
+                        CurrentApptID = row["Appointment ID"].ToString();
                         isOverlap = true;
                     }
                 }
-                else
-                {
-                    isOverlap = false;
-                }
+                //else
+                //{
+                //    isOverlap = false;
+                //}
             }
+            return isOverlap;
         }
     }
 }

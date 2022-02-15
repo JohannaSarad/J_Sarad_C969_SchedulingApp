@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -60,6 +61,18 @@ namespace J_Sarad_C969_SchedulingApp
                     cbSchedules.Items.Add(dtUsers.Rows[i]["User"].ToString());
                 }
                 cbSchedules.SelectedIndex = 0;
+            }
+
+            if (string.IsNullOrEmpty(cbCustByCity.Text))
+            {
+                cbCustByCity.Items.Add("--select city--");
+                var distinctCities = (from row in Customer.dtCustomer.AsEnumerable()
+                                      select row["City"]).Distinct();
+                foreach (var city in distinctCities)
+                {
+                    cbCustByCity.Items.Add(city);
+                }
+                cbCustByCity.SelectedIndex = 0;
             }
             
         }
@@ -195,6 +208,25 @@ namespace J_Sarad_C969_SchedulingApp
             this.Hide();
             MainMenu form = new MainMenu();
             form.ShowDialog();
+        }
+
+        private void cbCustByCity_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbCustByCity.SelectedIndex > 0)
+            {
+                txtReports.Text = $"Customers from {cbCustByCity.Text} \r\n\r\n";
+                ArrayList customers = Customer.FillArray();
+                //MessageBox.Show($"{customers}");
+                foreach (string customer in customers)
+                {
+                    string s = customer.ToString();
+                    string selected = cbCustByCity.Text;
+                    if (customer.ToString().Contains(selected))
+                    {
+                        txtReports.Text = txtReports.Text + customer.ToString() + "\r\n";
+                    }
+                }
+            }
         }
     }
 }
