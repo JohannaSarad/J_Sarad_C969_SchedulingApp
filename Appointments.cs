@@ -11,35 +11,64 @@ using J_Sarad_C969_SchedulingApp.model;
 
 namespace J_Sarad_C969_SchedulingApp
 {
+    
     public partial class Appointments : Form
     {
-        //Appointment appointment = new Appointment();
         public DataTable dtCurrentUserAppt;
-        //public int currentIndex;
+        //DataTable dtFiltered;
+        //DataTable dtCustId;
+
         public Appointments()
         {
             InitializeComponent();
         }
 
-        //closes Appointment Form and opens MainMenu Form
+        private void Appointments_Load(object sender, EventArgs e)
+        {
+            //reset global variables
+            DB.currentIndex = -1;
+            DB.currentApptId = null;
+
+            //display Controls
+            displayControls();
+        }
+
+        //dgvAppointments Cell Click Event
+        private void dgvAppointments_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //update current Index to store selected index
+            DB.currentIndex = e.RowIndex;
+            
+            //update global appointment ID selected 
+            Appointment.CurrentApptID = dgvAppointments.Rows[DB.currentIndex].Cells["Appointment ID"].Value.ToString();
+            
+            //update current appointment object in UpdateAppointments method based on Appt ID
+            Appointment.UpdateAppointment(Appointment.CurrentApptID);
+        }
+
+        //Button Click Events
         private void btnMenu_Click(object sender, EventArgs e)
         {
+            //close Appointment Form and open MainMenu Form
             this.Hide();
             MainMenu form = new MainMenu();
             form.ShowDialog();
         }
         
-        //closes Appointment Form and opens AddAppt Form
+        
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            //close Appointment Form and open AddAppt Form
             this.Hide();
             AddAppt form = new AddAppt();
             form.ShowDialog();
         }
 
-        //closes Appointment Form and opens UpdateAppt Form if a row is selected in dgvAppointments
+        
+        
         private void btnUpdate_Click(object sender, EventArgs e)
         {
+            //close Appointment Form and open UpdateAppt Form if a row is selected in dgvAppointments
             if (DB.currentIndex >= 0)
             {
                 this.Hide();
@@ -54,23 +83,94 @@ namespace J_Sarad_C969_SchedulingApp
             
         }
 
-        //closes Appointments Form and Exits program
-        private void btnExit_Click(object sender, EventArgs e)
+       private void btnExit_Click(object sender, EventArgs e)
         {
+            //Close Appointment form and exit program
             Application.Exit();
         }
 
-        
-        private void Appointments_Load(object sender, EventArgs e)
+        private void btnDelete_Click(object sender, EventArgs e)
         {
-            DB.currentIndex = -1;
-            DB.currentApptId = null;
-            
-            display();
+            //Delete selected row in dgvAppointments from database if a row is selected. 
+            if (DB.currentIndex >= 0)
+            {
+                DB.OpenConnection();
+                string query = "DELETE FROM appointment WHERE appointmentId = @appointmentID";
+                DB.NonQuery(query);
+                DB.cmd.Parameters.AddWithValue("@appointmentID", Appointment.CurrentApptObj["Appointment ID"]);
+                DB.cmd.ExecuteNonQuery();
+                DB.CloseConnection();
+                displayControls();
+                DB.currentIndex = -1;
+                dgvAppointments.ClearSelection();
+            }
+            else
+            {
+                //Show error message if no row is selected
+                MessageBox.Show("Please Select an Appointment to Delete");
+            }
         }
 
-        private void display()
+        //ComboBox Selcted Index Changed Events
+        private void cbApptType_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (cbApptType.SelectedIndex > 0)
+            {
+                DataTable dtFiltered = new DataTable();
+                foreach (DataRow row in dtCurrentUserAppt.Rows)
+                {
+                    //Traverse dtCurrentuserAppt datatable for Appointment types that contain type combo box selected value
+                    //and assign results to dtFiltered datable
+                    if (row["Appointment Type"].ToString() == cbApptType.Text)
+                    {
+                        cbCustId.SelectedIndex = 0;
+                        dtFiltered = dtCurrentUserAppt.AsEnumerable().Where(x => x["Appointment Type"].ToString() == cbApptType.Text).CopyToDataTable();
+                        //lambda used to store rows from dtCurrentUserAppt datatable with appointment types that match the selected value of Type combobox
+                        dgvAppointments.DataSource = dtFiltered;
+                        DB.currentIndex = -1;
+                        dgvAppointments.ClearSelection();
+                        
+                        
+                    }
+                }
+            }
+            else
+            {
+                displayControls();
+            }
+        }
+        private void cbCustId_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbCustId.SelectedIndex != 0)
+            {
+                DataTable dtFiltered = new DataTable();
+                foreach (DataRow row in dtCurrentUserAppt.Rows)
+                {
+                    //Traverse dtCurrentuserAppt datatable for Customer IDs that match type combobox selected value
+                    //and assign results to dtFiltered datable
+                    if (row["Customer ID"].ToString() == cbCustId.Text)
+                    {
+                        cbApptType.SelectedIndex = 0;
+                        //fill dtFiltered Data table with dt CurrentUser Appt filtered results
+                        dtFiltered = dtCurrentUserAppt.AsEnumerable().Where(x => x["Customer ID"].ToString() == cbCustId.Text).CopyToDataTable();
+                        //lambda used to store rows from dtCurrentUserAppt datatable with appointment types that match the selected value of Type combobox
+                        dgvAppointments.DataSource = dtFiltered;
+                        DB.currentIndex = -1;
+                        dgvAppointments.ClearSelection();
+                        
+                    }
+                }
+            }
+            else
+            {
+                displayControls();
+            }
+        }
+
+        //Appointment Form control display formatting
+        private void displayControls()
+        {
+
             Appointment.FillAppointments();
             dtCurrentUserAppt = new DataTable();
             dtCurrentUserAppt = Appointment.dtAppointments.Clone();
@@ -93,50 +193,35 @@ namespace J_Sarad_C969_SchedulingApp
             dgvAppointments.Columns["Date"].DefaultCellStyle.Format = "MM/dd/yyyy";
             dgvAppointments.Columns["Start Time"].DefaultCellStyle.Format = "hh:mm tt";
             dgvAppointments.Columns["End Time"].DefaultCellStyle.Format = "hh:mm tt";
+            dgvAppointments.ClearSelection();
 
             //cbApptType.DisplayMember = "All Types";
-            cbApptType.Items.Add("All Types");
-            cbApptType.Items.Add("Presentation");
-            cbApptType.Items.Add("SCRUM");
-            cbApptType.Items.Add("Consultation");
-            cbApptType.SelectedIndex = 0;
-        }
+            if (string.IsNullOrEmpty(cbApptType.Text))
+            {
+                cbApptType.Items.Add("All Types");
+                cbApptType.Items.Add("Presentation");
+                cbApptType.Items.Add("SCRUM");
+                cbApptType.Items.Add("Consultation");
+                cbApptType.SelectedIndex = 0;
+            }
 
-        private void dgvAppointments_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            //FIX ME!!! currentIndex may go better in Appointment class
-            DB.currentIndex = e.RowIndex;
-            //this might need to be an int value
-            Appointment.CurrentApptID = dgvAppointments.Rows[DB.currentIndex].Cells["Appointment ID"].Value.ToString();
-            Appointment.UpdateAppointment(Appointment.CurrentApptID);
-            
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            if (DB.currentIndex >= 0)
+            if (string.IsNullOrEmpty(cbCustId.Text))
             {
                 DB.OpenConnection();
-                string query = "DELETE FROM appointment WHERE appointmentId = @appointmentID";
-                DB.NonQuery(query);
-                DB.cmd.Parameters.AddWithValue("@appointmentID", Appointment.CurrentApptObj["Appointment ID"]);
-                DB.cmd.ExecuteNonQuery();
+                string query = "select customerID as 'Customer ID' from customer";
+                DB.Query(query);
+                DataTable dtCustId = new DataTable();
+                DB.adp.Fill(dtCustId);
                 DB.CloseConnection();
-                display();
-                DB.currentIndex = -1;
-                dgvAppointments.ClearSelection();
-            }
-            else
-            {
-                MessageBox.Show("Please Select an Appointment to Delete");
+
+                cbCustId.Items.Add("All Customers");
+
+                for (int i = 0; i < dtCustId.Rows.Count; i++)
+                {
+                    cbCustId.Items.Add(dtCustId.Rows[i]["Customer ID"].ToString());
+                }
+                cbCustId.SelectedIndex = 0;
             }
         }
-
-        private void cbApptType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //if (cbApptType.)
-        }
-
-        
     }
 }

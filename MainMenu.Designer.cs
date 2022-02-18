@@ -72,7 +72,7 @@ namespace J_Sarad_C969_SchedulingApp
             this.dgvCalendar.ReadOnly = true;
             this.dgvCalendar.Size = new System.Drawing.Size(675, 306);
             this.dgvCalendar.TabIndex = 4;
-            this.dgvCalendar.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCalendar_CellContentClick);
+            //this.dgvCalendar.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCalendar_CellContentClick);
             // 
             // lblAppointments
             // 
@@ -143,7 +143,7 @@ namespace J_Sarad_C969_SchedulingApp
             this.lblGreeting.TabIndex = 17;
             this.lblGreeting.Text = "Welcome User. What Can I Help You with Today?";
             this.lblGreeting.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.lblGreeting.Click += new System.EventHandler(this.lblGreeting_Click);
+            //this.lblGreeting.Click += new System.EventHandler(this.lblGreeting_Click);
             // 
             // MainMenu
             // 

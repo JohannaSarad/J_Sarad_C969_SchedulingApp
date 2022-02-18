@@ -32,18 +32,26 @@ namespace J_Sarad_C969_SchedulingApp
             isWeek = false;
             isMonth = false;
 
-            //call to show all appointments in dgvCalendar and display for all form controls
+            //Fill global data tables
             Appointment.FillAppointments();
             Customer.FillCustomer();
+            
+            //call to show all appointments in dgvCalendar and display for all form controls
             ShowAll();
             displayControls();
-            //MessageBox.Show($"{currentDate.DayOfWeek}" + ", " + $"{currentDate.ToShortTimeString()}");
         }
 
+        //dgvCalender Cell Click Event
+        //private void dgvCalendar_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    DB.currentIndex = e.RowIndex;
+        //}
+
         //Button Click Events
-        
+
         private void btnEditCust_Click(object sender, EventArgs e)
         {
+            //close Mainmenu form and open Customers form
             this.Hide();
             Customers form = new Customers();
             form.ShowDialog();
@@ -51,89 +59,54 @@ namespace J_Sarad_C969_SchedulingApp
 
         private void btnUpdateAppt_Click(object sender, EventArgs e)
         {
+            //close MainMenu form and open UpdateAppt form
             this.Hide();
             Appointments form = new Appointments();
             form.ShowDialog();
         }
 
+        private void btnReports_Click(object sender, EventArgs e)
+        {
+            //close MainMenu form and open Reports form
+            this.Hide();
+            Reports form = new Reports();
+            form.ShowDialog();
+        }
+
         private void btnExit_Click(object sender, EventArgs e)
         {
+            //close MainMenu form and exit program
             Application.Exit();
         }
 
-        /*bolds dates in monthCalendar based on cbMonth selection and displays corresponding appointments in 
-         * dgvCalender based on whether they are by all appointments, appointments in selected month, or 
-         * appointments in selected week */
+
+
+        /*bolds dates in monthCalendar based on cbMonth selection and displays corresponding appointments
+         * (All, by month, by week) in dgvCalender */
 
         private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
         {
             currentDate = this.monthCal.SelectionStart;
             if (isWeek)
             {
+                //get all appointments for week of selected monthCalender date and display in dgv calendar
                 ShowWeek();
             }
             else if (isMonth)
             {
+                //get all appoinments for month of selected monthCalendar date and display in dgv calendar
                 ShowMonth();
             }
             else
             {
+                //show all appointments in dgv calendar
                 ShowAll();
             }
         }
         
-        private void dgvCalendar_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            DB.currentIndex = e.RowIndex;
-            
-        }
-
-        //Form displays
-
-        //display format for Data Grid View dgvCalendar, monthCalendar cbMonthWeek, and combobox cbMonthWeek
-        private void displayControls()
-        {
-           
-            //dgvCalendar.DataSource = calendar;
-            dgvCalendar.DataSource = Appointment.dtAppointments;
-
-            dgvCalendar.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvCalendar.ReadOnly = true;
-            dgvCalendar.MultiSelect = false;
-            dgvCalendar.AllowUserToAddRows = false;
-            dgvCalendar.DefaultCellStyle.SelectionBackColor = this.dgvCalendar.DefaultCellStyle.BackColor;
-            dgvCalendar.DefaultCellStyle.SelectionForeColor = this.dgvCalendar.DefaultCellStyle.ForeColor; 
-            dgvCalendar.RowHeadersVisible = false;
-            dgvCalendar.Columns["Date"].DefaultCellStyle.Format = "MM/dd/yyyy";
-            dgvCalendar.Columns["Start Time"].DefaultCellStyle.Format = "hh:mm tt";
-            dgvCalendar.Columns["End Time"].DefaultCellStyle.Format = "hh:mm tt";
-            dgvCalendar.Columns["Appointment ID"].Visible = false;
-            dgvCalendar.Columns["User ID"].Visible = false;
-            dgvCalendar.Columns["Customer ID"].Visible = false;
-            dgvCalendar.Columns["Date"].DisplayIndex = 0;
-            dgvCalendar.Columns["Start Time"].DisplayIndex = 1;
-            dgvCalendar.Columns["End Time"].DisplayIndex = 2;
-            dgvCalendar.Columns["Customer Name"].DisplayIndex = 3;
-            dgvCalendar.Columns["User Name"].DisplayIndex = 4;
-            dgvCalendar.Columns["Appointment Type"].DisplayIndex = 5;
-
-            if (string.IsNullOrEmpty(cbMonthWeek.Text)) 
-            {
-                cbMonthWeek.Items.Add("All Appointments");
-                cbMonthWeek.Items.Add("Month");
-                cbMonthWeek.Items.Add("Week");
-                cbMonthWeek.SelectedIndex = 0;
-            }
-            
-            monthCal.AddBoldedDate(currentDate);
-            monthCal.UpdateBoldedDates();
-
-            lblGreeting.Text = ($"Welcome {DB.currentUser}. What can I help you with today?");
-        }
-
         //dgv and month Calendar event updates
 
-        //Selects and bolds date from month calendar, and shows all appointments in dgvCalender
+        //select and bolds date from month calendar, and shows all appointments in dgvCalender
         private void ShowAll()
         {
             //clears dataTable and monthCalendar data
@@ -239,16 +212,48 @@ namespace J_Sarad_C969_SchedulingApp
             }
         }
 
-        private void btnReports_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            Reports form = new Reports();
-            form.ShowDialog();
-        }
 
-        private void lblGreeting_Click(object sender, EventArgs e)
-        {
 
+        //display format for Data Grid View dgvCalendar, monthCalendar cbMonthWeek, and combobox cbMonthWeek
+        private void displayControls()
+        {
+            //dgvCalendar formatting
+            dgvCalendar.DataSource = Appointment.dtAppointments;
+            dgvCalendar.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvCalendar.ReadOnly = true;
+            dgvCalendar.MultiSelect = false;
+            dgvCalendar.AllowUserToAddRows = false;
+            dgvCalendar.DefaultCellStyle.SelectionBackColor = this.dgvCalendar.DefaultCellStyle.BackColor;
+            dgvCalendar.DefaultCellStyle.SelectionForeColor = this.dgvCalendar.DefaultCellStyle.ForeColor;
+            dgvCalendar.RowHeadersVisible = false;
+            dgvCalendar.Columns["Date"].DefaultCellStyle.Format = "MM/dd/yyyy";
+            dgvCalendar.Columns["Start Time"].DefaultCellStyle.Format = "hh:mm tt";
+            dgvCalendar.Columns["End Time"].DefaultCellStyle.Format = "hh:mm tt";
+            dgvCalendar.Columns["Appointment ID"].Visible = false;
+            dgvCalendar.Columns["User ID"].Visible = false;
+            dgvCalendar.Columns["Customer ID"].Visible = false;
+            dgvCalendar.Columns["Date"].DisplayIndex = 0;
+            dgvCalendar.Columns["Start Time"].DisplayIndex = 1;
+            dgvCalendar.Columns["End Time"].DisplayIndex = 2;
+            dgvCalendar.Columns["Customer Name"].DisplayIndex = 3;
+            dgvCalendar.Columns["User Name"].DisplayIndex = 4;
+            dgvCalendar.Columns["Appointment Type"].DisplayIndex = 5;
+
+            //cbMonthWeek formatting
+            if (string.IsNullOrEmpty(cbMonthWeek.Text))
+            {
+                cbMonthWeek.Items.Add("All Appointments");
+                cbMonthWeek.Items.Add("Month");
+                cbMonthWeek.Items.Add("Week");
+                cbMonthWeek.SelectedIndex = 0;
+            }
+
+            //bolded dates update for monthCalendat
+            monthCal.AddBoldedDate(currentDate);
+            monthCal.UpdateBoldedDates();
+
+            //greeting with name of current user
+            lblGreeting.Text = ($"Welcome {DB.currentUser}. What can I help you with today?");
         }
     }
 }

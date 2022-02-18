@@ -219,7 +219,7 @@ namespace J_Sarad_C969_SchedulingApp
                 //MessageBox.Show($"{customers}");
                 foreach (string customer in customers)
                 {
-                    string s = customer.ToString();
+                    //string s = customer.ToString();
                     string selected = cbCustByCity.Text;
                     if (customer.ToString().Contains(selected))
                     {

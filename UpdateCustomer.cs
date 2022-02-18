@@ -13,7 +13,6 @@ namespace J_Sarad_C969_SchedulingApp
 {
     public partial class UpdateCustomer : Form
     {
-        //public int currentID;
         public UpdateCustomer()
         {
             InitializeComponent();
@@ -23,6 +22,7 @@ namespace J_Sarad_C969_SchedulingApp
         {
             displayControls();
         }
+        //Button Click Events
 
         private void btnSave_Click(object sender, EventArgs e)
         {

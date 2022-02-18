@@ -52,7 +52,6 @@ namespace J_Sarad_C969_SchedulingApp
             this.dgvAppointments.Size = new System.Drawing.Size(870, 283);
             this.dgvAppointments.TabIndex = 0;
             this.dgvAppointments.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAppointments_CellClick);
-            //this.dgvAppointments.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAppointments_CellContentClick);
             // 
             // cbApptType
             // 
@@ -125,6 +124,7 @@ namespace J_Sarad_C969_SchedulingApp
             this.cbCustId.Name = "cbCustId";
             this.cbCustId.Size = new System.Drawing.Size(160, 24);
             this.cbCustId.TabIndex = 9;
+            this.cbCustId.SelectedIndexChanged += new System.EventHandler(this.cbCustId_SelectedIndexChanged);
             // 
             // btnExit
             // 

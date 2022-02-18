@@ -106,7 +106,7 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(623, 371);
+            this.btnExit.Location = new System.Drawing.Point(758, 364);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(75, 23);
             this.btnExit.TabIndex = 6;

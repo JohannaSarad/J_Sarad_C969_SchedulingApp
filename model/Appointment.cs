@@ -168,10 +168,13 @@ namespace J_Sarad_C969_SchedulingApp.model
                 //Start and End collumns from dtAppointmnet are in seconds = 00 on insert to database
                 StartTime = (DateTime)row["Start Time"];
                 EndTime = (DateTime)row["End Time"];
-                MessageBox.Show($"{row["Appointment ID"]}, {Appointment.CurrentApptObj["Appointment ID"]}");
-                if (row["Appointment ID"].ToString() == Appointment.CurrentApptObj["Appointment ID"].ToString())
+                //MessageBox.Show($"{row["Appointment ID"]}, {Appointment.CurrentApptObj["Appointment ID"]}");
+                if (Appointment.CurrentApptObj != null)
                 {
-                    isOverlap = false;
+                    if (row["Appointment ID"].ToString() == Appointment.CurrentApptObj["Appointment ID"].ToString())
+                    {
+                        isOverlap = false;
+                    }
                 }
                 else if (userId == row["User ID"].ToString())
                 {
