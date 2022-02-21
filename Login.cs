@@ -22,7 +22,9 @@ namespace J_Sarad_C969_SchedulingApp
     public partial class LogIn : Form
     {
        //bool foundUser;
+       //get the current language 
         CultureInfo language = CultureInfo.CurrentUICulture;
+        //get current date and time
         DateTime currentTime = DateTime.Now;
 
         public LogIn()
@@ -37,29 +39,31 @@ namespace J_Sarad_C969_SchedulingApp
 
         private void DetectLanguage()
         {
-            //CultureInfo language = CultureInfo.CurrentUICulture;
+            //user language in English text
             if (language.Parent.Name == "en")
             {
                 lblLogin.Text = "Please Enter Your Username and Password";
                 lblPassword.Text = "Password";
                 lblUsername.Text = "Username";
                 btnLogin.Text = "Login";
-
             }
+            //user language in Spanish text
             else if (language.Parent.Name == "es")
             {
                 lblLogin.Text = "Porfavor introduzca su nombre de usuario y contrasena";
                 lblPassword.Text = "contrasena";
                 lblUsername.Text = "Nombre de usuario";
                 btnLogin.Text = "Accesso";
+                txtPassword.Location = new Point(200, 77);
+                txtUsername.Location = new Point(200, 77);
             }
             else
             {
-                //FiXME make the format of this dialog box look nicer. 
+                //ifalnguage not English or Spanish
                 DialogResult dialog = MessageBox.Show("This application supports English or Spanish" +
-                    "\n Please change language settings and restart application" + 
-                    "\r\nEsta applicacion es compatible con ingles o espanol" +
-                    "\nCambie la configuracion de idioma y reinicie la aplicacion" ,
+                    "\r\nPlease change language settings and restart application" + 
+                    "\r\n\r\nEsta applicacion es compatible con ingles o espanol" +
+                    "\r\nCambie la configuracion de idioma y reinicie la aplicacion" ,
                     "Unknown Language -- Idioma desconocido", MessageBoxButtons.OK);
                 if (dialog == DialogResult.OK)
                 {
@@ -93,21 +97,23 @@ namespace J_Sarad_C969_SchedulingApp
             if (DB.currentUserID > 0)
             {
                 CheckForAppt();
-                string path = @"userLogs.txt";
-                //DirectoryInfo info = new DirectoryInfo(".");
+                DirectoryInfo info = new DirectoryInfo(".");
+                //string path = @"userLogs.txt";
+                string path = info + "\\userLogs.txt";
+                
 
                 using (StreamWriter sw = File.AppendText(path))
                 {
                     sw.WriteLine($"User: {DB.currentUser} . UserId: {DB.currentUserID} . Logged in at: {currentTime}");
                 }
-                using (StreamReader sr = File.OpenText(path))
-                {
-                    string s = " ";
-                    while ((s = sr.ReadLine()) != null)
-                    {
-                        Console.WriteLine(s);
-                    }
-                }
+                //using (StreamReader sr = File.OpenText(path))
+                //{
+                //    string s = " ";
+                //    while ((s = sr.ReadLine()) != null)
+                //    {
+                //        Console.WriteLine(s);
+                //    }
+                //}
                 this.Hide();
                 MainMenu form = new MainMenu();
                 form.ShowDialog();

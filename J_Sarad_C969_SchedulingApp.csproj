@@ -73,9 +73,9 @@
       <DependentUpon>Customers.cs</DependentUpon>
     </Compile>
     <Compile Include="model\Appointment.cs" />
+    <Compile Include="model\ApptException.cs" />
     <Compile Include="model\Customer.cs" />
     <Compile Include="model\DB.cs" />
-    <Compile Include="model\Localization.cs" />
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>

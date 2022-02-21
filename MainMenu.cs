@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using J_Sarad_C969_SchedulingApp.model;
+
 
 namespace J_Sarad_C969_SchedulingApp
 {
@@ -17,8 +19,8 @@ namespace J_Sarad_C969_SchedulingApp
         //global instances and variables
         DateTime currentDate = DateTime.Now;
         
-        bool isMonth;
-        bool isWeek;
+        public bool isMonth;
+        public bool isWeek;
         
         public MainMenu()
         {
@@ -41,17 +43,10 @@ namespace J_Sarad_C969_SchedulingApp
             displayControls();
         }
 
-        //dgvCalender Cell Click Event
-        //private void dgvCalendar_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        //{
-        //    DB.currentIndex = e.RowIndex;
-        //}
-
         //Button Click Events
-
         private void btnEditCust_Click(object sender, EventArgs e)
         {
-            //close Mainmenu form and open Customers form
+            //close MainMenu form and open Customers form
             this.Hide();
             Customers form = new Customers();
             form.ShowDialog();

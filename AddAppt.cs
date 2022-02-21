@@ -11,12 +11,16 @@ using J_Sarad_C969_SchedulingApp.model;
 
 namespace J_Sarad_C969_SchedulingApp
 {
+    
     public partial class AddAppt : Form
     {
         //AddAppt Form variables
         DataTable customerSearch;
         bool validCustomer;
         bool foundCustomer;
+
+        //create instance of Appointment class
+        Appointment appointment = new Appointment();
         
         public AddAppt()
         {
@@ -28,14 +32,7 @@ namespace J_Sarad_C969_SchedulingApp
             //reset current dgv Index and CurrentAppt object
             DB.currentIndex = -1;
             Appointment.CurrentApptObj = null;
-            
-            //create customer search table with all existing customers and related ID's and display results in dgv
-            DB.OpenConnection();
-            string query = "Select customerId as 'Customer Id', customerName as 'Customer Name' from customer";
-            DB.Query(query);
-            customerSearch = new DataTable();
-            DB.adp.Fill(customerSearch);
-            DB.CloseConnection();
+
             displayControls();
         }
 
@@ -55,22 +52,18 @@ namespace J_Sarad_C969_SchedulingApp
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            //store user selected date, start time, and end time from date time picker
+            
             DateTime date = dtpDate.Value.Date;
             TimeSpan startTime = dtpStart.Value.TimeOfDay;
             TimeSpan endTime = dtpEnd.Value.TimeOfDay;
-
-            //add user selected date to user selected start and end times with 00 seconds
             DateTime startAppt = date.Add(startTime).AddSeconds(-date.Add(startTime).Second);
             DateTime endAppt = date.Add(endTime).AddSeconds(-date.Add(endTime).Second);
 
-            //get current user Id from DB.cs
             string userId = DB.currentUserID.ToString();
 
-            //call Appointment.cs methods to check for overlapping appointments and appointments outside of 
-            //business hours
-            Appointment.IsOverlap(startAppt, endAppt, userId);
-            Appointment.IsBusinessHours(dtpDate.Value, dtpStart.Value, dtpEnd.Value);
+            //method calls to check for overlapping appointments and appointments outside ofbusiness hours
+            appointment.IsOverlap(startAppt, endAppt, userId);
+            appointment.IsBusinessHours(dtpDate.Value, dtpStart.Value, dtpEnd.Value);
 
             //traverse dtCustomer DataTable for rows with names and IDs matching user textbox input
             foreach(DataRow row in Customer.dtCustomer.Rows)
@@ -84,10 +77,6 @@ namespace J_Sarad_C969_SchedulingApp
                     validCustomer = true;
                     Customer.currentCustId = row["Customer ID"].ToString();
                 }
-                //else
-                //{
-                //    validCustomer = false;
-                //}
             }
             if (!validCustomer)
             {
@@ -102,74 +91,84 @@ namespace J_Sarad_C969_SchedulingApp
                     form.ShowDialog();
                 }
             }
-            //Check if user created appointement is within business hours 
-            else if (!Appointment.isBusinessHours)
+            else if (!appointment.isBusinessHours)
             {
+                //alert user if appointment is outside of business hours
                 MessageBox.Show("Appointment on " + dtpDate.Value.ToLongDateString() + " from " +
                         dtpStart.Value.ToShortTimeString() + " to " + dtpEnd.Value.ToShortTimeString() +
                         "\nis outside of business hours and can not be set." +
                         "\n\nBusiness Hours are 8:00 AM to 5:00 PM Monday through Friday.",
                         "Appointment Outside of Business Hours");
             }
-            //validate that user selected appointment times do not overlap current user appointment times
-            else if (Appointment.isOverlap)
+            else if (appointment.isOverlap)
             {
+                //alert user if appointment time is overlapping time of another appointment
                 MessageBox.Show($"There is an overlapping appointment for " +
                     $"{Appointment.CurrentApptObj["User Name"]} with " +
                         $"{Appointment.CurrentApptObj["Customer Name"]} from \n " +
                         $"{Appointment.CurrentApptObj["Start Time"]} to " +
                         $"{Appointment.CurrentApptObj["End Time"]}", "Overlapping Appointment");
             }
-            //validate that user selected end time is not after user selected start time for appointment
             else if (startAppt > endAppt)
             {
+                //alert user if selected appointment start time is after selected appointment end time
                 MessageBox.Show("The appointment start time cannot be later than the appointment end time");
             }
             else if (startAppt == endAppt)
             {
+                //alert user if selected appointment start time is the same as selected appointment end time
                 MessageBox.Show("The appointment start time cannot be the same as the appointment end time");
             }
             //validate that there are no empty textboxes
             else if  (string.IsNullOrEmpty(txtName.Text))
             {
+                //alert user if customer name field is not filled in
                 MessageBox.Show("Please select a Customer for this appointment",
                    "Missing Field Information");
             }
-            //validate that combobox appointment type is selected
             else if (cbType.SelectedIndex <= 0)
             {
+                //alert user if appointment type is not selected
                 MessageBox.Show("Please Select an Appointment Type for this Appointment",
                     "Missing Field Infromation");
             }
             else
             {
-                //all validations pass and new Appointment can be added to database
-                DB.OpenConnection();
-
-                string query =
+                //add appointment to database
+                try
+                {
+                    DB.OpenConnection();
+                    string query =
                     "INSERT INTO appointment (customerId, userId, title, description, location, contact, " +
                     "type, url, start, end, createDate, createdBy, lastUpdate, lastUpdateBy) " +
                     "VALUES (@custID, @userID, @title, @description, @location, @contact, @type, @url, @start, " +
                     "@end, CURDATE(), @user, CURDATE(), @user)";
-                DB.NonQuery(query);
-                DB.cmd.Parameters.AddWithValue("@custID", Customer.currentCustId);
-                DB.cmd.Parameters.AddWithValue("@userID", DB.currentUserID);
-                DB.cmd.Parameters.AddWithValue("@title", "none");
-                DB.cmd.Parameters.AddWithValue("@description", "none");
-                DB.cmd.Parameters.AddWithValue("@location", "none");
-                DB.cmd.Parameters.AddWithValue("@contact", "none");
-                DB.cmd.Parameters.AddWithValue("@type", cbType.Text.ToString());
-                DB.cmd.Parameters.AddWithValue("@url", "none");
-                DB.cmd.Parameters.AddWithValue("@start", Appointment.UniversalTime(date, startTime));
-                DB.cmd.Parameters.AddWithValue("@end", Appointment.UniversalTime(date, endTime));
-                DB.cmd.Parameters.AddWithValue("@user", DB.currentUser.ToString());
-                DB.cmd.ExecuteNonQuery();
-                DB.CloseConnection();
-
-                //close AddAppt form and open Appointments form
-                this.Hide();
-                Appointments form = new Appointments();
-                form.ShowDialog();
+                    DB.NonQuery(query);
+                    DB.cmd.Parameters.AddWithValue("@custID", Customer.currentCustId);
+                    DB.cmd.Parameters.AddWithValue("@userID", DB.currentUserID);
+                    DB.cmd.Parameters.AddWithValue("@title", "none");
+                    DB.cmd.Parameters.AddWithValue("@description", "none");
+                    DB.cmd.Parameters.AddWithValue("@location", "none");
+                    DB.cmd.Parameters.AddWithValue("@contact", "none");
+                    DB.cmd.Parameters.AddWithValue("@type", cbType.Text.ToString());
+                    DB.cmd.Parameters.AddWithValue("@url", "none");
+                    DB.cmd.Parameters.AddWithValue("@start", appointment.UniversalTime(date, startTime));
+                    DB.cmd.Parameters.AddWithValue("@end", appointment.UniversalTime(date, endTime));
+                    DB.cmd.Parameters.AddWithValue("@user", DB.currentUser.ToString());
+                    DB.cmd.ExecuteNonQuery();
+                    //close AddAppt form and open Appointments form
+                    this.Hide();
+                    Appointments form = new Appointments();
+                    form.ShowDialog();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error Occured!" + ex);
+                }
+                finally
+                {
+                    DB.CloseConnection();
+                }
             }
         }
 
@@ -219,7 +218,7 @@ namespace J_Sarad_C969_SchedulingApp
             }
             if (!foundCustomer) 
             { 
-                //display message box exception to user if user search textbox finds no matching customer 
+                //alert user if No customer in the database matched their search
                 DialogResult result = MessageBox.Show("There is no customer matching that Name or ID. \n " +
                     "Would you like to add a new customer", "Search Found No Results", MessageBoxButtons.YesNo);
                 if (result == DialogResult.Yes)
@@ -241,22 +240,42 @@ namespace J_Sarad_C969_SchedulingApp
         //Display formatting for AddAppt Form Controls
         private void displayControls()
         {
-            //dgvCustSearch formatting
-            dgvCustSearch.DataSource = customerSearch;
-            dgvCustSearch.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvCustSearch.ReadOnly = true;
-            dgvCustSearch.MultiSelect = false;
-            dgvCustSearch.AllowUserToAddRows = false;
-            dgvCustSearch.DefaultCellStyle.SelectionBackColor = Color.Yellow;
-            dgvCustSearch.DefaultCellStyle.SelectionForeColor = Color.Black;
-            dgvCustSearch.RowHeadersVisible = false;
-
             //cbType formatting
             cbType.Items.Add("--select Appointment Type--");
             cbType.Items.Add("Presentation");
             cbType.Items.Add("SCRUM");
             cbType.Items.Add("Consultation");
             cbType.SelectedIndex = 0;
+
+            //dgvCustSearch formatting
+            try
+            {
+                DB.OpenConnection();
+                string query = "Select customerId as 'Customer Id', customerName as 'Customer Name' from customer";
+                DB.Query(query);
+                customerSearch = new DataTable();
+                DB.adp.Fill(customerSearch);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error Occured!" + ex.Message);
+            }
+            finally
+            {
+                DB.CloseConnection();
+            }
+
+            if (customerSearch != null)
+            {
+                dgvCustSearch.DataSource = customerSearch;
+                dgvCustSearch.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                dgvCustSearch.ReadOnly = true;
+                dgvCustSearch.MultiSelect = false;
+                dgvCustSearch.AllowUserToAddRows = false;
+                dgvCustSearch.DefaultCellStyle.SelectionBackColor = Color.Yellow;
+                dgvCustSearch.DefaultCellStyle.SelectionForeColor = Color.Black;
+                dgvCustSearch.RowHeadersVisible = false;
+            }
         }
     }  
 }

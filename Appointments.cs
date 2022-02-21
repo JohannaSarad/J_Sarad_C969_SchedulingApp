@@ -14,9 +14,14 @@ namespace J_Sarad_C969_SchedulingApp
     
     public partial class Appointments : Form
     {
+        //FiX ME!!! in cbApptType_SelectedIndexChanged and cbCustId_SelectedIndexChanged there needs to be a 
+        //working option that clears the dgv if the type or id is not found but leaves the collumns of the dgv
+        //intact
+
         public DataTable dtCurrentUserAppt;
-        //DataTable dtFiltered;
-        //DataTable dtCustId;
+
+        //create an instance of Appointment
+        Appointment appointment = new Appointment();
 
         public Appointments()
         {
@@ -40,10 +45,10 @@ namespace J_Sarad_C969_SchedulingApp
             DB.currentIndex = e.RowIndex;
             
             //update global appointment ID selected 
-            Appointment.CurrentApptID = dgvAppointments.Rows[DB.currentIndex].Cells["Appointment ID"].Value.ToString();
+            appointment.CurrentApptID = dgvAppointments.Rows[DB.currentIndex].Cells["Appointment ID"].Value.ToString();
             
             //update current appointment object in UpdateAppointments method based on Appt ID
-            Appointment.UpdateAppointment(Appointment.CurrentApptID);
+            appointment.UpdateAppointment(appointment.CurrentApptID);
         }
 
         //Button Click Events
@@ -55,7 +60,6 @@ namespace J_Sarad_C969_SchedulingApp
             form.ShowDialog();
         }
         
-        
         private void btnAdd_Click(object sender, EventArgs e)
         {
             //close Appointment Form and open AddAppt Form
@@ -63,8 +67,6 @@ namespace J_Sarad_C969_SchedulingApp
             AddAppt form = new AddAppt();
             form.ShowDialog();
         }
-
-        
         
         private void btnUpdate_Click(object sender, EventArgs e)
         {
@@ -80,10 +82,9 @@ namespace J_Sarad_C969_SchedulingApp
             {
                 MessageBox.Show("Please Select an Appointment to Update");
             }
-            
         }
-
-       private void btnExit_Click(object sender, EventArgs e)
+        
+        private void btnExit_Click(object sender, EventArgs e)
         {
             //Close Appointment form and exit program
             Application.Exit();
@@ -111,9 +112,12 @@ namespace J_Sarad_C969_SchedulingApp
             }
         }
 
-        //ComboBox Selcted Index Changed Events
+        
+        //ComboBox Selected Index Changed Events
+        
         private void cbApptType_SelectedIndexChanged(object sender, EventArgs e)
         {
+            
             if (cbApptType.SelectedIndex > 0)
             {
                 DataTable dtFiltered = new DataTable();
@@ -129,13 +133,18 @@ namespace J_Sarad_C969_SchedulingApp
                         dgvAppointments.DataSource = dtFiltered;
                         DB.currentIndex = -1;
                         dgvAppointments.ClearSelection();
-                        
-                        
                     }
+                    //else
+                    //{
+                    //    //no matching appointment was found, display nothing
+                    //    //dtFiltered.Clear();
+                    //    dgvAppointments.Rows.Clear();
+                    //}
                 }
             }
             else
             {
+                //show all appointments
                 displayControls();
             }
         }
@@ -157,12 +166,18 @@ namespace J_Sarad_C969_SchedulingApp
                         dgvAppointments.DataSource = dtFiltered;
                         DB.currentIndex = -1;
                         dgvAppointments.ClearSelection();
-                        
                     }
+                    //else
+                    //{
+                    //    //no matching appointment was found, display nothing
+                    //    dtFiltered.Clear();
+                    //    dgvAppointments.DataSource = dtFiltered;
+                    //}
                 }
             }
             else
             {
+                //show all appointments
                 displayControls();
             }
         }
@@ -170,7 +185,7 @@ namespace J_Sarad_C969_SchedulingApp
         //Appointment Form control display formatting
         private void displayControls()
         {
-
+            //Fix me!!! may want to clear Appointment.dtAppointments table before doing this
             Appointment.FillAppointments();
             dtCurrentUserAppt = new DataTable();
             dtCurrentUserAppt = Appointment.dtAppointments.Clone();
@@ -195,7 +210,7 @@ namespace J_Sarad_C969_SchedulingApp
             dgvAppointments.Columns["End Time"].DefaultCellStyle.Format = "hh:mm tt";
             dgvAppointments.ClearSelection();
 
-            //cbApptType.DisplayMember = "All Types";
+            //cbAPptType formatting
             if (string.IsNullOrEmpty(cbApptType.Text))
             {
                 cbApptType.Items.Add("All Types");
@@ -205,6 +220,7 @@ namespace J_Sarad_C969_SchedulingApp
                 cbApptType.SelectedIndex = 0;
             }
 
+            //cbCustId formatting
             if (string.IsNullOrEmpty(cbCustId.Text))
             {
                 DB.OpenConnection();

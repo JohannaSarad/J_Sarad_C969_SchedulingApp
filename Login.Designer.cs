@@ -70,7 +70,7 @@ namespace J_Sarad_C969_SchedulingApp
             // txtUsername
             // 
             this.txtUsername.Location = new System.Drawing.Point(132, 77);
-            this.txtUsername.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtUsername.Margin = new System.Windows.Forms.Padding(4);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(159, 23);
             this.txtUsername.TabIndex = 3;
@@ -78,7 +78,7 @@ namespace J_Sarad_C969_SchedulingApp
             // txtPassword
             // 
             this.txtPassword.Location = new System.Drawing.Point(132, 109);
-            this.txtPassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPassword.Margin = new System.Windows.Forms.Padding(4);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(159, 23);
             this.txtPassword.TabIndex = 4;
@@ -86,7 +86,7 @@ namespace J_Sarad_C969_SchedulingApp
             // btnLogin
             // 
             this.btnLogin.Location = new System.Drawing.Point(148, 152);
-            this.btnLogin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnLogin.Margin = new System.Windows.Forms.Padding(4);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(100, 28);
             this.btnLogin.TabIndex = 5;
@@ -106,7 +106,7 @@ namespace J_Sarad_C969_SchedulingApp
             this.Controls.Add(this.lblPassword);
             this.Controls.Add(this.lblLogin);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "LogIn";
             this.Text = "User Login";
             this.Load += new System.EventHandler(this.LogIn_Load);

@@ -15,7 +15,8 @@ namespace J_Sarad_C969_SchedulingApp
 {
     public partial class AddCustomer : Form
     {
-        //bool allowSave;
+        //FIX ME!!! in cbCity_SelectedIndexChanged Function (may need to be changed to text instead of SelectedItem,
+        //cause they are throwing an unintended reference comparison error)
         string country;
         public AddCustomer()
         {
@@ -99,6 +100,7 @@ namespace J_Sarad_C969_SchedulingApp
 
         private void cbCity_SelectedIndexChanged(object sender, EventArgs e)
         {
+            
             if (cbCity.SelectedItem == "Los Angeles")
             {
                 country = "United States";

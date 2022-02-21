@@ -10,21 +10,19 @@ namespace J_Sarad_C969_SchedulingApp.model
 {
     class Customer
     {
+        //global data table
         public static DataTable dtCustomer { get; set; }
+
+        //global properties
         public static DataRow currentCustObj { get; set; }
-        //public int CurrentCustomerIndex = -1;
-        //private string ID { get; set; }
-        //private string Name { get; set; } 
-        //private string Phone { get; set; }
-        //private string Address { get; set; }
-        //private string City { get; set; }
-        //private string Country { get; set; }
         public static string currentCustId { get; set; }
 
         public Customer() { }
 
         public static void FillCustomer()
         {
+            //Fix ME!!! add try catch or move to DB method with try catch
+            //fill dtCustomer data table with customer information from database
             DB.OpenConnection();
             string query = "select customerId as 'Customer ID', customerName as 'Customer Name', phone as 'Phone', " +
                 "address as 'Address', city as 'City', country as 'Country' " +
@@ -40,7 +38,7 @@ namespace J_Sarad_C969_SchedulingApp.model
         {
             ArrayList array = new ArrayList();
             
-
+            //fill array ArrayList from dtCustomer data table, format string objects and return array
             foreach (DataRow row in Customer.dtCustomer.Rows)
             {
                 string format = $"{row["Customer Name"]} . {row["Phone"]} . {row["Address"]} . {row["City"]}" +
@@ -48,27 +46,22 @@ namespace J_Sarad_C969_SchedulingApp.model
                     array.Add(format);
             }
             return array;
-            
         }
 
         public void UpdateCustomer(string id)
         {
+            //update current customer object to customer with selected id
             foreach (DataRow row in dtCustomer.Rows)
             {
                 if (row["Customer ID"].ToString() == id)
                 {
-                    //ID = row["Customer ID"].ToString();
-                    //Name = row["Customer Name"].ToString();
-                    //Phone = row["Phone"].ToString();
-                    //Address = row["Address"].ToString();
-                    //City = row["City"].ToString();
-                    //Country = row["Country"].ToString();
                     currentCustObj = row;
                 }
             }
         }
         public void DeleteCustomer(string id)
         {
+            //delete customer with selected id from database
             DB.OpenConnection();
             string query = "set FOREIGN_KEY_CHECKS = 0";
             DB.NonQuery(query);
