@@ -17,10 +17,12 @@ namespace J_Sarad_C969_SchedulingApp
         //AddAppt Form variables
         DataTable customerSearch;
         bool validCustomer;
+        bool similarityCheck;
         bool foundCustomer;
 
         //create instance of Appointment class
         Appointment appointment = new Appointment();
+        Customer customer = new Customer();
         
         public AddAppt()
         {
@@ -75,10 +77,29 @@ namespace J_Sarad_C969_SchedulingApp
                     //Update validCustomer to true if current datatable row's customer name matches user textbox
                     //input customer name
                     validCustomer = true;
-                    Customer.currentCustId = row["Customer ID"].ToString();
+                    //if the name is found the id is set (maybe this should update the
+                    //currentCustObj) --customer.Update
+                    //this although does not change the static object and should only belong to this instance
+                    customer.currentCustId = row["Customer ID"].ToString();
+                }
+                else if (row["Customer Name"].ToString().ToUpper().Contains(txtName.Text.ToUpper()))
+                {
+                    DialogResult result = MessageBox.Show($"Did you mean {row["Customer Name"]}",
+                        "Similar Name in Database", MessageBoxButtons.YesNo);
+                    if(result == DialogResult.Yes)
+                    {
+                        validCustomer = true;
+                        customer.currentCustId = row["Customer ID"].ToString();
+                        txtName.Text = row["Customer Name"].ToString();
+                        similarityCheck = true;
+                    }
+                    if (result == DialogResult.No)
+                    {
+                        similarityCheck = false;
+                    }
                 }
             }
-            if (!validCustomer)
+            if (!validCustomer && (similarityCheck))
             {
                 //show message box exception if no valid customer is found in user input
                 DialogResult result = MessageBox.Show("There is no existing customer by this name,\r\n " +
@@ -144,7 +165,7 @@ namespace J_Sarad_C969_SchedulingApp
                     "VALUES (@custID, @userID, @title, @description, @location, @contact, @type, @url, @start, " +
                     "@end, CURDATE(), @user, CURDATE(), @user)";
                     DB.NonQuery(query);
-                    DB.cmd.Parameters.AddWithValue("@custID", Customer.currentCustId);
+                    DB.cmd.Parameters.AddWithValue("@custID", customer.currentCustId);
                     DB.cmd.Parameters.AddWithValue("@userID", DB.currentUserID);
                     DB.cmd.Parameters.AddWithValue("@title", "none");
                     DB.cmd.Parameters.AddWithValue("@description", "none");

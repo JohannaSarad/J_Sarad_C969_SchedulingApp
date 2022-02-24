@@ -12,10 +12,12 @@ namespace J_Sarad_C969_SchedulingApp.model
 {
     public static class DB
     {
+        //FIX ME!!! This may not need to be a static class
+        //global properties
         public static int currentIndex { get; set; }
         public static int currentUserID { get; set; }
         public static string currentUser { get; set; }
-        public static string currentApptId { get; set; }
+        //public static string currentApptId { get; set; }
 
         //public static TimeZone CurrentTimeZone { get; }
 
@@ -27,11 +29,9 @@ namespace J_Sarad_C969_SchedulingApp.model
        
         public static void OpenConnection()
         {
-            //add try catch
-                string connectionString = ConfigurationManager.ConnectionStrings["MySqlkey"].ConnectionString;
-                con = new MySqlConnection(connectionString);
-                con.Open();
-            
+            string connectionString = ConfigurationManager.ConnectionStrings["MySqlkey"].ConnectionString;
+            con = new MySqlConnection(connectionString);
+            con.Open();
         }
 
         public static void CloseConnection()

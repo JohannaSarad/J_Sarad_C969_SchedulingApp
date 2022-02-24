@@ -54,37 +54,58 @@ namespace J_Sarad_C969_SchedulingApp.model
         public static void FillAppointments()
         {
             //fill Appointments data table from database an display in local time
-            DB.OpenConnection();
-            string query =
-                "select appointmentId as 'Appointment ID', type as 'Appointment Type', userId as 'User ID'," +
-                "userName as 'User Name', customerId as 'Customer ID', customerName as 'Customer Name', " +
-                "start as 'Date', start as 'Start Time', end as 'End Time' from user inner join appointment " +
-                "using(userId) inner join customer using(customerId)";
-            DB.Query(query);
-            dtAppointments = new DataTable();
-            DB.adp.Fill(dtAppointments);
-            DB.CloseConnection();
-            
-            DisplayLocalTime(dtAppointments);
+            try
+            {
+                DB.OpenConnection();
+                string query =
+                    "select appointmentId as 'Appointment ID', type as 'Appointment Type', userId as 'User ID'," +
+                    "userName as 'User Name', customerId as 'Customer ID', customerName as 'Customer Name', " +
+                    "start as 'Date', start as 'Start Time', end as 'End Time' from user inner join appointment " +
+                    "using(userId) inner join customer using(customerId)";
+                DB.Query(query);
+                dtAppointments = new DataTable();
+                DB.adp.Fill(dtAppointments);
+                DisplayLocalTime(dtAppointments);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error Occured!" + ex.Message);
+            }
+            finally
+            {
+                DB.CloseConnection();
+            }
         }
 
         public static void FillAppointmentsByDate(DateTime startDate, DateTime endDate)
         {
-            //fill dtAppointments based on selected dates
-            string query =
-               "select appointmentId as 'Appointment ID', userId as 'User ID', customerId as 'Customer ID', " +
-               "start as 'Date', start as 'Start Time', end as 'End Time', type as 'Appointment Type', " +
-               "customerName as 'Customer Name', userName as 'User Name'" +
-               "from user inner join appointment using(userId) inner join customer using(customerId)" +
-               "where start BETWEEN @start AND @end order by start";
-            DB.Query(query);
-            DB.cmd.Parameters.AddWithValue("@start", startDate);
-            DB.cmd.Parameters.AddWithValue("@end", endDate);
             dtAppointments = new DataTable();
-            DB.adp.Fill(dtAppointments);
-
-            DB.CloseConnection();
-            DisplayLocalTime(dtAppointments);
+            //fill dtAppointments based on selected dates
+            try
+            {
+                DB.OpenConnection();
+                string query =
+                   "select appointmentId as 'Appointment ID', userId as 'User ID', customerId as 'Customer ID', " +
+                   "start as 'Date', start as 'Start Time', end as 'End Time', type as 'Appointment Type', " +
+                   "customerName as 'Customer Name', userName as 'User Name'" +
+                   "from user inner join appointment using(userId) inner join customer using(customerId)" +
+                   "where start BETWEEN @start AND @end order by start";
+                DB.Query(query);
+                DB.cmd.Parameters.AddWithValue("@start", startDate);
+                DB.cmd.Parameters.AddWithValue("@end", endDate);
+                DB.adp.Fill(dtAppointments);
+                DisplayLocalTime(dtAppointments);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error Occured!" + ex.Message);
+            }
+            finally
+            {
+                DB.CloseConnection();
+            }
+            
         }
         
         public static void DisplayLocalTime(DataTable table) { 

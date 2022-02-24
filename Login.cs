@@ -74,13 +74,23 @@ namespace J_Sarad_C969_SchedulingApp
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            DB.OpenConnection();
-            string query = "SELECT * FROM User";
-            DB.Query(query);
             DataTable dataTable = new DataTable();
-            DB.adp.Fill(dataTable);
-            DB.CloseConnection();
-
+            try
+            {
+                DB.OpenConnection();
+                string query = "SELECT * FROM User";
+                DB.Query(query);
+                DB.adp.Fill(dataTable);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error Occured!" + ex.Message);
+            }
+            finally
+            {
+                DB.CloseConnection();
+            }
+            
             //bool foundUser = false;
 
             for (int i = 0; i < dataTable.Rows.Count; i++)
@@ -133,12 +143,22 @@ namespace J_Sarad_C969_SchedulingApp
         }
         private void CheckForAppt ()
         {
-            DB.OpenConnection();
-            string query2 = "Select appointmentId as ApptID, start as Start from appointment ";
-            DB.Query(query2);
             DataTable check = new DataTable();
-            DB.adp.Fill(check);
-            DB.CloseConnection();
+            try
+            {
+                DB.OpenConnection();
+                string query2 = "Select appointmentId as ApptID, start as Start from appointment ";
+                DB.Query(query2);
+                DB.adp.Fill(check);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error Ocurred" + ex.Message);
+            }
+            finally
+            {
+                DB.CloseConnection();
+            }
 
             for (int i = 0; i < check.Rows.Count; i++)
             {

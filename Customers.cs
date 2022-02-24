@@ -13,10 +13,11 @@ using System.Configuration;
 
 namespace J_Sarad_C969_SchedulingApp
 {
-    
+    //FIX ME!! Phone formatting not working in displayControls.
+
     public partial class Customers : Form
     {
-        //public int currentIndex;
+        //create instance of Customer class
         Customer customer = new Customer();
         
         public Customers()
@@ -26,50 +27,45 @@ namespace J_Sarad_C969_SchedulingApp
 
         private void Customer_Load(object sender, EventArgs e)
         {
+            //reset global variables
             DB.currentIndex = -1;
+            //there should not be a customer id set for this customer yet
+
             displayControls();
         }
 
-        private void displayControls()
-        {
-
-            Customer.FillCustomer();
-            dgvCustomers.DataSource = Customer.dtCustomer;
-            dgvCustomers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvCustomers.ReadOnly = true;
-            dgvCustomers.MultiSelect = false;
-            dgvCustomers.AllowUserToAddRows = false;
-            dgvCustomers.DefaultCellStyle.SelectionBackColor = Color.Yellow;
-            dgvCustomers.DefaultCellStyle.SelectionForeColor = Color.Black;
-            dgvCustomers.RowHeadersVisible = false;
-            //FIX ME!! Phone formatting not working.
-            dgvCustomers.Columns["Phone"].DefaultCellStyle.Format = "###-####";
-        }
-
+        
+        //dgvCustomers Cell Click Event
         private void dgvCustomers_CellClick(object sender, DataGridViewCellEventArgs e)
         { 
+            //update current index, and current customer id
             DB.currentIndex = e.RowIndex;
-            Customer.currentCustId = Customer.dtCustomer.Rows[DB.currentIndex]["Customer ID"].ToString();
-            customer.UpdateCustomer(Customer.currentCustId);
+            customer.currentCustId = Customer.dtCustomer.Rows[DB.currentIndex]["Customer ID"].ToString();
+            //updates static currentCustObj
+            customer.UpdateCustomer(customer.currentCustId);
             
         }
 
+        //Button Click Events
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             if (DB.currentIndex >= 0)
             {
+                //close Customers form and open UpdateCustomer form
                 this.Hide();
                 UpdateCustomer form = new UpdateCustomer();
                 form.ShowDialog();
             }
             else
             {
+                //alert user to select a row to update
                 MessageBox.Show("Please Select a Customer to Update");
             }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            //close Cutomers form and open AddCustomers form
             this.Hide();
             AddCustomer form = new AddCustomer();
             form.ShowDialog();
@@ -77,11 +73,13 @@ namespace J_Sarad_C969_SchedulingApp
 
         private void btnExit_Click(object sender, EventArgs e)
         {
+            //close Customers form and exit application
             Application.Exit();
         }
 
         private void btnMain_Click(object sender, EventArgs e)
         {
+            //close Customers form and open MainMenu form
             this.Hide();
             MainMenu form = new MainMenu();
             form.ShowDialog();
@@ -91,14 +89,37 @@ namespace J_Sarad_C969_SchedulingApp
         private void btnDelete_Click(object sender, EventArgs e)
         {
             if (DB.currentIndex >= 0) {
-                customer.DeleteCustomer(Customer.currentCustId);
+                //delete selected customer from database
+                customer.DeleteCustomer(customer.currentCustId);
                 displayControls();
                 dgvCustomers.ClearSelection();
+                DB.currentIndex = -1;
             }
             else
             {
+                //alert user to select a row to update
                 MessageBox.Show("Please Select a Customer to Delete");
             }
+        }
+
+        //diplay formatting
+        private void displayControls()
+        {
+            //dgvCustomers formatting
+
+            Customer.FillCustomer();
+
+            dgvCustomers.DataSource = Customer.dtCustomer;
+            dgvCustomers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvCustomers.ReadOnly = true;
+            dgvCustomers.MultiSelect = false;
+            dgvCustomers.AllowUserToAddRows = false;
+            dgvCustomers.DefaultCellStyle.SelectionBackColor = Color.Yellow;
+            dgvCustomers.DefaultCellStyle.SelectionForeColor = Color.Black;
+            dgvCustomers.RowHeadersVisible = false;
+            
+            //
+            dgvCustomers.Columns["Phone"].DefaultCellStyle.Format = "(###) ###-####";
         }
     }
 }

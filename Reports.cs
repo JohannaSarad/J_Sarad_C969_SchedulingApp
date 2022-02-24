@@ -48,12 +48,22 @@ namespace J_Sarad_C969_SchedulingApp
 
             if (string.IsNullOrEmpty(cbSchedules.Text))
             {
-                DB.OpenConnection();
-                string query = "select userId as 'User' from user";
-                DB.Query(query);
                 DataTable dtUsers = new DataTable();
-                DB.adp.Fill(dtUsers);
-                DB.CloseConnection();
+                try
+                {
+                    DB.OpenConnection();
+                    string query = "select userId as 'User' from user";
+                    DB.Query(query);
+                    DB.adp.Fill(dtUsers);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error Occured" + ex.Message);
+                }
+                finally
+                {
+                    DB.CloseConnection();
+                }
 
                 cbSchedules.Items.Add("--select user--");
 
@@ -80,19 +90,28 @@ namespace J_Sarad_C969_SchedulingApp
 
         private void cbApptByMonth_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+            DataTable dtTypeByMonth = new DataTable();
             if (cbApptByMonth.SelectedIndex > 0)
             {
                 if (cbSchedules.SelectedIndex > 0)
                 {
                     cbSchedules.SelectedIndex = 0;
                 }
-                DB.OpenConnection();
-                string query = "Select start as 'Start', type as 'Type' from appointment";
-                DB.Query(query);
-                DataTable dtTypeByMonth = new DataTable();
-                DB.adp.Fill(dtTypeByMonth);
-                DB.CloseConnection();
+                try
+                {
+                    DB.OpenConnection();
+                    string query = "Select start as 'Start', type as 'Type' from appointment";
+                    DB.Query(query);
+                    DB.adp.Fill(dtTypeByMonth);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error Occured" + ex.Message);
+                }
+                finally
+                {
+                    DB.CloseConnection();
+                }
 
                 for (int i = 0; i < dtTypeByMonth.Rows.Count; i++)
                 {

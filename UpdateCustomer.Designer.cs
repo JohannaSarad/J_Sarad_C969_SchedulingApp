@@ -144,7 +144,7 @@ namespace J_Sarad_C969_SchedulingApp
             this.cbCity.Name = "cbCity";
             this.cbCity.Size = new System.Drawing.Size(170, 24);
             this.cbCity.TabIndex = 12;
-            this.cbCity.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.cbCity.SelectedIndexChanged += new System.EventHandler(this.cbCity_SelectedIndexChanged);
             // 
             // UpdateCustomer
             // 

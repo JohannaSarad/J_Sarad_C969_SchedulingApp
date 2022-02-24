@@ -73,7 +73,6 @@
       <DependentUpon>Customers.cs</DependentUpon>
     </Compile>
     <Compile Include="model\Appointment.cs" />
-    <Compile Include="model\ApptException.cs" />
     <Compile Include="model\Customer.cs" />
     <Compile Include="model\DB.cs" />
     <Compile Include="Login.cs">
@@ -90,7 +89,6 @@
     </Compile>
     <Compile Include="model\Program.cs" />
     <Compile Include="model\Schedule.cs" />
-    <Compile Include="model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reports.cs">
       <SubType>Form</SubType>

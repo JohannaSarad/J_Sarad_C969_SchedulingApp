@@ -18,7 +18,7 @@ namespace J_Sarad_C969_SchedulingApp
         //working option that clears the dgv if the type or id is not found but leaves the collumns of the dgv
         //intact
 
-        public DataTable dtCurrentUserAppt;
+        //public DataTable dtCurrentUserAppt;
 
         //create an instance of Appointment
         Appointment appointment = new Appointment();
@@ -32,16 +32,15 @@ namespace J_Sarad_C969_SchedulingApp
         {
             //reset global variables
             DB.currentIndex = -1;
-            DB.currentApptId = null;
+            //DB.currentApptId = null;
 
-            //display Controls
             displayControls();
         }
 
         //dgvAppointments Cell Click Event
         private void dgvAppointments_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            //update current Index to store selected index
+            //update current Index to selected dgv row index
             DB.currentIndex = e.RowIndex;
             
             //update global appointment ID selected 
@@ -49,6 +48,7 @@ namespace J_Sarad_C969_SchedulingApp
             
             //update current appointment object in UpdateAppointments method based on Appt ID
             appointment.UpdateAppointment(appointment.CurrentApptID);
+            //updating the static appointmentObj (this should be the same everywhere)
         }
 
         //Button Click Events
@@ -95,15 +95,26 @@ namespace J_Sarad_C969_SchedulingApp
             //Delete selected row in dgvAppointments from database if a row is selected. 
             if (DB.currentIndex >= 0)
             {
-                DB.OpenConnection();
-                string query = "DELETE FROM appointment WHERE appointmentId = @appointmentID";
-                DB.NonQuery(query);
-                DB.cmd.Parameters.AddWithValue("@appointmentID", Appointment.CurrentApptObj["Appointment ID"]);
-                DB.cmd.ExecuteNonQuery();
-                DB.CloseConnection();
-                displayControls();
-                DB.currentIndex = -1;
-                dgvAppointments.ClearSelection();
+                try
+                {
+                    DB.OpenConnection();
+                    string query = "DELETE FROM appointment WHERE appointmentId = @appointmentID";
+                    DB.NonQuery(query);
+                    DB.cmd.Parameters.AddWithValue("@appointmentID", Appointment.CurrentApptObj["Appointment ID"]);
+                    DB.cmd.ExecuteNonQuery();
+                    displayControls();
+                    DB.currentIndex = -1;
+                    dgvAppointments.ClearSelection();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error Occured!" + ex.Message);
+                }
+                finally
+                {
+                    DB.CloseConnection();
+                }
+                
             }
             else
             {
@@ -117,30 +128,37 @@ namespace J_Sarad_C969_SchedulingApp
         
         private void cbApptType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
             if (cbApptType.SelectedIndex > 0)
             {
+                bool typeFound = false;
                 DataTable dtFiltered = new DataTable();
-                foreach (DataRow row in dtCurrentUserAppt.Rows)
+                //dtFiltered = dtCurrentUserAppt.AsEnumerable().CopyToDataTable();
+                dtFiltered = Appointment.dtAppointments.AsEnumerable().CopyToDataTable();
+                //foreach (DataRow row in dtCurrentUserAppt.Rows)
+                foreach (DataRow row in Appointment.dtAppointments.Rows)
+
                 {
                     //Traverse dtCurrentuserAppt datatable for Appointment types that contain type combo box selected value
                     //and assign results to dtFiltered datable
                     if (row["Appointment Type"].ToString() == cbApptType.Text)
                     {
                         cbCustId.SelectedIndex = 0;
-                        dtFiltered = dtCurrentUserAppt.AsEnumerable().Where(x => x["Appointment Type"].ToString() == cbApptType.Text).CopyToDataTable();
+                        //dtFiltered = dtCurrentUserAppt.AsEnumerable().Where(x => x["Appointment Type"].ToString() == cbApptType.Text).CopyToDataTable();
+                        dtFiltered = Appointment.dtAppointments.AsEnumerable().Where(x => x["Appointment Type"].ToString() == cbApptType.Text).CopyToDataTable();
                         //lambda used to store rows from dtCurrentUserAppt datatable with appointment types that match the selected value of Type combobox
-                        dgvAppointments.DataSource = dtFiltered;
+
                         DB.currentIndex = -1;
                         dgvAppointments.ClearSelection();
                     }
-                    //else
-                    //{
-                    //    //no matching appointment was found, display nothing
-                    //    //dtFiltered.Clear();
-                    //    dgvAppointments.Rows.Clear();
-                    //}
                 }
+                if (!typeFound)
+                {
+                    //no matching appointment was found, display nothing
+                    dtFiltered.Clear();
+                    //dgvAppointments.Rows.Clear();
+                }
+                dgvAppointments.DataSource = dtFiltered;
             }
             else
             {
@@ -150,30 +168,37 @@ namespace J_Sarad_C969_SchedulingApp
         }
         private void cbCustId_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cbCustId.SelectedIndex != 0)
+            if (cbCustId.SelectedIndex > 0)
             {
+                bool custIDFound = false;
                 DataTable dtFiltered = new DataTable();
-                foreach (DataRow row in dtCurrentUserAppt.Rows)
-                {
-                    //Traverse dtCurrentuserAppt datatable for Customer IDs that match type combobox selected value
-                    //and assign results to dtFiltered datable
+                //dtFiltered = dtCurrentUserAppt.AsEnumerable().CopyToDataTable();
+                dtFiltered = Appointment.dtAppointments.AsEnumerable().CopyToDataTable();
+
+                //foreach (DataRow row in dtCurrentUserAppt.Rows)
+                foreach (DataRow row in Appointment.dtAppointments.Rows)
+                    {
+                    //    //Traverse dtCurrentuserAppt datatable for Customer IDs that match type combobox selected value
+                    //    //and assign results to dtFiltered datable
                     if (row["Customer ID"].ToString() == cbCustId.Text)
                     {
                         cbApptType.SelectedIndex = 0;
                         //fill dtFiltered Data table with dt CurrentUser Appt filtered results
-                        dtFiltered = dtCurrentUserAppt.AsEnumerable().Where(x => x["Customer ID"].ToString() == cbCustId.Text).CopyToDataTable();
+                        //dtFiltered = dtCurrentUserAppt.AsEnumerable().Where(x => x["Customer ID"].ToString() == cbCustId.Text).CopyToDataTable();
+                        dtFiltered = Appointment.dtAppointments.AsEnumerable().Where(x => x["Customer ID"].ToString() == cbCustId.Text).CopyToDataTable();
                         //lambda used to store rows from dtCurrentUserAppt datatable with appointment types that match the selected value of Type combobox
-                        dgvAppointments.DataSource = dtFiltered;
+                        custIDFound = true;
                         DB.currentIndex = -1;
                         dgvAppointments.ClearSelection();
                     }
-                    //else
-                    //{
-                    //    //no matching appointment was found, display nothing
-                    //    dtFiltered.Clear();
-                    //    dgvAppointments.DataSource = dtFiltered;
-                    //}
                 }
+                if(!custIDFound) 
+                {
+                    //no matching appointment was found, display nothing
+                    dtFiltered.Clear();
+                    //dgvAppointments.DataSource = dtFiltered;
+                }
+                dgvAppointments.DataSource = dtFiltered;
             }
             else
             {
@@ -186,18 +211,23 @@ namespace J_Sarad_C969_SchedulingApp
         private void displayControls()
         {
             //Fix me!!! may want to clear Appointment.dtAppointments table before doing this
-            Appointment.FillAppointments();
-            dtCurrentUserAppt = new DataTable();
-            dtCurrentUserAppt = Appointment.dtAppointments.Clone();
-            foreach (DataRow row in Appointment.dtAppointments.Rows)
+            if (Appointment.dtAppointments != null)
             {
-                if (row["User ID"].ToString() == DB.currentUserID.ToString())
-                {
-                    dtCurrentUserAppt.ImportRow(row);
-                }
+                Appointment.dtAppointments.Clear();
             }
+            Appointment.FillAppointments();
+            //dtCurrentUserAppt = new DataTable();
+            //dtCurrentUserAppt = Appointment.dtAppointments.Clone();
+            //foreach (DataRow row in Appointment.dtAppointments.Rows)
+            //{
+            //    if (row["User ID"].ToString() == DB.currentUserID.ToString())
+            //    {
+            //        dtCurrentUserAppt.ImportRow(row);
+            //    }
+            //}
 
-            dgvAppointments.DataSource = dtCurrentUserAppt;
+            //dgvAppointments.DataSource = dtCurrentUserAppt;
+            dgvAppointments.DataSource = Appointment.dtAppointments;
             dgvAppointments.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvAppointments.ReadOnly = true;
             dgvAppointments.MultiSelect = false;
@@ -223,12 +253,23 @@ namespace J_Sarad_C969_SchedulingApp
             //cbCustId formatting
             if (string.IsNullOrEmpty(cbCustId.Text))
             {
-                DB.OpenConnection();
-                string query = "select customerID as 'Customer ID' from customer";
-                DB.Query(query);
                 DataTable dtCustId = new DataTable();
-                DB.adp.Fill(dtCustId);
-                DB.CloseConnection();
+                try
+                {
+                    DB.OpenConnection();
+                    string query = "select customerID as 'Customer ID' from customer";
+                    DB.Query(query);
+                    //DataTable dtCustId = new DataTable();
+                    DB.adp.Fill(dtCustId);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error Occured!" + ex.Message);
+                }
+                finally
+                {
+                    DB.CloseConnection();
+                }
 
                 cbCustId.Items.Add("All Customers");
 
