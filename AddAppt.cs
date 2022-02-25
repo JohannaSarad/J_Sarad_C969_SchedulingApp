@@ -44,12 +44,19 @@ namespace J_Sarad_C969_SchedulingApp
             //update selected appointment
             DB.currentIndex = e.RowIndex;
         }
-        
+
         //Button Click Events
         private void btnSelectCust_Click(object sender, EventArgs e)
         {
             //set customerName text to currently selected dgv row Customer Name
-            txtName.Text = dgvCustSearch.Rows[DB.currentIndex].Cells["Customer Name"].Value.ToString();
+            if (DB.currentIndex >= 0)
+            {
+                txtName.Text = dgvCustSearch.Rows[DB.currentIndex].Cells["Customer Name"].Value.ToString();
+            }
+            else
+            {
+                MessageBox.Show("Please choose a customer from the search list to select");
+            }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -70,6 +77,8 @@ namespace J_Sarad_C969_SchedulingApp
             //traverse dtCustomer DataTable for rows with names and IDs matching user textbox input
             foreach(DataRow row in Customer.dtCustomer.Rows)
             {
+                string trimName = row["Customer Name"].ToString().ToUpper().Replace(" ", String.Empty);
+                MessageBox.Show(trimName);
                 
                 if (row["Customer Name"].ToString().ToUpper() == txtName.Text.ToUpper())
                 {
@@ -82,7 +91,8 @@ namespace J_Sarad_C969_SchedulingApp
                     //this although does not change the static object and should only belong to this instance
                     customer.currentCustId = row["Customer ID"].ToString();
                 }
-                else if (row["Customer Name"].ToString().ToUpper().Contains(txtName.Text.ToUpper()))
+                //else if (row["Customer Name"].ToString().ToUpper().Contains(txtName.Text.ToUpper()))
+                else if (trimName.Contains(txtName.Text.ToUpper()) && !String.IsNullOrEmpty(txtName.Text))
                 {
                     DialogResult result = MessageBox.Show($"Did you mean {row["Customer Name"]}",
                         "Similar Name in Database", MessageBoxButtons.YesNo);
@@ -130,17 +140,11 @@ namespace J_Sarad_C969_SchedulingApp
                         $"{Appointment.CurrentApptObj["Start Time"]} to " +
                         $"{Appointment.CurrentApptObj["End Time"]}", "Overlapping Appointment");
             }
-            else if (startAppt > endAppt)
+            else if (startAppt >= endAppt)
             {
-                //alert user if selected appointment start time is after selected appointment end time
-                MessageBox.Show("The appointment start time cannot be later than the appointment end time");
+                //alert user if selected appointment start time is at the same time or after selected appointment end time
+                MessageBox.Show("The appointment end time must be later than the appointment start time");
             }
-            else if (startAppt == endAppt)
-            {
-                //alert user if selected appointment start time is the same as selected appointment end time
-                MessageBox.Show("The appointment start time cannot be the same as the appointment end time");
-            }
-            //validate that there are no empty textboxes
             else if  (string.IsNullOrEmpty(txtName.Text))
             {
                 //alert user if customer name field is not filled in
@@ -214,6 +218,10 @@ namespace J_Sarad_C969_SchedulingApp
 
             //create new datatable to store and display search results
             DataTable dtSearch = new DataTable();
+            if(dtSearch != null)
+            {
+                dtSearch.Clear();
+            }
             foreach (DataRow row in customerSearch.Rows)
             {
                 //Traverse customerSearch datatable for customer names that contain user search textbox input
@@ -250,6 +258,8 @@ namespace J_Sarad_C969_SchedulingApp
                     form.ShowDialog();
                 }
             }
+            DB.currentIndex = -1;
+            dgvCustSearch.ClearSelection();
         }
 
         private void btnViewAll_Click(object sender, EventArgs e)

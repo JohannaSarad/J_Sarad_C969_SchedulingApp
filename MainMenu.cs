@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using J_Sarad_C969_SchedulingApp.model;
@@ -27,6 +28,7 @@ namespace J_Sarad_C969_SchedulingApp
             InitializeComponent();
         }
 
+        
         private void MainMenu_Load(object sender, EventArgs e)
         {
             //variable and property initialization
@@ -40,6 +42,7 @@ namespace J_Sarad_C969_SchedulingApp
             
             //call to show all appointments in dgvCalendar and display for all form controls
             ShowAll();
+            DB.OverrideCulture();
             displayControls();
         }
 
@@ -212,6 +215,7 @@ namespace J_Sarad_C969_SchedulingApp
         //display format for Data Grid View dgvCalendar, monthCalendar cbMonthWeek, and combobox cbMonthWeek
         private void displayControls()
         {
+            
             //dgvCalendar formatting
             dgvCalendar.DataSource = Appointment.dtAppointments;
             dgvCalendar.SelectionMode = DataGridViewSelectionMode.FullRowSelect;

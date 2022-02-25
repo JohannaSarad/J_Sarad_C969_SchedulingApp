@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using MySql.Data;
 using System.Configuration;
+using System.Threading;
+using System.Globalization;
 
 namespace J_Sarad_C969_SchedulingApp.model
 {
@@ -48,6 +50,12 @@ namespace J_Sarad_C969_SchedulingApp.model
         public static void NonQuery(string query)
         {
             cmd = new MySqlCommand(query, con);
+        }
+
+        public static void OverrideCulture()
+        {
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("en");
+            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("en");
         }
     }
 }

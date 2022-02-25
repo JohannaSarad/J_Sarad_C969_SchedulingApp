@@ -59,7 +59,7 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             this.cbType.FormattingEnabled = true;
             this.cbType.Location = new System.Drawing.Point(213, 36);
-            this.cbType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbType.Margin = new System.Windows.Forms.Padding(4);
             this.cbType.Name = "cbType";
             this.cbType.Size = new System.Drawing.Size(200, 24);
             this.cbType.TabIndex = 0;
@@ -96,7 +96,7 @@ namespace J_Sarad_C969_SchedulingApp
             // txtName
             // 
             this.txtName.Location = new System.Drawing.Point(213, 91);
-            this.txtName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtName.Margin = new System.Windows.Forms.Padding(4);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(200, 23);
             this.txtName.TabIndex = 10;
@@ -106,7 +106,9 @@ namespace J_Sarad_C969_SchedulingApp
             this.dtpDate.CustomFormat = "MM/dd/yyyy";
             this.dtpDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpDate.Location = new System.Drawing.Point(213, 153);
-            this.dtpDate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpDate.Margin = new System.Windows.Forms.Padding(4);
+            this.dtpDate.MaxDate = new System.DateTime(2032, 12, 31, 0, 0, 0, 0);
+            this.dtpDate.MinDate = new System.DateTime(2012, 1, 1, 0, 0, 0, 0);
             this.dtpDate.Name = "dtpDate";
             this.dtpDate.ShowUpDown = true;
             this.dtpDate.Size = new System.Drawing.Size(119, 23);
@@ -126,7 +128,7 @@ namespace J_Sarad_C969_SchedulingApp
             // btnSave
             // 
             this.btnSave.Location = new System.Drawing.Point(213, 344);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(4);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(100, 28);
             this.btnSave.TabIndex = 13;
@@ -137,7 +139,7 @@ namespace J_Sarad_C969_SchedulingApp
             // btnCancel
             // 
             this.btnCancel.Location = new System.Drawing.Point(321, 344);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(100, 28);
             this.btnCancel.TabIndex = 14;
@@ -150,7 +152,7 @@ namespace J_Sarad_C969_SchedulingApp
             this.dgvCustSearch.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvCustSearch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCustSearch.Location = new System.Drawing.Point(537, 97);
-            this.dgvCustSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvCustSearch.Margin = new System.Windows.Forms.Padding(4);
             this.dgvCustSearch.Name = "dgvCustSearch";
             this.dgvCustSearch.Size = new System.Drawing.Size(423, 239);
             this.dgvCustSearch.TabIndex = 16;
@@ -169,7 +171,7 @@ namespace J_Sarad_C969_SchedulingApp
             // btnSearch
             // 
             this.btnSearch.Location = new System.Drawing.Point(860, 56);
-            this.btnSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(4);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(100, 28);
             this.btnSearch.TabIndex = 19;
@@ -180,7 +182,7 @@ namespace J_Sarad_C969_SchedulingApp
             // txtSearch
             // 
             this.txtSearch.Location = new System.Drawing.Point(659, 59);
-            this.txtSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSearch.Margin = new System.Windows.Forms.Padding(4);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(184, 23);
             this.txtSearch.TabIndex = 20;
@@ -188,7 +190,7 @@ namespace J_Sarad_C969_SchedulingApp
             // btnSelectCust
             // 
             this.btnSelectCust.Location = new System.Drawing.Point(760, 346);
-            this.btnSelectCust.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSelectCust.Margin = new System.Windows.Forms.Padding(4);
             this.btnSelectCust.Name = "btnSelectCust";
             this.btnSelectCust.Size = new System.Drawing.Size(200, 28);
             this.btnSelectCust.TabIndex = 21;
@@ -219,7 +221,7 @@ namespace J_Sarad_C969_SchedulingApp
             // btnExit
             // 
             this.btnExit.Location = new System.Drawing.Point(860, 407);
-            this.btnExit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnExit.Margin = new System.Windows.Forms.Padding(4);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(100, 28);
             this.btnExit.TabIndex = 27;
@@ -243,7 +245,7 @@ namespace J_Sarad_C969_SchedulingApp
             this.dtpStart.CustomFormat = "hh:mm tt";
             this.dtpStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpStart.Location = new System.Drawing.Point(213, 211);
-            this.dtpStart.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpStart.Margin = new System.Windows.Forms.Padding(4);
             this.dtpStart.Name = "dtpStart";
             this.dtpStart.ShowUpDown = true;
             this.dtpStart.Size = new System.Drawing.Size(119, 23);
@@ -255,7 +257,7 @@ namespace J_Sarad_C969_SchedulingApp
             this.dtpEnd.CustomFormat = "hh:mm tt";
             this.dtpEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpEnd.Location = new System.Drawing.Point(213, 272);
-            this.dtpEnd.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpEnd.Margin = new System.Windows.Forms.Padding(4);
             this.dtpEnd.Name = "dtpEnd";
             this.dtpEnd.ShowUpDown = true;
             this.dtpEnd.Size = new System.Drawing.Size(119, 23);
@@ -322,7 +324,7 @@ namespace J_Sarad_C969_SchedulingApp
             this.Controls.Add(this.lblType);
             this.Controls.Add(this.cbType);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "AddAppt";
             this.Text = "Add Appointment";
             this.Load += new System.EventHandler(this.AddAppt_Load);

@@ -44,9 +44,10 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             // btnEditCust
             // 
-            this.btnEditCust.Location = new System.Drawing.Point(18, 303);
+            this.btnEditCust.Location = new System.Drawing.Point(25, 323);
+            this.btnEditCust.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnEditCust.Name = "btnEditCust";
-            this.btnEditCust.Size = new System.Drawing.Size(227, 23);
+            this.btnEditCust.Size = new System.Drawing.Size(225, 28);
             this.btnEditCust.TabIndex = 2;
             this.btnEditCust.Text = "View/Edit Customers";
             this.btnEditCust.UseVisualStyleBackColor = true;
@@ -54,9 +55,10 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             // btnReports
             // 
-            this.btnReports.Location = new System.Drawing.Point(18, 366);
+            this.btnReports.Location = new System.Drawing.Point(25, 395);
+            this.btnReports.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnReports.Name = "btnReports";
-            this.btnReports.Size = new System.Drawing.Size(227, 23);
+            this.btnReports.Size = new System.Drawing.Size(225, 28);
             this.btnReports.TabIndex = 3;
             this.btnReports.Text = "Generate Reports";
             this.btnReports.UseVisualStyleBackColor = true;
@@ -66,19 +68,20 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             this.dgvCalendar.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvCalendar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCalendar.Location = new System.Drawing.Point(277, 86);
+            this.dgvCalendar.Location = new System.Drawing.Point(300, 106);
+            this.dgvCalendar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvCalendar.MultiSelect = false;
             this.dgvCalendar.Name = "dgvCalendar";
             this.dgvCalendar.ReadOnly = true;
-            this.dgvCalendar.Size = new System.Drawing.Size(675, 306);
+            this.dgvCalendar.Size = new System.Drawing.Size(643, 317);
             this.dgvCalendar.TabIndex = 4;
-            //this.dgvCalendar.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCalendar_CellContentClick);
             // 
             // lblAppointments
             // 
             this.lblAppointments.AutoSize = true;
             this.lblAppointments.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.lblAppointments.Location = new System.Drawing.Point(275, 63);
+            this.lblAppointments.Location = new System.Drawing.Point(296, 79);
+            this.lblAppointments.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblAppointments.Name = "lblAppointments";
             this.lblAppointments.Size = new System.Drawing.Size(73, 20);
             this.lblAppointments.TabIndex = 7;
@@ -86,9 +89,10 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             // btnUpdateAppt
             // 
-            this.btnUpdateAppt.Location = new System.Drawing.Point(18, 335);
+            this.btnUpdateAppt.Location = new System.Drawing.Point(25, 359);
+            this.btnUpdateAppt.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnUpdateAppt.Name = "btnUpdateAppt";
-            this.btnUpdateAppt.Size = new System.Drawing.Size(227, 23);
+            this.btnUpdateAppt.Size = new System.Drawing.Size(225, 28);
             this.btnUpdateAppt.TabIndex = 11;
             this.btnUpdateAppt.Text = "Veiw/Edit Appointments";
             this.btnUpdateAppt.UseVisualStyleBackColor = true;
@@ -96,9 +100,10 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(877, 416);
+            this.btnExit.Location = new System.Drawing.Point(843, 456);
+            this.btnExit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(75, 23);
+            this.btnExit.Size = new System.Drawing.Size(100, 28);
             this.btnExit.TabIndex = 13;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
@@ -106,7 +111,8 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             // monthCal
             // 
-            this.monthCal.Location = new System.Drawing.Point(17, 119);
+            this.monthCal.Location = new System.Drawing.Point(23, 146);
+            this.monthCal.Margin = new System.Windows.Forms.Padding(12, 11, 12, 11);
             this.monthCal.MaxDate = new System.DateTime(2040, 12, 31, 0, 0, 0, 0);
             this.monthCal.MinDate = new System.DateTime(1990, 1, 1, 0, 0, 0, 0);
             this.monthCal.Name = "monthCal";
@@ -117,9 +123,10 @@ namespace J_Sarad_C969_SchedulingApp
             // cbMonthWeek
             // 
             this.cbMonthWeek.FormattingEnabled = true;
-            this.cbMonthWeek.Location = new System.Drawing.Point(19, 86);
+            this.cbMonthWeek.Location = new System.Drawing.Point(25, 106);
+            this.cbMonthWeek.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbMonthWeek.Name = "cbMonthWeek";
-            this.cbMonthWeek.Size = new System.Drawing.Size(121, 21);
+            this.cbMonthWeek.Size = new System.Drawing.Size(160, 24);
             this.cbMonthWeek.TabIndex = 15;
             this.cbMonthWeek.SelectedIndexChanged += new System.EventHandler(this.cbMonthWeek_SelectedIndexChanged);
             // 
@@ -127,7 +134,8 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label1.Location = new System.Drawing.Point(21, 67);
+            this.label1.Location = new System.Drawing.Point(28, 82);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(121, 17);
             this.label1.TabIndex = 16;
@@ -137,19 +145,19 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             this.lblGreeting.AutoSize = true;
             this.lblGreeting.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.lblGreeting.Location = new System.Drawing.Point(275, 19);
+            this.lblGreeting.Location = new System.Drawing.Point(21, 19);
+            this.lblGreeting.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblGreeting.Name = "lblGreeting";
             this.lblGreeting.Size = new System.Drawing.Size(359, 20);
             this.lblGreeting.TabIndex = 17;
             this.lblGreeting.Text = "Welcome User. What Can I Help You with Today?";
             this.lblGreeting.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            //this.lblGreeting.Click += new System.EventHandler(this.lblGreeting_Click);
             // 
             // MainMenu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1062, 461);
+            this.ClientSize = new System.Drawing.Size(1028, 567);
             this.Controls.Add(this.lblGreeting);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cbMonthWeek);
@@ -160,6 +168,8 @@ namespace J_Sarad_C969_SchedulingApp
             this.Controls.Add(this.dgvCalendar);
             this.Controls.Add(this.btnReports);
             this.Controls.Add(this.btnEditCust);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "MainMenu";
             this.Text = "MainMenu";
             this.Load += new System.EventHandler(this.MainMenu_Load);
