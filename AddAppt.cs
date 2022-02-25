@@ -65,6 +65,8 @@ namespace J_Sarad_C969_SchedulingApp
             DateTime date = dtpDate.Value.Date;
             TimeSpan startTime = dtpStart.Value.TimeOfDay;
             TimeSpan endTime = dtpEnd.Value.TimeOfDay;
+            
+            //set seconds to 00
             DateTime startAppt = date.Add(startTime).AddSeconds(-date.Add(startTime).Second);
             DateTime endAppt = date.Add(endTime).AddSeconds(-date.Add(endTime).Second);
 
@@ -74,7 +76,7 @@ namespace J_Sarad_C969_SchedulingApp
             appointment.IsOverlap(startAppt, endAppt, userId);
             appointment.IsBusinessHours(dtpDate.Value, dtpStart.Value, dtpEnd.Value);
 
-            //traverse dtCustomer DataTable for rows with names and IDs matching user textbox input
+            //check for rows with names and IDs matching user textbox input
             foreach(DataRow row in Customer.dtCustomer.Rows)
             {
                 string trimName = row["Customer Name"].ToString().ToUpper().Replace(" ", String.Empty);
@@ -82,18 +84,14 @@ namespace J_Sarad_C969_SchedulingApp
                 
                 if (row["Customer Name"].ToString().ToUpper() == txtName.Text.ToUpper())
                 {
-                    MessageBox.Show(row["Customer Name"].ToString().ToUpper() + ", " + txtName.Text.ToUpper());
-                    //Update validCustomer to true if current datatable row's customer name matches user textbox
-                    //input customer name
+                    //if user input customer name is exactly a name in the database
+                    //MessageBox.Show(row["Customer Name"].ToString().ToUpper() + ", " + txtName.Text.ToUpper());
                     validCustomer = true;
-                    //if the name is found the id is set (maybe this should update the
-                    //currentCustObj) --customer.Update
-                    //this although does not change the static object and should only belong to this instance
                     customer.currentCustId = row["Customer ID"].ToString();
                 }
-                //else if (row["Customer Name"].ToString().ToUpper().Contains(txtName.Text.ToUpper()))
                 else if (trimName.Contains(txtName.Text.ToUpper()) && !String.IsNullOrEmpty(txtName.Text))
                 {
+                    //alert user if customer name is similar to a name in the database
                     DialogResult result = MessageBox.Show($"Did you mean {row["Customer Name"]}",
                         "Similar Name in Database", MessageBoxButtons.YesNo);
                     if(result == DialogResult.Yes)
@@ -103,13 +101,9 @@ namespace J_Sarad_C969_SchedulingApp
                         txtName.Text = row["Customer Name"].ToString();
                         similarityCheck = true;
                     }
-                    if (result == DialogResult.No)
-                    {
-                        similarityCheck = false;
-                    }
                 }
             }
-            if (!validCustomer && (similarityCheck))
+            if (!validCustomer)
             {
                 //show message box exception if no valid customer is found in user input
                 DialogResult result = MessageBox.Show("There is no existing customer by this name,\r\n " +
@@ -224,8 +218,7 @@ namespace J_Sarad_C969_SchedulingApp
             }
             foreach (DataRow row in customerSearch.Rows)
             {
-                //Traverse customerSearch datatable for customer names that contain user search textbox input
-                //and assign results to dtSearch datable
+                //if user input matches customer name in database add it to dtSearch
                 if (row["Customer Name"].ToString().ToUpper().Contains(txtSearch.Text.ToUpper()))
                 {
                     dtSearch =
@@ -234,8 +227,7 @@ namespace J_Sarad_C969_SchedulingApp
                     dgvCustSearch.DataSource = dtSearch;
                     foundCustomer = true;
                 }
-                //Traverse customerSearch datatavle for customer IDs that match user serch textbox imput and
-                //assign results to dtSearch datatable
+                //if user input matched customer id in database add it to dtSearch
                 else if (row["Customer ID"].ToString() == (txtSearch.Text))
                 {
                     dtSearch =
@@ -246,7 +238,12 @@ namespace J_Sarad_C969_SchedulingApp
                 }
             }
             if (!foundCustomer) 
-            { 
+            {
+                if (dtSearch != null)
+                {
+                    dtSearch.Clear();
+                }
+                dgvCustSearch.DataSource = dtSearch;
                 //alert user if No customer in the database matched their search
                 DialogResult result = MessageBox.Show("There is no customer matching that Name or ID. \n " +
                     "Would you like to add a new customer", "Search Found No Results", MessageBoxButtons.YesNo);
@@ -258,6 +255,7 @@ namespace J_Sarad_C969_SchedulingApp
                     form.ShowDialog();
                 }
             }
+            //reset current index and dgv selection
             DB.currentIndex = -1;
             dgvCustSearch.ClearSelection();
         }
