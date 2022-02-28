@@ -162,9 +162,9 @@ namespace J_Sarad_C969_SchedulingApp
             monthCal.RemoveAllBoldedDates();
             Appointment.dtAppointments.Clear();
 
-            /*creates start and end dates of month from monthCalender click currentDate and converts them from
-             * string to DateTime */
-            //FIX ME!!! next month (end) doesn't work when I get to december. 
+            //start and end dates of month from monthCalender click currentDate and converts them from
+            // string to DateTime 
+           
             int month = (int)currentDate.Month;
             int year = (int)currentDate.Year;
             int nextMonth;
@@ -181,13 +181,14 @@ namespace J_Sarad_C969_SchedulingApp
             else
             {
                 nextMonth = month + 1;
+                start = (year.ToString() + "-" + month.ToString() + "-" + "01");
+                end = (year.ToString() + "-" + nextMonth.ToString() + "-" + "01");
             }
-            start = (year.ToString() + "-" + month.ToString() + "-" + "01");
-            end = (year.ToString() + "-" + nextMonth.ToString() + "-" + "01");
+            
             DateTime startDate = Convert.ToDateTime(start);
             DateTime endDate = Convert.ToDateTime(end);
             var daysInMonth = (endDate - startDate).TotalDays;
-            MessageBox.Show($"{startDate}, {endDate}");
+            //MessageBox.Show($"{startDate}, {endDate}");
 
             //bolds days of selected month in MonthCalendar
             for (var i = 0; i <= daysInMonth; i++)

@@ -36,10 +36,11 @@ namespace J_Sarad_C969_SchedulingApp
                 //alert user that there are empty text fields
                 MessageBox.Show("Please Fill out all required fields");
             }
-            else if ((!Int64.TryParse(phone, out i)) || (phone.Length < 10) || (phone.Length > 15))
+            else if ((!Int64.TryParse(phone, out i)) || (phone.Length < 10) || (phone.Length > 15)
+                || (phone.Trim().StartsWith("0")))
             {
                 //alert user to input a valid telephone number with only digits
-                MessageBox.Show("Phone Number must be between 10 and 15 digits");
+                MessageBox.Show("Phone Number must be between 10 and 15 digits \nand cannot start with zero");
             }
             else
             {

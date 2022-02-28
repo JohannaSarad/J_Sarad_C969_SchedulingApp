@@ -90,8 +90,13 @@ namespace J_Sarad_C969_SchedulingApp
         {
             if (DB.currentIndex >= 0) {
                 //delete selected customer from database
-                customer.DeleteCustomer(customer.currentCustId);
-                displayControls();
+                DialogResult result = MessageBox.Show("Are you sure you want to delete this customer?", " ", 
+                    MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    customer.DeleteCustomer(customer.currentCustId);
+                    displayControls();
+                }
                 dgvCustomers.ClearSelection();
                 DB.currentIndex = -1;
             }

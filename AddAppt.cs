@@ -16,7 +16,7 @@ namespace J_Sarad_C969_SchedulingApp
     {
         //AddAppt Form variables
         DataTable customerSearch;
-        //bool validCustomer;
+        
         bool foundCustomer;
 
         //create instance of Appointment class
