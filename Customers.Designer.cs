@@ -48,7 +48,6 @@ namespace J_Sarad_C969_SchedulingApp
             this.dgvCustomers.Size = new System.Drawing.Size(747, 283);
             this.dgvCustomers.TabIndex = 12;
             this.dgvCustomers.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCustomers_CellClick);
-            //this.dgvCustomers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCustomers_CellContentClick);
             // 
             // btnAdd
             // 
@@ -120,6 +119,7 @@ namespace J_Sarad_C969_SchedulingApp
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Customers";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Customers";
             this.Load += new System.EventHandler(this.Customer_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomers)).EndInit();

@@ -80,7 +80,7 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             this.cbType.FormattingEnabled = true;
             this.cbType.Location = new System.Drawing.Point(183, 121);
-            this.cbType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbType.Margin = new System.Windows.Forms.Padding(4);
             this.cbType.Name = "cbType";
             this.cbType.Size = new System.Drawing.Size(227, 24);
             this.cbType.TabIndex = 6;
@@ -88,7 +88,7 @@ namespace J_Sarad_C969_SchedulingApp
             // txtName
             // 
             this.txtName.Location = new System.Drawing.Point(183, 56);
-            this.txtName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtName.Margin = new System.Windows.Forms.Padding(4);
             this.txtName.Name = "txtName";
             this.txtName.ReadOnly = true;
             this.txtName.Size = new System.Drawing.Size(227, 23);
@@ -99,7 +99,7 @@ namespace J_Sarad_C969_SchedulingApp
             this.dtpDate.CustomFormat = "MM/dd/yyyy";
             this.dtpDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpDate.Location = new System.Drawing.Point(183, 197);
-            this.dtpDate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpDate.Margin = new System.Windows.Forms.Padding(4);
             this.dtpDate.Name = "dtpDate";
             this.dtpDate.ShowUpDown = true;
             this.dtpDate.Size = new System.Drawing.Size(100, 23);
@@ -108,7 +108,7 @@ namespace J_Sarad_C969_SchedulingApp
             // btnSave
             // 
             this.btnSave.Location = new System.Drawing.Point(183, 379);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(4);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(100, 28);
             this.btnSave.TabIndex = 11;
@@ -119,7 +119,7 @@ namespace J_Sarad_C969_SchedulingApp
             // btnCancel
             // 
             this.btnCancel.Location = new System.Drawing.Point(313, 379);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(100, 28);
             this.btnCancel.TabIndex = 12;
@@ -132,7 +132,7 @@ namespace J_Sarad_C969_SchedulingApp
             this.dtpStart.CustomFormat = "hh:mm tt";
             this.dtpStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpStart.Location = new System.Drawing.Point(183, 258);
-            this.dtpStart.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpStart.Margin = new System.Windows.Forms.Padding(4);
             this.dtpStart.Name = "dtpStart";
             this.dtpStart.ShowUpDown = true;
             this.dtpStart.Size = new System.Drawing.Size(100, 23);
@@ -143,7 +143,7 @@ namespace J_Sarad_C969_SchedulingApp
             this.dtpEnd.CustomFormat = "hh:mm tt";
             this.dtpEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpEnd.Location = new System.Drawing.Point(183, 318);
-            this.dtpEnd.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpEnd.Margin = new System.Windows.Forms.Padding(4);
             this.dtpEnd.Name = "dtpEnd";
             this.dtpEnd.ShowUpDown = true;
             this.dtpEnd.Size = new System.Drawing.Size(100, 23);
@@ -220,8 +220,9 @@ namespace J_Sarad_C969_SchedulingApp
             this.Controls.Add(this.lblType);
             this.Controls.Add(this.lblName);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "UpdateAppt";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "UpdateAppt";
             this.Load += new System.EventHandler(this.UpdateAppt_Load);
             this.ResumeLayout(false);

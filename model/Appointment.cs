@@ -61,7 +61,7 @@ namespace J_Sarad_C969_SchedulingApp.model
                     "select appointmentId as 'Appointment ID', type as 'Appointment Type', userId as 'User ID'," +
                     "userName as 'User Name', customerId as 'Customer ID', customerName as 'Customer Name', " +
                     "start as 'Date', start as 'Start Time', end as 'End Time' from user inner join appointment " +
-                    "using(userId) inner join customer using(customerId)";
+                    "using(userId) inner join customer using(customerId) order by start";
                 DB.Query(query);
                 dtAppointments = new DataTable();
                 DB.adp.Fill(dtAppointments);

@@ -39,6 +39,7 @@ namespace J_Sarad_C969_SchedulingApp
             this.cbCustId = new System.Windows.Forms.ComboBox();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnMenu = new System.Windows.Forms.Button();
+            this.lblApptGreeting = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAppointments)).BeginInit();
             this.SuspendLayout();
             // 
@@ -46,18 +47,20 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             this.dgvAppointments.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvAppointments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvAppointments.Location = new System.Drawing.Point(37, 110);
+            this.dgvAppointments.Location = new System.Drawing.Point(37, 205);
             this.dgvAppointments.Margin = new System.Windows.Forms.Padding(4);
             this.dgvAppointments.Name = "dgvAppointments";
-            this.dgvAppointments.Size = new System.Drawing.Size(870, 283);
+            this.dgvAppointments.Size = new System.Drawing.Size(893, 292);
             this.dgvAppointments.TabIndex = 0;
             this.dgvAppointments.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAppointments_CellClick);
             // 
             // cbApptType
             // 
             this.cbApptType.FormattingEnabled = true;
-            this.cbApptType.Location = new System.Drawing.Point(37, 54);
+            this.cbApptType.IntegralHeight = false;
+            this.cbApptType.Location = new System.Drawing.Point(36, 104);
             this.cbApptType.Margin = new System.Windows.Forms.Padding(4);
+            this.cbApptType.MaxDropDownItems = 4;
             this.cbApptType.Name = "cbApptType";
             this.cbApptType.Size = new System.Drawing.Size(160, 24);
             this.cbApptType.TabIndex = 2;
@@ -66,7 +69,7 @@ namespace J_Sarad_C969_SchedulingApp
             // lblType
             // 
             this.lblType.AutoSize = true;
-            this.lblType.Location = new System.Drawing.Point(33, 22);
+            this.lblType.Location = new System.Drawing.Point(33, 72);
             this.lblType.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblType.Name = "lblType";
             this.lblType.Size = new System.Drawing.Size(180, 17);
@@ -75,7 +78,7 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(37, 414);
+            this.btnAdd.Location = new System.Drawing.Point(38, 519);
             this.btnAdd.Margin = new System.Windows.Forms.Padding(4);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(167, 28);
@@ -86,7 +89,7 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(257, 414);
+            this.btnUpdate.Location = new System.Drawing.Point(219, 519);
             this.btnUpdate.Margin = new System.Windows.Forms.Padding(4);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(167, 28);
@@ -97,7 +100,7 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(472, 414);
+            this.btnDelete.Location = new System.Drawing.Point(394, 519);
             this.btnDelete.Margin = new System.Windows.Forms.Padding(4);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(167, 28);
@@ -109,7 +112,7 @@ namespace J_Sarad_C969_SchedulingApp
             // lblSelectedCust
             // 
             this.lblSelectedCust.AutoSize = true;
-            this.lblSelectedCust.Location = new System.Drawing.Point(244, 22);
+            this.lblSelectedCust.Location = new System.Drawing.Point(244, 72);
             this.lblSelectedCust.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSelectedCust.Name = "lblSelectedCust";
             this.lblSelectedCust.Size = new System.Drawing.Size(142, 17);
@@ -119,8 +122,10 @@ namespace J_Sarad_C969_SchedulingApp
             // cbCustId
             // 
             this.cbCustId.FormattingEnabled = true;
-            this.cbCustId.Location = new System.Drawing.Point(248, 54);
+            this.cbCustId.IntegralHeight = false;
+            this.cbCustId.Location = new System.Drawing.Point(247, 104);
             this.cbCustId.Margin = new System.Windows.Forms.Padding(4);
+            this.cbCustId.MaxDropDownItems = 4;
             this.cbCustId.Name = "cbCustId";
             this.cbCustId.Size = new System.Drawing.Size(160, 24);
             this.cbCustId.TabIndex = 9;
@@ -128,7 +133,7 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(807, 414);
+            this.btnExit.Location = new System.Drawing.Point(830, 519);
             this.btnExit.Margin = new System.Windows.Forms.Padding(4);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(100, 28);
@@ -139,7 +144,7 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             // btnMenu
             // 
-            this.btnMenu.Location = new System.Drawing.Point(723, 50);
+            this.btnMenu.Location = new System.Drawing.Point(746, 104);
             this.btnMenu.Margin = new System.Windows.Forms.Padding(4);
             this.btnMenu.Name = "btnMenu";
             this.btnMenu.Size = new System.Drawing.Size(184, 28);
@@ -148,11 +153,21 @@ namespace J_Sarad_C969_SchedulingApp
             this.btnMenu.UseVisualStyleBackColor = true;
             this.btnMenu.Click += new System.EventHandler(this.btnMenu_Click);
             // 
+            // lblApptGreeting
+            // 
+            this.lblApptGreeting.AutoSize = true;
+            this.lblApptGreeting.Location = new System.Drawing.Point(34, 28);
+            this.lblApptGreeting.Name = "lblApptGreeting";
+            this.lblApptGreeting.Size = new System.Drawing.Size(153, 17);
+            this.lblApptGreeting.TabIndex = 12;
+            this.lblApptGreeting.Text = "Appointments for User ";
+            // 
             // Appointments
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(952, 462);
+            this.ClientSize = new System.Drawing.Size(970, 571);
+            this.Controls.Add(this.lblApptGreeting);
             this.Controls.Add(this.btnMenu);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.cbCustId);
@@ -166,6 +181,7 @@ namespace J_Sarad_C969_SchedulingApp
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Appointments";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Appointments";
             this.Load += new System.EventHandler(this.Appointments_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvAppointments)).EndInit();
@@ -185,5 +201,6 @@ namespace J_Sarad_C969_SchedulingApp
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnMenu;
         public System.Windows.Forms.DataGridView dgvAppointments;
+        private System.Windows.Forms.Label lblApptGreeting;
     }
 }

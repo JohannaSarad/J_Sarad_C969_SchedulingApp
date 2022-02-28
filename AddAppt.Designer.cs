@@ -100,6 +100,7 @@ namespace J_Sarad_C969_SchedulingApp
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(200, 23);
             this.txtName.TabIndex = 10;
+            //this.txtName.TextChanged += new System.EventHandler(this.txtName_TextChanged);
             // 
             // dtpDate
             // 
@@ -326,6 +327,7 @@ namespace J_Sarad_C969_SchedulingApp
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "AddAppt";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add Appointment";
             this.Load += new System.EventHandler(this.AddAppt_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustSearch)).EndInit();

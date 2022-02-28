@@ -15,8 +15,10 @@ namespace J_Sarad_C969_SchedulingApp.model
         public static DataTable dtCustomer { get; set; }
 
         //global properties
+        public string currentCustomerName { get; set; }
         public static DataRow currentCustObj { get; set; }
         public string currentCustId { get; set; }
+        public bool isValidCustomer { get; set; }
 
         //public Customer() { }
 
@@ -112,6 +114,43 @@ namespace J_Sarad_C969_SchedulingApp.model
             for(int i = 0; i < table.Rows.Count; i++)
             {
                 table.Rows[i]["Phone"] = Convert.ToInt64(table.Rows[i]["Phone"]);
+            }
+        }
+
+        public void  ValidateCustomer(string name)
+        {
+            foreach (DataRow row in dtCustomer.Rows)
+            {
+                //string trimName = row["Customer Name"].ToString().ToUpper().Replace(" ", String.Empty);
+                //MessageBox.Show(trimName);
+
+                if (row["Customer Name"].ToString().ToUpper() == name.ToUpper())
+                {
+                    //if user input customer name is exactly a name in the database
+                    //MessageBox.Show(row["Customer Name"].ToString().ToUpper() + ", " + txtName.Text.ToUpper());
+                    isValidCustomer = true;
+                    currentCustId = row["Customer ID"].ToString();
+                    break;
+                }
+                //else if (trimName.Contains(name.ToUpper()))
+                ////&& !String.IsNullOrEmpty(txtName.Text))
+                //{
+                //    //alert user if customer name is similar to a name in the database
+                //    DialogResult result = MessageBox.Show($"Did you mean {row["Customer Name"]}",
+                //                "Similar Name in Database", MessageBoxButtons.YesNo);
+                //    if (result == DialogResult.Yes)
+                //    {
+                //        isValidCustomer = true;
+                //        currentCustId = row["Customer ID"].ToString();
+                //        //customerSelected = true;
+                //        currentCustomerName = row["Customer Name"].ToString();
+                //        //need to send the name back to the textbox here
+                //    }
+                //}
+                else
+                {
+                    isValidCustomer = false;
+                }
             }
         }
     }

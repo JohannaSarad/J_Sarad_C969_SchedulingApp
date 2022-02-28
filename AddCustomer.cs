@@ -41,10 +41,10 @@ namespace J_Sarad_C969_SchedulingApp
                 //alert user that there are empty text fields
                 MessageBox.Show("Please Fill out all required fields");
             }
-            else if ((!Int64.TryParse(phone, out i)) || (phone.Length != 10))
+            else if ((!Int64.TryParse(phone, out i)) || (phone.Length < 10) || (phone.Length > 15))
             {
                 //alert user to input valid ten digit phone number
-                MessageBox.Show("Phone Number must be 10 digits");
+                MessageBox.Show("Phone Number must be between 10 and 15 digits");
             }
             else if (cbCity.SelectedIndex == 0)
             {

@@ -166,6 +166,7 @@ namespace J_Sarad_C969_SchedulingApp
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "UpdateCustomer";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Update Customer";
             this.Load += new System.EventHandler(this.UpdateCustomer_Load);
             this.ResumeLayout(false);
