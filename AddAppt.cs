@@ -199,6 +199,8 @@ namespace J_Sarad_C969_SchedulingApp
 
             //create new datatable to store and display search results
             DataTable dtSearch = new DataTable();
+
+            dtSearch = customerSearch.AsEnumerable().CopyToDataTable();
             if(dtSearch != null)
             {
                 dtSearch.Clear();
@@ -211,7 +213,7 @@ namespace J_Sarad_C969_SchedulingApp
                     dtSearch =
                         customerSearch.AsEnumerable().Where(x => x["Customer Name"].ToString().ToUpper().Contains(txtSearch.Text.ToUpper())).CopyToDataTable();
                         //lambda used to store rows from customerSearch datatable with customer names that contain user search textbox input
-                    dgvCustSearch.DataSource = dtSearch;
+                    //dgvCustSearch.DataSource = dtSearch;
                     foundCustomer = true;
                 }
                 //if user input matched customer id in database add it to dtSearch
@@ -220,7 +222,7 @@ namespace J_Sarad_C969_SchedulingApp
                     dtSearch =
                         customerSearch.AsEnumerable().Where(x => x["Customer ID"].ToString() == txtSearch.Text).CopyToDataTable();
                         //lambda used to store rows from customerSearch datatvle with customer IDs that match user search textbox input
-                    dgvCustSearch.DataSource = dtSearch;
+                    //dgvCustSearch.DataSource = dtSearch;
                     foundCustomer = true;
                 }
             }
@@ -230,7 +232,7 @@ namespace J_Sarad_C969_SchedulingApp
                 {
                     dtSearch.Clear();
                 }
-                dgvCustSearch.DataSource = dtSearch;
+                //dgvCustSearch.DataSource = dtSearch;
                 //alert user if No customer in the database matched their search
                 DialogResult result = MessageBox.Show("There is no customer matching that Name or ID. \n " +
                     "Would you like to add a new customer", "Search Found No Results", MessageBoxButtons.YesNo);
@@ -242,6 +244,8 @@ namespace J_Sarad_C969_SchedulingApp
                     form.ShowDialog();
                 }
             }
+
+            dgvCustSearch.DataSource = dtSearch;
             //reset current index and dgv selection
             DB.currentIndex = -1;
             dgvCustSearch.ClearSelection();

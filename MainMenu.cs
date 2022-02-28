@@ -164,14 +164,30 @@ namespace J_Sarad_C969_SchedulingApp
 
             /*creates start and end dates of month from monthCalender click currentDate and converts them from
              * string to DateTime */
+            //FIX ME!!! next month (end) doesn't work when I get to december. 
             int month = (int)currentDate.Month;
             int year = (int)currentDate.Year;
-            int nextMonth = month + 1;
-            string start = (year.ToString() + "-" + month.ToString() + "-" + "01");
-            string end = (year.ToString() + "-" + nextMonth.ToString() + "-" + "01");
+            int nextMonth;
+            int nextYear;
+            string start;
+            string end;
+            if (month == 12)
+            {
+                nextMonth = 1;
+                nextYear = year + 1;
+                start = (year.ToString() + "-" + month.ToString() + "-" + "01");
+                end = (nextYear.ToString() + "-" + nextMonth.ToString() + "-" + "01");
+            }
+            else
+            {
+                nextMonth = month + 1;
+            }
+            start = (year.ToString() + "-" + month.ToString() + "-" + "01");
+            end = (year.ToString() + "-" + nextMonth.ToString() + "-" + "01");
             DateTime startDate = Convert.ToDateTime(start);
             DateTime endDate = Convert.ToDateTime(end);
             var daysInMonth = (endDate - startDate).TotalDays;
+            MessageBox.Show($"{startDate}, {endDate}");
 
             //bolds days of selected month in MonthCalendar
             for (var i = 0; i <= daysInMonth; i++)

@@ -153,7 +153,6 @@ namespace J_Sarad_C969_SchedulingApp
                         //type found, fill dtFiltered with appointments matching selected type
                         typeFound = true;
                         
-
                         dtFiltered = dtUserAppts.AsEnumerable().Where(x => x["Appointment Type"].ToString() == cbApptType.Text).CopyToDataTable();
                         //dtFiltered = Appointment.dtAppointments.AsEnumerable().Where(x => x["Appointment Type"].ToString() == cbApptType.Text).CopyToDataTable();
                         //lambda used to store rows from dtCurrentUserAppt datatable with appointment types that match the selected value of Type combobox
