@@ -39,7 +39,7 @@ namespace J_Sarad_C969_SchedulingApp
 
             //method calls to check for overlapping appointments and appointments outside ofbusiness hours
             appointment.IsOverlap(startAppt, endAppt, DB.currentUserID.ToString());
-            appointment.IsBusinessHours(dtpDate.Value, dtpStart.Value, dtpEnd.Value);
+            appointment.IsBusinessHours(dtpDate.Value, startAppt, endAppt);
 
             
             if (!appointment.isBusinessHours)
@@ -88,8 +88,8 @@ namespace J_Sarad_C969_SchedulingApp
                     DB.NonQuery(query);
                     DB.cmd.Parameters.AddWithValue("@Type", cbType.Text.ToString());
                     DB.cmd.Parameters.AddWithValue("@ApptID", Appointment.CurrentApptObj["Appointment ID"]);
-                    DB.cmd.Parameters.AddWithValue("@start", appointment.UniversalTime(date, startTime));
-                    DB.cmd.Parameters.AddWithValue("@end", appointment.UniversalTime(date, endTime));
+                    DB.cmd.Parameters.AddWithValue("@start", appointment.UniversalTime(startAppt));
+                    DB.cmd.Parameters.AddWithValue("@end", appointment.UniversalTime(endAppt));
                     DB.cmd.ExecuteNonQuery();
                     this.Hide();
                     Appointments form = new Appointments();
@@ -105,8 +105,7 @@ namespace J_Sarad_C969_SchedulingApp
                 }
             }
         }
-    
-
+        
         private void btnCancel_Click(object sender, EventArgs e)
         {
             //close UpdateAppt form and open Appointments form

@@ -95,7 +95,7 @@ namespace J_Sarad_C969_SchedulingApp
             //Delete selected row in dgvAppointments from database if a row is selected. 
             if (DB.currentIndex >= 0)
             {
-                DialogResult result = MessageBox.Show("Are you sure you would like to dlete this appointment?", " ",
+                DialogResult result = MessageBox.Show("Are you sure you would like to delete this appointment?", " ",
                     MessageBoxButtons.YesNo);
                 if (result == DialogResult.Yes)
                 {
@@ -239,12 +239,6 @@ namespace J_Sarad_C969_SchedulingApp
                 }
             }
 
-            //
-           // dtUserAppts = Appointment.dtAppointments.AsEnumerable().Where(x => x["User ID"].ToString() == DB.currentUserID.ToString()).CopyToDataTable();
-
-            //dgvAppointments formatting
-            //dgvAppointments.DataSource = Appointment.dtAppointments;
-            //
             dgvAppointments.DataSource = dtUserAppts;
             dgvAppointments.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvAppointments.ReadOnly = true;

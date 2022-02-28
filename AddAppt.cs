@@ -75,7 +75,7 @@ namespace J_Sarad_C969_SchedulingApp
 
             //method calls to check for overlapping appointments and appointments outside ofbusiness hours
             appointment.IsOverlap(startAppt, endAppt, userId);
-            appointment.IsBusinessHours(dtpDate.Value, dtpStart.Value, dtpEnd.Value);
+            appointment.IsBusinessHours(dtpDate.Value, startAppt, endAppt);
             
             if (!String.IsNullOrEmpty(txtName.Text))
             {
@@ -137,66 +137,6 @@ namespace J_Sarad_C969_SchedulingApp
                 MessageBox.Show("Please select or input a Customer for this appointment",
                     "Missing Field Information");
             }
-            //else if (!String.IsNullOrEmpty(txtName.Text) && !validCustomer)
-            //{
-            //    //check for rows with names matching user textbox input
-            //    foreach (DataRow row in Customer.dtCustomer.Rows)
-            //    {
-            //        string trimName = row["Customer Name"].ToString().ToUpper().Replace(" ", String.Empty);
-            //        //MessageBox.Show(trimName);
-
-            //        if (row["Customer Name"].ToString().ToUpper() == txtName.Text.ToUpper())
-            //        {
-            //            //if user input customer name is exactly a name in the database
-            //            //MessageBox.Show(row["Customer Name"].ToString().ToUpper() + ", " + txtName.Text.ToUpper());
-                        
-            //            customer.currentCustId = row["Customer ID"].ToString();
-            //            //switches valid customer from false in textChanged event to true
-            //            validCustomer = true;
-            //            break;
-            //        }
-            //        else if (trimName.Contains(txtName.Text.ToUpper()))
-            //        //&& !String.IsNullOrEmpty(txtName.Text))
-            //        {
-            //            //alert user if customer name is similar to a name in the database
-            //            DialogResult result = MessageBox.Show($"Did you mean {row["Customer Name"]}",
-            //                "Similar Name in Database", MessageBoxButtons.YesNo);
-            //            if (result == DialogResult.Yes)
-            //            {
-                            
-            //                customer.currentCustId = row["Customer ID"].ToString();
-            //                txtName.Text = row["Customer Name"].ToString();
-            //                //switches valid customer from false in textChanged event to true
-            //                validCustomer = true;
-            //                break;
-            //            }
-            //        }
-            //    }
-            //    if (!validCustomer)
-            //    {
-            //        DialogResult result = MessageBox.Show("There is no existing customer by this name,\r\n " +
-            //        "Would you like to add this customer?", "Invalid Customer Name", MessageBoxButtons.YesNo);
-            //        if (result == DialogResult.Yes)
-            //        {
-            //            //close AddAppt form and open AddCustomer form 
-            //            this.Hide();
-            //            AddCustomer form = new AddCustomer();
-            //            form.ShowDialog();
-            //        }
-            //    }
-            //}
-            
-            
-            //    DialogResult result = MessageBox.Show("There is no existing customer by this name,\r\n " +
-            //        "Would you like to add this customer?", "Invalid Customer Name", MessageBoxButtons.YesNo);
-            //    if (result == DialogResult.Yes)
-            //    {
-            //        //close AddAppt form and open AddCustomer form 
-            //        this.Hide();
-            //        AddCustomer form = new AddCustomer();
-            //        form.ShowDialog();
-            //    }
-            //}
             else 
             {
                 try
@@ -217,8 +157,8 @@ namespace J_Sarad_C969_SchedulingApp
                     DB.cmd.Parameters.AddWithValue("@contact", "none");
                     DB.cmd.Parameters.AddWithValue("@type", cbType.Text.ToString());
                     DB.cmd.Parameters.AddWithValue("@url", "none");
-                    DB.cmd.Parameters.AddWithValue("@start", appointment.UniversalTime(date, startTime));
-                    DB.cmd.Parameters.AddWithValue("@end", appointment.UniversalTime(date, endTime));
+                    DB.cmd.Parameters.AddWithValue("@start", appointment.UniversalTime(startAppt));
+                    DB.cmd.Parameters.AddWithValue("@end", appointment.UniversalTime(endAppt));
                     DB.cmd.Parameters.AddWithValue("@user", DB.currentUser.ToString());
                     DB.cmd.ExecuteNonQuery();
                     //close AddAppt form and open Appointments form
@@ -355,15 +295,5 @@ namespace J_Sarad_C969_SchedulingApp
                 dgvCustSearch.RowHeadersVisible = false;
             }
         }
-
-        //private void txtName_TextChanged(object sender, EventArgs e)
-        //{
-        //    //validCustomer = false;
-        //    if (!String.IsNullOrEmpty(txtName.Text))
-        //    {
-        //        string name = txtName.Text.ToString();
-        //        customer.ValidateCustmomer(name);
-        //    }
-        //}
     }  
 }

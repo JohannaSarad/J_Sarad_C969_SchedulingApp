@@ -135,13 +135,15 @@ namespace J_Sarad_C969_SchedulingApp.model
                 }
             }
         }
-        public DateTime UniversalTime(DateTime date, TimeSpan time)
+        public DateTime UniversalTime(DateTime date)
+            //TimeSpan time)
         {
             //append time to date, format resulting DateTime to seconds = 00, convert resulting DateTime from
             //local to universal time, and returns universal DateTime value
-            DateTime formatDate = date.Add(time);
-            DateTime formatDT = formatDate.AddSeconds(-formatDate.Second);
-            DateTime universal = LocalZone.ToUniversalTime(formatDT);
+            //DateTime formatDate = date.Add(time);
+            //DateTime formatDT = formatDate.AddSeconds(-formatDate.Second);
+            DateTime universal = LocalZone.ToUniversalTime(date);
+                //(formatDT);
             return universal;
         }
 
