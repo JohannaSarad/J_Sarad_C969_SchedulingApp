@@ -44,10 +44,10 @@ namespace J_Sarad_C969_SchedulingApp
             DB.currentIndex = e.RowIndex;
             
             //update global appointment ID selected 
-            appointment.CurrentApptID = dgvAppointments.Rows[DB.currentIndex].Cells["Appointment ID"].Value.ToString();
+            Appointment.CurrentApptID = dgvAppointments.Rows[DB.currentIndex].Cells["Appointment ID"].Value.ToString();
             
             //update current appointment object in UpdateAppointments method based on Appt ID
-            appointment.UpdateAppointment(appointment.CurrentApptID);
+            appointment.UpdateAppointment(Appointment.CurrentApptID);
             //updating the static appointmentObj (this should be the same everywhere)
         }
 

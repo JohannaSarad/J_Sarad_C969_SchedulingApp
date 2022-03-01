@@ -21,7 +21,7 @@ namespace J_Sarad_C969_SchedulingApp.model
         public static DataRow CurrentApptObj { get; set; }
 
         //global properties
-        public string CurrentApptID {get; set;}
+        public static string CurrentApptID {get; set;}
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public bool isOverlap { get; set; }
@@ -183,9 +183,13 @@ namespace J_Sarad_C969_SchedulingApp.model
                 //check for overlapping appointment if appointment is not the current appointment
                 if (Appointment.CurrentApptObj != null)
                 {
-                    if (row["Appointment ID"].ToString() == Appointment.CurrentApptObj["Appointment ID"].ToString())
+                    if (CurrentApptID != null)
                     {
-                        isOverlap = false;
+                        if (row["Appointment ID"].ToString() == CurrentApptID.ToString())
+                        //Appointment.CurrentApptObj["Appointment ID"].ToString())
+                        {
+                            isOverlap = false;
+                        }
                     }
                 }
                 else if (userId == row["User ID"].ToString())
@@ -195,7 +199,7 @@ namespace J_Sarad_C969_SchedulingApp.model
                     {
                         //update appointment object
                         CurrentApptObj = row;
-                        CurrentApptID = row["Appointment ID"].ToString();
+                        //CurrentApptID = row["Appointment ID"].ToString();
                         isOverlap = true;
                     }
                 }

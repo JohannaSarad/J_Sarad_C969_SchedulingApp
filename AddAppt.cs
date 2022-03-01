@@ -75,42 +75,43 @@ namespace J_Sarad_C969_SchedulingApp
 
             //method calls to check for overlapping appointments and appointments outside ofbusiness hours
             appointment.IsOverlap(startAppt, endAppt, userId);
-            appointment.IsBusinessHours(dtpDate.Value, startAppt, endAppt);
+            //appointment.IsBusinessHours(dtpDate.Value, startAppt, endAppt);
             
-            if (!String.IsNullOrEmpty(txtName.Text))
-            {
-                customer.ValidateCustomer(txtName.Text.ToString());
-            }
+            //if (!String.IsNullOrEmpty(txtName.Text))
+            //{
+            //    customer.ValidateCustomer(txtName.Text.ToString());
+            //}
 
             //validCustomer = false;
-            if (string.IsNullOrEmpty(txtName.Text))
-            {
-                //alert user if customer name field is not filled in
-                MessageBox.Show("Please select or input a Customer for this appointment",
-                    "Missing Field Information");
-            }
-            else if (!customer.isValidCustomer)
-            {
-                DialogResult result = MessageBox.Show("There is no existing customer by this name,\r\n " +
-                    "Would you like to add this customer?", "Invalid Customer Name", MessageBoxButtons.YesNo);
-                if (result == DialogResult.Yes)
-                {
-                    //close AddAppt form and open AddCustomer form 
-                    this.Hide();
-                    AddCustomer form = new AddCustomer();
-                    form.ShowDialog();
-                }
-            }
-            else if (!appointment.isBusinessHours)
-            {
-                //alert user if appointment is outside of business hours
-                MessageBox.Show("Appointment on " + dtpDate.Value.ToLongDateString() + " from " +
-                        dtpStart.Value.ToShortTimeString() + " to " + dtpEnd.Value.ToShortTimeString() +
-                        "\nis outside of business hours and can not be set." +
-                        "\n\nBusiness Hours are 8:00 AM to 5:00 PM Monday through Friday.",
-                        "Appointment Outside of Business Hours");
-            }
-            else if (appointment.isOverlap)
+            //if (string.IsNullOrEmpty(txtName.Text))
+            //{
+            //    //alert user if customer name field is not filled in
+            //    MessageBox.Show("Please select or input a Customer for this appointment",
+            //        "Missing Field Information");
+            //}
+            //else if (!customer.isValidCustomer)
+            //{
+            //    DialogResult result = MessageBox.Show("There is no existing customer by this name,\r\n " +
+            //        "Would you like to add this customer?", "Invalid Customer Name", MessageBoxButtons.YesNo);
+            //    if (result == DialogResult.Yes)
+            //    {
+            //        //close AddAppt form and open AddCustomer form 
+            //        this.Hide();
+            //        AddCustomer form = new AddCustomer();
+            //        form.ShowDialog();
+            //    }
+            //}
+            //else if (!appointment.isBusinessHours)
+            //{
+            //    //alert user if appointment is outside of business hours
+            //    MessageBox.Show("Appointment on " + dtpDate.Value.ToLongDateString() + " from " +
+            //            dtpStart.Value.ToShortTimeString() + " to " + dtpEnd.Value.ToShortTimeString() +
+            //            "\nis outside of business hours and can not be set." +
+            //            "\n\nBusiness Hours are 8:00 AM to 5:00 PM Monday through Friday.",
+            //            "Appointment Outside of Business Hours");
+            //}
+            //else if (appointment.isOverlap)
+            if(appointment.isOverlap)
             {
                 //alert user if appointment time is overlapping time of another appointment
                 MessageBox.Show($"There is an overlapping appointment for " +
@@ -118,64 +119,65 @@ namespace J_Sarad_C969_SchedulingApp
                         $"{Appointment.CurrentApptObj["Customer Name"]} from \n " +
                         $"{Appointment.CurrentApptObj["Start Time"]} to " +
                         $"{Appointment.CurrentApptObj["End Time"]}", "Overlapping Appointment");
+                Appointment.CurrentApptObj = null;
             }
-            else if (startAppt >= endAppt)
-            {
-                //alert user if selected appointment start time is at the same time or after selected appointment end time
-                MessageBox.Show("The appointment end time must be later than the appointment start time");
-            }
+            //else if (startAppt >= endAppt)
+            //{
+            //    //alert user if selected appointment start time is at the same time or after selected appointment end time
+            //    MessageBox.Show("The appointment end time must be later than the appointment start time");
+            //}
 
-            else if (cbType.SelectedIndex <= 0)
-            {
-                    //alert user if appointment type is not selected
-                MessageBox.Show("Please Select an Appointment Type for this Appointment",
-                    "Missing Field Infromation");
-            }
-            else if (string.IsNullOrEmpty(txtName.Text))
-            {
-                //alert user if customer name field is not filled in
-                MessageBox.Show("Please select or input a Customer for this appointment",
-                    "Missing Field Information");
-            }
-            else 
-            {
-                try
-                {
-                    //add appointment to database
-                    DB.OpenConnection();
-                    string query =
-                    "INSERT INTO appointment (customerId, userId, title, description, location, contact, " +
-                    "type, url, start, end, createDate, createdBy, lastUpdate, lastUpdateBy) " +
-                    "VALUES (@custID, @userID, @title, @description, @location, @contact, @type, @url, @start, " +
-                    "@end, CURDATE(), @user, CURDATE(), @user)";
-                    DB.NonQuery(query);
-                    DB.cmd.Parameters.AddWithValue("@custID", customer.currentCustId);
-                    DB.cmd.Parameters.AddWithValue("@userID", DB.currentUserID);
-                    DB.cmd.Parameters.AddWithValue("@title", "none");
-                    DB.cmd.Parameters.AddWithValue("@description", "none");
-                    DB.cmd.Parameters.AddWithValue("@location", "none");
-                    DB.cmd.Parameters.AddWithValue("@contact", "none");
-                    DB.cmd.Parameters.AddWithValue("@type", cbType.Text.ToString());
-                    DB.cmd.Parameters.AddWithValue("@url", "none");
-                    DB.cmd.Parameters.AddWithValue("@start", appointment.UniversalTime(startAppt));
-                    DB.cmd.Parameters.AddWithValue("@end", appointment.UniversalTime(endAppt));
-                    DB.cmd.Parameters.AddWithValue("@user", DB.currentUser.ToString());
-                    DB.cmd.ExecuteNonQuery();
-                    //close AddAppt form and open Appointments form
-                    this.Hide();
-                    Appointments form = new Appointments();
-                    form.ShowDialog();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error Occured!" + ex);
-                }
-                finally
-                {
-                    DB.CloseConnection();
-                }
-            }
-            //Appointment.CurrentApptObj = null;
+            //else if (cbType.SelectedIndex <= 0)
+            //{
+            //        //alert user if appointment type is not selected
+            //    MessageBox.Show("Please Select an Appointment Type for this Appointment",
+            //        "Missing Field Infromation");
+            //}
+            //else if (string.IsNullOrEmpty(txtName.Text))
+            //{
+            //    //alert user if customer name field is not filled in
+            //    MessageBox.Show("Please select or input a Customer for this appointment",
+            //        "Missing Field Information");
+            //}
+            //else 
+            //{
+            //    try
+            //    {
+            //        //add appointment to database
+            //        DB.OpenConnection();
+            //        string query =
+            //        "INSERT INTO appointment (customerId, userId, title, description, location, contact, " +
+            //        "type, url, start, end, createDate, createdBy, lastUpdate, lastUpdateBy) " +
+            //        "VALUES (@custID, @userID, @title, @description, @location, @contact, @type, @url, @start, " +
+            //        "@end, CURDATE(), @user, CURDATE(), @user)";
+            //        DB.NonQuery(query);
+            //        DB.cmd.Parameters.AddWithValue("@custID", customer.currentCustId);
+            //        DB.cmd.Parameters.AddWithValue("@userID", DB.currentUserID);
+            //        DB.cmd.Parameters.AddWithValue("@title", "none");
+            //        DB.cmd.Parameters.AddWithValue("@description", "none");
+            //        DB.cmd.Parameters.AddWithValue("@location", "none");
+            //        DB.cmd.Parameters.AddWithValue("@contact", "none");
+            //        DB.cmd.Parameters.AddWithValue("@type", cbType.Text.ToString());
+            //        DB.cmd.Parameters.AddWithValue("@url", "none");
+            //        DB.cmd.Parameters.AddWithValue("@start", appointment.UniversalTime(startAppt));
+            //        DB.cmd.Parameters.AddWithValue("@end", appointment.UniversalTime(endAppt));
+            //        DB.cmd.Parameters.AddWithValue("@user", DB.currentUser.ToString());
+            //        DB.cmd.ExecuteNonQuery();
+            //        //close AddAppt form and open Appointments form
+            //        this.Hide();
+            //        Appointments form = new Appointments();
+            //        form.ShowDialog();
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        MessageBox.Show("Error Occured!" + ex);
+            //    }
+            //    finally
+            //    {
+            //        DB.CloseConnection();
+            //    }
+            //}
+            
         }
         
 
