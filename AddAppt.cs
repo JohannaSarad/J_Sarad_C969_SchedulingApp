@@ -175,6 +175,7 @@ namespace J_Sarad_C969_SchedulingApp
                     DB.CloseConnection();
                 }
             }
+            //Appointment.CurrentApptObj = null;
         }
         
 
