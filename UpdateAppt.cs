@@ -13,8 +13,6 @@ namespace J_Sarad_C969_SchedulingApp
 {
     public partial class UpdateAppt : Form
     {
-        //FIX ME!!! DateTimePickers need a range of dates set.
-        
         //create an instance of Appointment class 
         Appointment appointment = new Appointment();
         public UpdateAppt()
@@ -87,7 +85,7 @@ namespace J_Sarad_C969_SchedulingApp
                         "WHERE appointment.appointmentID = @ApptID";
                     DB.NonQuery(query);
                     DB.cmd.Parameters.AddWithValue("@Type", cbType.Text.ToString());
-                    DB.cmd.Parameters.AddWithValue("@ApptID", Appointment.CurrentApptObj["Appointment ID"]);
+                    DB.cmd.Parameters.AddWithValue("@ApptID", Appointment.CurrentApptID);
                     DB.cmd.Parameters.AddWithValue("@start", appointment.UniversalTime(startAppt));
                     DB.cmd.Parameters.AddWithValue("@end", appointment.UniversalTime(endAppt));
                     DB.cmd.ExecuteNonQuery();

@@ -19,9 +19,10 @@ namespace J_Sarad_C969_SchedulingApp.model
         //shared CurrentApptObj needs to be accessed in MainMenu.cs. Appointments.cs, UpdateAppt.cs
         //and AddAppt.cs
         public static DataRow CurrentApptObj { get; set; }
+        public static string CurrentApptID { get; set; }
 
         //global properties
-        public static string CurrentApptID {get; set;}
+
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public bool isOverlap { get; set; }
@@ -30,8 +31,10 @@ namespace J_Sarad_C969_SchedulingApp.model
         //get local timezone
         public static TimeZone LocalZone = TimeZone.CurrentTimeZone;
 
+        //population methods
         public static List<Schedule> FillSchedule()
         {
+            //fills list for user schedule report
             List<Schedule> output = new List<Schedule>();
             
             //fill output List with dtAppointments DataTable 
@@ -53,7 +56,7 @@ namespace J_Sarad_C969_SchedulingApp.model
 
         public static void FillAppointments()
         {
-            //fill Appointments data table from database an display in local time
+            //fill Appointments data table from database and display in local time
             try
             {
                 DB.OpenConnection();
@@ -108,6 +111,7 @@ namespace J_Sarad_C969_SchedulingApp.model
             
         }
         
+        //UTC and local time handling methods
         public static void DisplayLocalTime(DataTable table) { 
             //convert UTC time to local time and timezone
             for (int i = 0; i < table.Rows.Count; i++)
@@ -124,6 +128,13 @@ namespace J_Sarad_C969_SchedulingApp.model
             }
         }
 
+        public DateTime UniversalTime(DateTime date)
+        {
+            DateTime universal = LocalZone.ToUniversalTime(date);
+            return universal;
+        }
+
+        //appointment modifucation methods
         public void UpdateAppointment(string id)
         {
             //update CurrentApptObj with selected row id
@@ -135,13 +146,8 @@ namespace J_Sarad_C969_SchedulingApp.model
                 }
             }
         }
-        public DateTime UniversalTime(DateTime date)
-            //TimeSpan time)
-        {
-            DateTime universal = LocalZone.ToUniversalTime(date);
-            return universal;
-        }
-
+        
+        //appointment validating methods
         public void IsBusinessHours(DateTime date, DateTime start, DateTime end)
         {
             //sets business hours from 8 AM to 5PM Monday through Friday
@@ -161,7 +167,6 @@ namespace J_Sarad_C969_SchedulingApp.model
             }
         }
 
-        //Method to check for overlapping appointments
         public bool IsOverlap(DateTime start, DateTime end, string userId)
         {
             isOverlap = false;

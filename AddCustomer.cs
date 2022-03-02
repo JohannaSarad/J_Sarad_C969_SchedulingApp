@@ -33,15 +33,25 @@ namespace J_Sarad_C969_SchedulingApp
             long i;
             string phone = txtPhone.Text.Replace("-", String.Empty).Replace("(", String.Empty).Replace(")", String.Empty);
             //MessageBox.Show($"{phone}, {phone.Length}");
-            
-           
+
+
             if ((string.IsNullOrEmpty(txtName.Text)) || (string.IsNullOrEmpty(txtAddress.Text)) ||
                 (string.IsNullOrEmpty(txtPhone.Text)))
             {
                 //alert user that there are empty text fields
                 MessageBox.Show("Please Fill out all required fields");
             }
-            else if ((!Int64.TryParse(phone, out i)) || (phone.Length < 10) || (phone.Length > 15) 
+            else if (txtName.Text.Length > 45)
+            {
+                //alert user if customer name exceeds database max characters
+                MessageBox.Show("The customer name cannot exceed 45 characters");
+            }
+            else if (txtAddress.Text.Length > 50)
+            {
+                //alert user if customer address exceeds database max characters
+                MessageBox.Show("The customer address cannot exceed 50 characters");
+            }
+            else if ((!Int64.TryParse(phone, out i)) || (phone.Length < 10) || (phone.Length > 15)
                 || (phone.Trim().StartsWith("0")))
             {
                 //alert user to input valid ten digit phone number
@@ -52,7 +62,8 @@ namespace J_Sarad_C969_SchedulingApp
                 //alert user to select a city from combobox
                 MessageBox.Show("Please Select a City");
             }
-            else {
+            else
+            {
                 //add customer to database
                 try
                 {

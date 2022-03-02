@@ -14,7 +14,8 @@ namespace J_Sarad_C969_SchedulingApp.model
 {
     public static class DB
     {
-        //FIX ME!!! This may not need to be a static class
+        //FIX ME!!! This may not need to be a static class or other static properties should go here. 
+        
         //global properties
         public static int currentIndex { get; set; }
         public static int currentUserID { get; set; }
@@ -52,6 +53,7 @@ namespace J_Sarad_C969_SchedulingApp.model
             cmd = new MySqlCommand(query, con);
         }
 
+        //FIX ME!!! Does not override control's default languages
         public static void OverrideCulture()
         {
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("en");

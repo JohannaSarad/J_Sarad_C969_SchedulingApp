@@ -60,7 +60,7 @@ namespace J_Sarad_C969_SchedulingApp
             }
             else
             {
-                //ifalnguage not English or Spanish
+                //if lnguage not English or Spanish
                 DialogResult dialog = MessageBox.Show("This application supports English or Spanish" +
                     "\r\nPlease change language settings and restart application" + 
                     "\r\n\r\nEsta applicacion es compatible con ingles o espanol" +
@@ -117,14 +117,6 @@ namespace J_Sarad_C969_SchedulingApp
                 {
                     sw.WriteLine($"User: {DB.currentUser} . UserId: {DB.currentUserID} . Logged in at: {currentTime}");
                 }
-                //using (StreamReader sr = File.OpenText(path))
-                //{
-                //    string s = " ";
-                //    while ((s = sr.ReadLine()) != null)
-                //    {
-                //        Console.WriteLine(s);
-                //    }
-                //}
                 this.Hide();
                 MainMenu form = new MainMenu();
                 form.ShowDialog();
@@ -142,6 +134,7 @@ namespace J_Sarad_C969_SchedulingApp
                 }
             }
         }
+
         private void CheckForAppt ()
         {
             DataTable check = new DataTable();

@@ -100,6 +100,8 @@ namespace J_Sarad_C969_SchedulingApp
             this.dtpDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpDate.Location = new System.Drawing.Point(183, 197);
             this.dtpDate.Margin = new System.Windows.Forms.Padding(4);
+            this.dtpDate.MaxDate = new System.DateTime(2040, 12, 31, 0, 0, 0, 0);
+            this.dtpDate.MinDate = new System.DateTime(1990, 1, 1, 0, 0, 0, 0);
             this.dtpDate.Name = "dtpDate";
             this.dtpDate.ShowUpDown = true;
             this.dtpDate.Size = new System.Drawing.Size(100, 23);
@@ -133,6 +135,8 @@ namespace J_Sarad_C969_SchedulingApp
             this.dtpStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpStart.Location = new System.Drawing.Point(183, 258);
             this.dtpStart.Margin = new System.Windows.Forms.Padding(4);
+            this.dtpStart.MaxDate = new System.DateTime(2040, 12, 31, 0, 0, 0, 0);
+            this.dtpStart.MinDate = new System.DateTime(1990, 1, 1, 0, 0, 0, 0);
             this.dtpStart.Name = "dtpStart";
             this.dtpStart.ShowUpDown = true;
             this.dtpStart.Size = new System.Drawing.Size(100, 23);
@@ -144,6 +148,8 @@ namespace J_Sarad_C969_SchedulingApp
             this.dtpEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpEnd.Location = new System.Drawing.Point(183, 318);
             this.dtpEnd.Margin = new System.Windows.Forms.Padding(4);
+            this.dtpEnd.MaxDate = new System.DateTime(2040, 12, 31, 0, 0, 0, 0);
+            this.dtpEnd.MinDate = new System.DateTime(1990, 1, 1, 0, 0, 0, 0);
             this.dtpEnd.Name = "dtpEnd";
             this.dtpEnd.ShowUpDown = true;
             this.dtpEnd.Size = new System.Drawing.Size(100, 23);

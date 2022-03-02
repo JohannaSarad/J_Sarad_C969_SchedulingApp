@@ -229,7 +229,7 @@ namespace J_Sarad_C969_SchedulingApp
 
 
 
-        //display format for Data Grid View dgvCalendar, monthCalendar cbMonthWeek, and combobox cbMonthWeek
+        //display formatting
         private void displayControls()
         {
             

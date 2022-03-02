@@ -29,8 +29,7 @@ namespace J_Sarad_C969_SchedulingApp
         {
             //reset global variables
             DB.currentIndex = -1;
-            //there should not be a customer id set for this customer yet
-
+            
             displayControls();
         }
 
@@ -43,7 +42,6 @@ namespace J_Sarad_C969_SchedulingApp
             customer.currentCustId = Customer.dtCustomer.Rows[DB.currentIndex]["Customer ID"].ToString();
             //updates static currentCustObj
             customer.UpdateCustomer(customer.currentCustId);
-            
         }
 
         //Button Click Events

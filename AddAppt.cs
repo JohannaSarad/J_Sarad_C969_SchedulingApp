@@ -89,6 +89,7 @@ namespace J_Sarad_C969_SchedulingApp
                 MessageBox.Show("Please select or input a Customer for this appointment",
                     "Missing Field Information");
             }
+            
             else if (!customer.isValidCustomer)
             {
                 DialogResult result = MessageBox.Show("There is no existing customer by this name,\r\n " +
@@ -268,6 +269,9 @@ namespace J_Sarad_C969_SchedulingApp
             cbType.Items.Add("SCRUM");
             cbType.Items.Add("Consultation");
             cbType.SelectedIndex = 0;
+
+            //dateTimePicker formatting
+            dtpDate.Value = DateTime.Now;
 
             //dgvCustSearch formatting
             try

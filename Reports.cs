@@ -33,6 +33,7 @@ namespace J_Sarad_C969_SchedulingApp
         //Button Click Events
         private void btnMainMenu_Click(object sender, EventArgs e)
         {
+            //close Reports form and open MainMenu form
             this.Hide();
             MainMenu form = new MainMenu();
             form.ShowDialog();
@@ -40,6 +41,7 @@ namespace J_Sarad_C969_SchedulingApp
 
         private void btnExit_Click(object sender, EventArgs e)
         {
+            //close Reports form and exit application
             Application.Exit();
         }
 

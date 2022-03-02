@@ -14,17 +14,17 @@ namespace J_Sarad_C969_SchedulingApp.model
         //global data table
         public static DataTable dtCustomer { get; set; }
 
-        //global properties
-        public string currentCustomerName { get; set; }
+        //global properties, shared with Customers.cs, UpdateCustomers.cs
         public static DataRow currentCustObj { get; set; }
+        
+        //local class properties
         public string currentCustId { get; set; }
         public bool isValidCustomer { get; set; }
+        //public string currentCustomerName { get; set; }
 
-        //public Customer() { }
-
+        //population methods
         public static void FillCustomer()
         {
-            //Fix ME!!! add try catch or move to DB method with try catch
             //fill dtCustomer data table with customer information from database
             try
             {
@@ -50,9 +50,9 @@ namespace J_Sarad_C969_SchedulingApp.model
 
         public static ArrayList FillArray()
         {
+            //fill ArrayList for customer by city report
             ArrayList array = new ArrayList();
             
-            //fill array ArrayList from dtCustomer data table, format string objects and return array
             foreach (DataRow row in Customer.dtCustomer.Rows)
             {
                 string format = $"{row["Customer Name"]} . {row["Phone"]} . {row["Address"]} . {row["City"]}" +
@@ -62,6 +62,7 @@ namespace J_Sarad_C969_SchedulingApp.model
             return array;
         }
 
+        //customer modification methods
         public void UpdateCustomer(string id)
         {
             //update current customer object to customer with selected id
@@ -73,6 +74,7 @@ namespace J_Sarad_C969_SchedulingApp.model
                 }
             }
         }
+
         public void DeleteCustomer(string id)
         {
             //delete customer with selected id from database
@@ -109,14 +111,8 @@ namespace J_Sarad_C969_SchedulingApp.model
             }
         }
 
-        public static void FormatPhone(DataTable table)
-        {
-            for(int i = 0; i < table.Rows.Count; i++)
-            {
-                table.Rows[i]["Phone"] = Convert.ToInt64(table.Rows[i]["Phone"]);
-            }
-        }
-
+       
+        //customer validationg methods
         public void  ValidateCustomer(string name)
         {
             foreach (DataRow row in dtCustomer.Rows)
@@ -133,6 +129,15 @@ namespace J_Sarad_C969_SchedulingApp.model
                 {
                     isValidCustomer = false;
                 }
+            }
+        }
+
+        //FIX ME!!! This method doesn't work properly
+        public static void FormatPhone(DataTable table)
+        {
+            for (int i = 0; i < table.Rows.Count; i++)
+            {
+                table.Rows[i]["Phone"] = Convert.ToInt64(table.Rows[i]["Phone"]);
             }
         }
     }
