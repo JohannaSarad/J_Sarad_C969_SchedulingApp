@@ -171,16 +171,27 @@ namespace J_Sarad_C969_SchedulingApp.model
         //Method to check for overlapping appointments
         public bool IsOverlap(DateTime start, DateTime end, string userId)
         {
+            isOverlap = false;
+            
             //traverse dtAppointments data table to check for overlapping appointments
-            foreach(DataRow row in dtAppointments.Rows) 
+            foreach (DataRow row in dtAppointments.Rows) 
             {
                 //MessageBox.Show($"start: {start}, end: {end}, \nStartTime: {StartTime}, EndTime: {EndTime}, \n{isOverlap}");
-
-                //Start and End collumns from dtAppointmnet are in seconds = 00 on insert to database
                 StartTime = (DateTime)row["Start Time"];
                 EndTime = (DateTime)row["End Time"];
-                
-                //check for overlapping appointment if appointment is not the current appointment
+
+                if (userId == row["User ID"].ToString())
+                {
+                    if ((start <= StartTime && end >= StartTime) || (start <= EndTime && end >= EndTime)
+                        || (start >= StartTime && end <= EndTime) || (start == EndTime) || (end == StartTime))
+                    {
+                        //update appointment object
+                        CurrentApptObj = row;
+                        //CurrentApptID = row["Appointment ID"].ToString();
+                        isOverlap = true;
+                    }
+                }
+                    //check for overlapping appointment if appointment is not the current appointment
                 if (Appointment.CurrentApptObj != null)
                 {
                     if (CurrentApptID != null)
@@ -190,17 +201,6 @@ namespace J_Sarad_C969_SchedulingApp.model
                         {
                             isOverlap = false;
                         }
-                    }
-                }
-                else if (userId == row["User ID"].ToString())
-                {
-                    if ((start <= StartTime && end >= StartTime) || (start <= EndTime && end >= EndTime)
-                        || (start >= StartTime && end <= EndTime) || (start == EndTime) || (end == StartTime))
-                    {
-                        //update appointment object
-                        CurrentApptObj = row;
-                        //CurrentApptID = row["Appointment ID"].ToString();
-                        isOverlap = true;
                     }
                 }
             }

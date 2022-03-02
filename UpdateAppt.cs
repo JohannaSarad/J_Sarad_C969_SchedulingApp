@@ -41,7 +41,7 @@ namespace J_Sarad_C969_SchedulingApp
             appointment.IsOverlap(startAppt, endAppt, DB.currentUserID.ToString());
             appointment.IsBusinessHours(dtpDate.Value, startAppt, endAppt);
 
-            
+
             if (!appointment.isBusinessHours)
             {
                 //alert user if appointment is outside of business hours
@@ -105,7 +105,7 @@ namespace J_Sarad_C969_SchedulingApp
                 }
             }
         }
-        
+
         private void btnCancel_Click(object sender, EventArgs e)
         {
             //close UpdateAppt form and open Appointments form
