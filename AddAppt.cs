@@ -176,11 +176,8 @@ namespace J_Sarad_C969_SchedulingApp
                     DB.CloseConnection();
                 }
             }
-
         }
-
-
-
+        
         private void btnCancel_Click(object sender, EventArgs e)
         {
             //close AddAppt form and open Appointments form

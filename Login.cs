@@ -54,7 +54,7 @@ namespace J_Sarad_C969_SchedulingApp
                 lblPassword.Text = "contrasena";
                 lblUsername.Text = "Nombre de usuario";
                 btnLogin.Text = "Accesso";
-                txtPassword.Location = new Point(200, 77);
+                txtPassword.Location = new Point(200, 109);
                 txtUsername.Location = new Point(200, 77);
             }
             else
