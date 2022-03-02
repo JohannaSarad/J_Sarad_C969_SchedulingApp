@@ -27,76 +27,31 @@ namespace J_Sarad_C969_SchedulingApp
         private void Reports_Load(object sender, EventArgs e)
         {
             displayControls();
-            if (Appointment.dtAppointments == null)
-            {
-                Appointment.FillAppointments();
-            }
-        }
-
-        private void displayControls()
-        {
-            if (string.IsNullOrEmpty(cbApptByMonth.Text))
-            {
-                cbApptByMonth.Items.Add("--select month--");
-                cbApptByMonth.Items.Add("All Months");
-                for (int i = 0; i < Months.Length; i++)
-                {
-                    cbApptByMonth.Items.Add(Months[i]);
-                }
-                cbApptByMonth.SelectedIndex = 0;
-            }
-
-            if (string.IsNullOrEmpty(cbSchedules.Text))
-            {
-                DataTable dtUsers = new DataTable();
-                try
-                {
-                    DB.OpenConnection();
-                    string query = "select userId as 'User' from user";
-                    DB.Query(query);
-                    DB.adp.Fill(dtUsers);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error Occured" + ex.Message);
-                }
-                finally
-                {
-                    DB.CloseConnection();
-                }
-
-                cbSchedules.Items.Add("--select user--");
-
-                for (int i = 0; i < dtUsers.Rows.Count; i++)
-                {
-                    cbSchedules.Items.Add(dtUsers.Rows[i]["User"].ToString());
-                }
-                cbSchedules.SelectedIndex = 0;
-            }
-
-            if (string.IsNullOrEmpty(cbCustByCity.Text))
-            {
-                cbCustByCity.Items.Add("--select city--");
-                var distinctCities = (from row in Customer.dtCustomer.AsEnumerable()
-                                      select row["City"]).Distinct();
-                foreach (var city in distinctCities)
-                {
-                    cbCustByCity.Items.Add(city);
-                }
-                cbCustByCity.SelectedIndex = 0;
-            }
             
         }
 
+        //Button Click Events
+        private void btnMainMenu_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            MainMenu form = new MainMenu();
+            form.ShowDialog();
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        //ComboBox Index Changed Events
         private void cbApptByMonth_SelectedIndexChanged(object sender, EventArgs e)
         {
             DataTable dtTypeByMonth = new DataTable();
             if (cbApptByMonth.SelectedIndex > 0)
             {
-                if (cbSchedules.SelectedIndex > 0)
-                {
-                    cbSchedules.SelectedIndex = 0;
-                }
+                cbSchedules.SelectedIndex = 0;
+                cbCustByCity.SelectedIndex = 0;
+                
                 try
                 {
                     DB.OpenConnection();
@@ -122,6 +77,7 @@ namespace J_Sarad_C969_SchedulingApp
 
                 if (cbApptByMonth.SelectedIndex == 1) 
                 {
+                    //display all months
                     txtReports.Text = "\rNumber of each appointment type by All Months \r\n\r\n\t";
                     for (int i = 0; i < Months.Length; i++)
                     {
@@ -155,6 +111,7 @@ namespace J_Sarad_C969_SchedulingApp
                 }
                 else
                 {
+                    //display by month
                     txtReports.Text = "\r\nNumber of each appointment type by Month of ";
                     for (int i = 0; i < Months.Length; i++)
                     {
@@ -184,7 +141,7 @@ namespace J_Sarad_C969_SchedulingApp
                                     }
                                 }
                             }
-                            txtReports.Text = txtReports.Text + $"Consulation: {consultation} \r\n\t " +
+                            txtReports.Text = txtReports.Text + $" Consulation: {consultation} \r\n\t " +
                                    $"Presentation: {presentation}\r\n\t SCRUM: {scrum}";
                         }   
                     }
@@ -202,10 +159,11 @@ namespace J_Sarad_C969_SchedulingApp
 
             if (cbSchedules.SelectedIndex > 0)
             {
-                if (cbApptByMonth.SelectedIndex > 0)
-                {
+                //if (cbApptByMonth.SelectedIndex > 0)
+                //{
                     cbApptByMonth.SelectedIndex = 0;
-                }
+                cbCustByCity.SelectedIndex = 0;
+                //}
                 txtReports.Text =
                     $"Consulatant Schedule for User {user} \r\n\r\n Date : Start Time : End Time : " +
                     $"Customer Name : Schedule Type \r\n\r\n";
@@ -217,23 +175,15 @@ namespace J_Sarad_C969_SchedulingApp
                 }
             }
         }
-
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void btnMainMenu_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            MainMenu form = new MainMenu();
-            form.ShowDialog();
-        }
-
+        
         private void cbCustByCity_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //display current customers in database by city
             if (cbCustByCity.SelectedIndex > 0)
             {
+                cbApptByMonth.SelectedIndex = 0;
+                cbSchedules.SelectedIndex = 0;
+
                 txtReports.Text = $"Customers from {cbCustByCity.Text} \r\n\r\n";
                 ArrayList customers = Customer.FillArray();
                 //MessageBox.Show($"{customers}");
@@ -247,6 +197,71 @@ namespace J_Sarad_C969_SchedulingApp
                     }
                 }
             }
+        }
+
+        //display formatting
+        private void displayControls()
+        {
+            //fill dtAppointmets datatable 
+            if (Appointment.dtAppointments == null)
+            {
+                Appointment.FillAppointments();
+            }
+
+            //cbApptByMonth formatting
+            if (string.IsNullOrEmpty(cbApptByMonth.Text))
+            {
+                cbApptByMonth.Items.Add("--select month--");
+                cbApptByMonth.Items.Add("All Months");
+                for (int i = 0; i < Months.Length; i++)
+                {
+                    cbApptByMonth.Items.Add(Months[i]);
+                }
+                cbApptByMonth.SelectedIndex = 0;
+            }
+
+            //cbSchedules formatting
+            if (string.IsNullOrEmpty(cbSchedules.Text))
+            {
+                DataTable dtUsers = new DataTable();
+                try
+                {
+                    DB.OpenConnection();
+                    string query = "select userId as 'User' from user";
+                    DB.Query(query);
+                    DB.adp.Fill(dtUsers);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error Occured" + ex.Message);
+                }
+                finally
+                {
+                    DB.CloseConnection();
+                }
+
+                cbSchedules.Items.Add("--select user--");
+
+                for (int i = 0; i < dtUsers.Rows.Count; i++)
+                {
+                    cbSchedules.Items.Add(dtUsers.Rows[i]["User"].ToString());
+                }
+                cbSchedules.SelectedIndex = 0;
+            }
+
+            //cbCustbyCity formatting
+            if (string.IsNullOrEmpty(cbCustByCity.Text))
+            {
+                cbCustByCity.Items.Add("--select city--");
+                var distinctCities = (from row in Customer.dtCustomer.AsEnumerable()
+                                      select row["City"]).Distinct();
+                foreach (var city in distinctCities)
+                {
+                    cbCustByCity.Items.Add(city);
+                }
+                cbCustByCity.SelectedIndex = 0;
+            }
+
         }
     }
 }

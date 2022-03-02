@@ -40,7 +40,7 @@ namespace J_Sarad_C969_SchedulingApp
             // lblLogin
             // 
             this.lblLogin.AutoSize = true;
-            this.lblLogin.Location = new System.Drawing.Point(47, 25);
+            this.lblLogin.Location = new System.Drawing.Point(73, 22);
             this.lblLogin.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblLogin.Name = "lblLogin";
             this.lblLogin.Size = new System.Drawing.Size(285, 17);
@@ -50,7 +50,7 @@ namespace J_Sarad_C969_SchedulingApp
             // lblPassword
             // 
             this.lblPassword.AutoSize = true;
-            this.lblPassword.Location = new System.Drawing.Point(47, 115);
+            this.lblPassword.Location = new System.Drawing.Point(73, 106);
             this.lblPassword.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPassword.Name = "lblPassword";
             this.lblPassword.Size = new System.Drawing.Size(69, 17);
@@ -60,7 +60,7 @@ namespace J_Sarad_C969_SchedulingApp
             // lblUsername
             // 
             this.lblUsername.AutoSize = true;
-            this.lblUsername.Location = new System.Drawing.Point(47, 77);
+            this.lblUsername.Location = new System.Drawing.Point(73, 63);
             this.lblUsername.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblUsername.Name = "lblUsername";
             this.lblUsername.Size = new System.Drawing.Size(73, 17);
@@ -69,7 +69,7 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             // txtUsername
             // 
-            this.txtUsername.Location = new System.Drawing.Point(132, 77);
+            this.txtUsername.Location = new System.Drawing.Point(199, 63);
             this.txtUsername.Margin = new System.Windows.Forms.Padding(4);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(159, 23);
@@ -77,7 +77,7 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(132, 109);
+            this.txtPassword.Location = new System.Drawing.Point(199, 100);
             this.txtPassword.Margin = new System.Windows.Forms.Padding(4);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(159, 23);
@@ -85,7 +85,7 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             // btnLogin
             // 
-            this.btnLogin.Location = new System.Drawing.Point(148, 152);
+            this.btnLogin.Location = new System.Drawing.Point(227, 152);
             this.btnLogin.Margin = new System.Windows.Forms.Padding(4);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(100, 28);
@@ -98,7 +98,7 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(412, 211);
+            this.ClientSize = new System.Drawing.Size(471, 219);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.txtUsername);

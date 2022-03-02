@@ -138,20 +138,13 @@ namespace J_Sarad_C969_SchedulingApp.model
         public DateTime UniversalTime(DateTime date)
             //TimeSpan time)
         {
-            //append time to date, format resulting DateTime to seconds = 00, convert resulting DateTime from
-            //local to universal time, and returns universal DateTime value
-            //DateTime formatDate = date.Add(time);
-            //DateTime formatDT = formatDate.AddSeconds(-formatDate.Second);
             DateTime universal = LocalZone.ToUniversalTime(date);
-
-                //(formatDT);
             return universal;
         }
 
         public void IsBusinessHours(DateTime date, DateTime start, DateTime end)
         {
-            //sets business hours from 8 AM to 5PM Monday through Friday and returns bool value of isBusinessHours 
-            //property
+            //sets business hours from 8 AM to 5PM Monday through Friday
             TimeSpan open = new TimeSpan(08, 00, 00);
             TimeSpan close = new TimeSpan(17, 00, 00);
 
@@ -183,7 +176,8 @@ namespace J_Sarad_C969_SchedulingApp.model
                 if (userId == row["User ID"].ToString())
                 {
                     if ((start <= StartTime && end >= StartTime) || (start <= EndTime && end >= EndTime)
-                        || (start >= StartTime && end <= EndTime) || (start == EndTime) || (end == StartTime))
+                        || (start >= StartTime && end <= EndTime) || (start == EndTime) || (end == StartTime)
+                        || (start == StartTime) || (end == EndTime))
                     {
                         //update appointment object
                         CurrentApptObj = row;

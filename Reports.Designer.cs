@@ -43,7 +43,7 @@ namespace J_Sarad_C969_SchedulingApp
             // lblTypeByMonth
             // 
             this.lblTypeByMonth.AutoSize = true;
-            this.lblTypeByMonth.Location = new System.Drawing.Point(35, 149);
+            this.lblTypeByMonth.Location = new System.Drawing.Point(35, 85);
             this.lblTypeByMonth.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTypeByMonth.Name = "lblTypeByMonth";
             this.lblTypeByMonth.Size = new System.Drawing.Size(193, 17);
@@ -53,7 +53,7 @@ namespace J_Sarad_C969_SchedulingApp
             // lblApptsByUser
             // 
             this.lblApptsByUser.AutoSize = true;
-            this.lblApptsByUser.Location = new System.Drawing.Point(35, 268);
+            this.lblApptsByUser.Location = new System.Drawing.Point(35, 216);
             this.lblApptsByUser.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblApptsByUser.Name = "lblApptsByUser";
             this.lblApptsByUser.Size = new System.Drawing.Size(138, 17);
@@ -63,7 +63,7 @@ namespace J_Sarad_C969_SchedulingApp
             // lblCustByCity
             // 
             this.lblCustByCity.AutoSize = true;
-            this.lblCustByCity.Location = new System.Drawing.Point(35, 368);
+            this.lblCustByCity.Location = new System.Drawing.Point(35, 343);
             this.lblCustByCity.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCustByCity.Name = "lblCustByCity";
             this.lblCustByCity.Size = new System.Drawing.Size(122, 17);
@@ -74,7 +74,7 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             this.cbApptByMonth.FormattingEnabled = true;
             this.cbApptByMonth.IntegralHeight = false;
-            this.cbApptByMonth.Location = new System.Drawing.Point(38, 170);
+            this.cbApptByMonth.Location = new System.Drawing.Point(38, 106);
             this.cbApptByMonth.Margin = new System.Windows.Forms.Padding(4);
             this.cbApptByMonth.MaxDropDownItems = 4;
             this.cbApptByMonth.Name = "cbApptByMonth";
@@ -86,7 +86,7 @@ namespace J_Sarad_C969_SchedulingApp
             // 
             this.cbSchedules.FormattingEnabled = true;
             this.cbSchedules.IntegralHeight = false;
-            this.cbSchedules.Location = new System.Drawing.Point(38, 289);
+            this.cbSchedules.Location = new System.Drawing.Point(38, 237);
             this.cbSchedules.Margin = new System.Windows.Forms.Padding(4);
             this.cbSchedules.MaxDropDownItems = 4;
             this.cbSchedules.Name = "cbSchedules";
@@ -127,7 +127,7 @@ namespace J_Sarad_C969_SchedulingApp
             // cbCustByCity
             // 
             this.cbCustByCity.FormattingEnabled = true;
-            this.cbCustByCity.Location = new System.Drawing.Point(38, 397);
+            this.cbCustByCity.Location = new System.Drawing.Point(38, 363);
             this.cbCustByCity.Name = "cbCustByCity";
             this.cbCustByCity.Size = new System.Drawing.Size(160, 24);
             this.cbCustByCity.TabIndex = 8;
