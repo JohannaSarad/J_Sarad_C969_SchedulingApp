@@ -42,7 +42,7 @@ namespace J_Sarad_C969_SchedulingApp
             
             //call to show all appointments in dgvCalendar and display for all form controls
             ShowAll();
-            DB.OverrideCulture();
+            //DB.OverrideCulture();
             displayControls();
         }
 

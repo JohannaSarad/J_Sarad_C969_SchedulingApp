@@ -54,10 +54,10 @@ namespace J_Sarad_C969_SchedulingApp.model
         }
 
         //FIX ME!!! Does not override control's default languages
-        public static void OverrideCulture()
-        {
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo("en");
-            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("en");
-        }
+        //public static void OverrideCulture()
+        //{
+        //    Thread.CurrentThread.CurrentUICulture = new CultureInfo("en");
+        //    Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("en");
+        //}
     }
 }

@@ -22,8 +22,11 @@ namespace J_Sarad_C969_SchedulingApp
     public partial class LogIn : Form
     {
        //bool foundUser;
-       //get the current language 
+       
+        
         CultureInfo language = CultureInfo.CurrentUICulture;
+        CultureInfo locale = CultureInfo.CurrentCulture;
+        
         //get current date and time
         DateTime currentTime = DateTime.Now;
 
@@ -34,22 +37,33 @@ namespace J_Sarad_C969_SchedulingApp
 
         private void LogIn_Load(object sender, EventArgs e)
         {
+            //MessageBox.Show($"locale Parent: {locale.Parent.Name} \nlanguage Parent: {language.Parent.Name} " +
+            //    $"\nlocale Name: {locale.Name} \nregion: {region.TwoLetterISORegionName}");
+            
             DetectLanguage();
+
         }
 
         private void DetectLanguage()
         {
-            //user language in English text
-            if (language.Parent.Name == "en")
+            if ((language.Parent.Name != "en" && language.Parent.Name != "es") 
+                || (locale.Parent.Name != "en" && locale.Parent.Name != "es"))
             {
-                lblLogin.Text = "Please Enter Your Username and Password";
-                lblPassword.Text = "Password";
-                lblUsername.Text = "Username";
-                btnLogin.Text = "Login";
+                //user language not English or Spanish
+                DialogResult dialog = MessageBox.Show("This application supports English or Spanish" +
+                    "\r\nPlease change language settings and restart application" +
+                    "\r\n\r\nEsta applicacion es compatible con ingles o espanol" +
+                    "\r\nCambie la configuracion de idioma y reinicie la aplicacion",
+                    "Unknown Language -- Idioma desconocido", MessageBoxButtons.OK);
+                if (dialog == DialogResult.OK)
+                {
+                    Application.Exit();
+                }
             }
-            //user language in Spanish text
-            else if (language.Parent.Name == "es")
+            
+            else if ((language.Parent.Name == "es") || (locale.Parent.Name == "es"))
             {
+                //user language in Spanish 
                 lblLogin.Text = "Porfavor introduzca su nombre de usuario y contrasena";
                 lblPassword.Text = "contrasena";
                 lblUsername.Text = "Nombre de usuario";
@@ -60,16 +74,12 @@ namespace J_Sarad_C969_SchedulingApp
             }
             else
             {
-                //if lnguage not English or Spanish
-                DialogResult dialog = MessageBox.Show("This application supports English or Spanish" +
-                    "\r\nPlease change language settings and restart application" + 
-                    "\r\n\r\nEsta applicacion es compatible con ingles o espanol" +
-                    "\r\nCambie la configuracion de idioma y reinicie la aplicacion" ,
-                    "Unknown Language -- Idioma desconocido", MessageBoxButtons.OK);
-                if (dialog == DialogResult.OK)
-                {
-                    Application.Exit();
-                }
+                //user language English
+                lblLogin.Text = "Please Enter Your Username and Password";
+                lblPassword.Text = "Password";
+                lblUsername.Text = "Username";
+                btnLogin.Text = "Login";
+               
             }
         }
 
@@ -123,14 +133,15 @@ namespace J_Sarad_C969_SchedulingApp
             }
             else
             {
-                if (language.Parent.Name == "en")
-                {
-                    MessageBox.Show("Please check your username and password", "Invalid username or password");
-                }
-                if (language.Parent.Name == "es")
+               if ((language.Parent.Name == "es") || (locale.Parent.Name == "es"))
                 {
                     MessageBox.Show("Por favor verifique su nombre de usuario y contrasena",
-                        "usuario o contrasena invalido");
+                       "usuario o contrasena invalido");
+                   
+                }
+                else 
+                {
+                    MessageBox.Show("Please check your username and password", "Invalid username or password");
                 }
             }
         }
